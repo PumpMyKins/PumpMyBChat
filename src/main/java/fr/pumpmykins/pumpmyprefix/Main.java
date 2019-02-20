@@ -13,7 +13,9 @@ import fr.pumpmykins.pumpmyprefix.command.PrefixSetCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixWarnPrefixOwnerCommand;
 import me.lucko.luckperms.LuckPerms;
 import me.lucko.luckperms.api.LuckPermsApi;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
@@ -35,7 +37,11 @@ public class Main  extends Plugin{
 	
 	public static ConfigManager configManager;
 	
+	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer WHERE `uuid` =";
 	
+	public static String STRING_ERROR_NO_PREFIX = "Vous n'avez pas de préfix !";
+	
+	public static TextComponent ERROR_NO_PREFIX = new TextComponent();
 	@Override
 	public void onEnable() {
 		
@@ -62,6 +68,10 @@ public class Main  extends Plugin{
 			mySQL.update(createprefixtable);
 			
 		}
+		
+		TextComponent ERROR_NO_PREFIX = new TextComponent(STRING_ERROR_NO_PREFIX);
+		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
+		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://pumpmykins.buycraft.net/"));
 	}
 
 
@@ -81,6 +91,16 @@ public class Main  extends Plugin{
 
 	public static MySql getMySQL() {
 		return mySQL;
+	}
+
+
+	public static TextComponent getERROR_NO_PREFIX() {
+		return ERROR_NO_PREFIX;
+	}
+
+
+	public static void setERROR_NO_PREFIX(TextComponent eRROR_NO_PREFIX) {
+		ERROR_NO_PREFIX = eRROR_NO_PREFIX;
 	}
 
 	
