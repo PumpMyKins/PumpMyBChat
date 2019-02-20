@@ -55,7 +55,13 @@ public class Main  extends Plugin{
 		
 		api = LuckPerms.getApi();
 		
-		
+		mySQL.openConnection();
+		if(mySQL.isConnected()) {
+			
+			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer (`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT '0', `warn` INT NOT NULL DEFAULT `0`";
+			mySQL.update(createprefixtable);
+			
+		}
 	}
 
 
