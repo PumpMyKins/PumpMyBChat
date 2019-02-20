@@ -3,6 +3,7 @@ package fr.pumpmykins.pumpmyprefix;
 import java.util.Arrays;
 
 import fr.pumpmykins.pumpmyprefix.command.PrefixActivationCommand;
+import fr.pumpmykins.pumpmyprefix.command.PrefixColorCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixForceDeleteCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixHelpCommand;
@@ -25,6 +26,15 @@ public class Main  extends Plugin{
 
 	public static LuckPermsApi api;
 	
+	static MySql mySQL;
+	public static String host = "";
+	public static String username = "";
+	public static String password = "";
+	public static String database = "";
+	public static int port = 3306;
+	
+	public static ConfigManager configManager;
+	
 	
 	@Override
 	public void onEnable() {
@@ -41,10 +51,32 @@ public class Main  extends Plugin{
 		PrefixCommand.addCommand(Arrays.asList("active", "a"), new PrefixActivationCommand());
 		PrefixCommand.addCommand(Arrays.asList("forcedelete"), new PrefixForceDeleteCommand());
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
-		
+		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
 		
 		api = LuckPerms.getApi();
 		
 		
 	}
+
+
+	public static Main getSharedInstance() {
+		return sharedInstance;
+	}
+
+
+	public static void setSharedInstance(Main sharedInstance) {
+		Main.sharedInstance = sharedInstance;
+	}
+
+
+	public static LuckPermsApi getApi() {
+		return api;
+	}
+
+	public static MySql getMySQL() {
+		return mySQL;
+	}
+
+	
+	
 }
