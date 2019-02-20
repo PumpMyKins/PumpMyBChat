@@ -7,7 +7,7 @@ public class PrefixReloadCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return null;
+		return "prefix.hasone";
 	}
 
 	@Override

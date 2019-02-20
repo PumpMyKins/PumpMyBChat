@@ -7,13 +7,13 @@ public class PrefixActivationCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return null;
+		return "prefix.hasone";
 	}
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

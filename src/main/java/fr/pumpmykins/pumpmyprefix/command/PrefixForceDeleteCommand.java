@@ -7,7 +7,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return null;
+		return "prefix.staff";
 	}
 
 	@Override
