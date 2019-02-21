@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.pumpmykins.pumpmyprefix.Main;
+import me.lucko.luckperms.api.Node;
+import me.lucko.luckperms.api.User;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -63,6 +65,15 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 							TextComponent success = new TextComponent("Prefix Supprimer avec succès !");
 							success.setColor(ChatColor.DARK_GREEN);
 							sender.sendMessage(success);
+							User deleteuser  = Main.getApi().getUser(deletescope.getUniqueId());
+							
+							Node hasone = Main.getApi().getNodeFactory().newBuilder("prefix.hasone").build();
+							deleteuser.unsetPermission(hasone);
+							
+							TextComponent deleted = new TextComponent("La décision de vous supprimer définitivement votre préfix à été prise par :"+sender.getName());
+							deleted.setColor(ChatColor.DARK_RED);
+							deleted.setBold(true);
+							deletescope.sendMessage(deleted);
 						}
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
