@@ -81,7 +81,7 @@ public class Main  extends Plugin implements Listener{
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
 			
-			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer(`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT '0', `warn` INT NOT NULL DEFAULT `0`, `modification` INT NOT NULL DEFAULT `0`)";
+			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer(`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT 0, `warn` INT NOT NULL DEFAULT 0, `modification` INT NOT NULL DEFAULT 0)";
 			mySQL.update(createprefixtable);
 			
 			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX);
