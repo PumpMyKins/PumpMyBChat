@@ -21,11 +21,12 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
+import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.event.EventHandler;
 
-public class Main  extends Plugin{
+public class Main  extends Plugin implements Listener{
 
 	static Main sharedInstance = null;
 	
@@ -65,6 +66,8 @@ public class Main  extends Plugin{
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
 		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
 		
+		
+		
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
 			
@@ -100,7 +103,7 @@ public class Main  extends Plugin{
 		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
 		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://pumpmykins.buycraft.net/"));
 		
-		
+		pm.registerListener(this, this);
 	}
 
 	@EventHandler
