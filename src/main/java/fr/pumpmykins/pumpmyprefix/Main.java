@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
+import fr.pumpmykins.pumpmyprefix.MySql.MySQLCredentials;
 import fr.pumpmykins.pumpmyprefix.command.PrefixActivationCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixColorCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixCommand;
@@ -66,12 +67,16 @@ public class Main  extends Plugin implements Listener{
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
 		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
 		
+		configManager = new ConfigManager();
 		try {
-			ConfigManager.init();
+			configManager.init();
 		} catch (Throwable e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		};
+		}
+		
+		MySQLCredentials credentials = new MySQLCredentials(host, port, username, password, database);
+		mySQL = new MySql(credentials);
 		
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
