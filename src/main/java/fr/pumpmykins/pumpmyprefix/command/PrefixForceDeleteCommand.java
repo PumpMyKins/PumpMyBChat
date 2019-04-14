@@ -1,11 +1,6 @@
 package fr.pumpmykins.pumpmyprefix.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import fr.pumpmykins.pumpmyprefix.Main;
-import me.lucko.luckperms.api.Node;
-import me.lucko.luckperms.api.User;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -24,7 +19,6 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 	public void onCommand(CommandSender sender, String[] args) {
 		// TODO Auto-generated method stub
 		if(sender instanceof ProxiedPlayer) {
-			ProxiedPlayer p = (ProxiedPlayer) sender;
 			
 			if(args.length >= 2) {
 				
@@ -53,32 +47,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 				if(deletescope != null) {	
 					
 					Main.getMySQL().update("DELETE * FROM PrefixPlayer WHERE `uuid` ="+deletescope.getUniqueId());
-					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+deletescope.getUniqueId());
-					try {
-						if(rs.next()) {
-							
-							TextComponent error = new TextComponent("Erreur de la suppression contacter le responsable !");
-							error.setColor(ChatColor.DARK_RED);
-							sender.sendMessage(error);
-						} else {
-							
-							TextComponent success = new TextComponent("Prefix Supprimer avec succès !");
-							success.setColor(ChatColor.DARK_GREEN);
-							sender.sendMessage(success);
-							User deleteuser  = Main.getApi().getUser(deletescope.getUniqueId());
-							
-							Node hasone = Main.getApi().getNodeFactory().newBuilder("prefix.hasone").build();
-							deleteuser.unsetPermission(hasone);
-							
-							TextComponent deleted = new TextComponent("La décision de vous supprimer définitivement votre préfix à été prise par :"+sender.getName());
-							deleted.setColor(ChatColor.DARK_RED);
-							deleted.setBold(true);
-							deletescope.sendMessage(deleted);
-						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					
 				}
 			}
 		}

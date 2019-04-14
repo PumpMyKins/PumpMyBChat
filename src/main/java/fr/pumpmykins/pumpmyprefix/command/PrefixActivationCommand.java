@@ -24,7 +24,7 @@ public class PrefixActivationCommand extends QSubCommand {
 		if(sender instanceof ProxiedPlayer) {
 			ProxiedPlayer p = (ProxiedPlayer) sender;
 			
-			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX + p.getUniqueId());
+			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` =" +p.getUniqueId());
 			try {
 				if(!rs.next()) {
 					

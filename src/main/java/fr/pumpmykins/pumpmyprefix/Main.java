@@ -1,6 +1,8 @@
 package fr.pumpmykins.pumpmyprefix;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.UUID;
 
 import fr.pumpmykins.pumpmyprefix.command.PrefixActivationCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixColorCommand;
@@ -11,8 +13,6 @@ import fr.pumpmykins.pumpmyprefix.command.PrefixReloadCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixResetCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixSetCommand;
 import fr.pumpmykins.pumpmyprefix.command.PrefixWarnPrefixOwnerCommand;
-import me.lucko.luckperms.LuckPerms;
-import me.lucko.luckperms.api.LuckPermsApi;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -25,8 +25,6 @@ public class Main  extends Plugin{
 	static Main sharedInstance = null;
 	
 	public static TextComponent PREFIX = new TextComponent("[PumpMyPrefix]");
-
-	public static LuckPermsApi api;
 	
 	static MySql mySQL;
 	public static String host = "";
@@ -37,11 +35,14 @@ public class Main  extends Plugin{
 	
 	public static ConfigManager configManager;
 	
-	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer WHERE `uuid` =";
+	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer ";
 	
 	public static String STRING_ERROR_NO_PREFIX = "Vous n'avez pas de préfix !";
 	
 	public static TextComponent ERROR_NO_PREFIX = new TextComponent();
+	
+	private Map<UUID , String> prefix;
+	
 	@Override
 	public void onEnable() {
 		
@@ -52,19 +53,17 @@ public class Main  extends Plugin{
 		pm.registerCommand(this, new PrefixCommand("prefix"));
 		PrefixCommand.addCommand(Arrays.asList("help", "h"), new PrefixHelpCommand());
 		PrefixCommand.addCommand(Arrays.asList("set"), new PrefixSetCommand());
-		PrefixCommand.addCommand(Arrays.asList("reload", "r"), new PrefixReloadCommand());
+		PrefixCommand.addCommand(Arrays.asList("reload", "r"), new PrefixReloadCommand(this.prefix));
 		PrefixCommand.addCommand(Arrays.asList("reset"), new PrefixResetCommand());
 		PrefixCommand.addCommand(Arrays.asList("active", "a"), new PrefixActivationCommand());
 		PrefixCommand.addCommand(Arrays.asList("forcedelete"), new PrefixForceDeleteCommand());
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
 		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
 		
-		api = LuckPerms.getApi();
-		
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
 			
-			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer (`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT '0', `warn` INT NOT NULL DEFAULT `0`";
+			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer (`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT '0', `warn` INT NOT NULL DEFAULT `0`, `modification` INT NOT NULL DEFAULT `0`";
 			mySQL.update(createprefixtable);
 			
 		}
@@ -82,11 +81,6 @@ public class Main  extends Plugin{
 
 	public static void setSharedInstance(Main sharedInstance) {
 		Main.sharedInstance = sharedInstance;
-	}
-
-
-	public static LuckPermsApi getApi() {
-		return api;
 	}
 
 	public static MySql getMySQL() {
