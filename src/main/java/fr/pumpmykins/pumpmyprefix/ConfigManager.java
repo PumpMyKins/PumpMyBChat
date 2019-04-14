@@ -14,19 +14,19 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 public class ConfigManager {
 
-	Configuration configuration = null;
+	static Configuration configuration = null;
 
-	public void init() throws Throwable {
+	public static void init() throws Throwable {
 
 		saveDefaultConfig();
 		try {
 
-			this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
-			Main.host = this.configuration.getString("mysql.host");
-			Main.port = this.configuration.getInt("mysql.port");
-			Main.username = this.configuration.getString("mysql.username");
-			Main.password = this.configuration.getString("mysql.password");
-			Main.database = this.configuration.getString("mysql.database");
+			configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
+			Main.host = configuration.getString("mysql.host");
+			Main.port = configuration.getInt("mysql.port");
+			Main.username = configuration.getString("mysql.username");
+			Main.password = configuration.getString("mysql.password");
+			Main.database = configuration.getString("mysql.database");
 
 		} catch(IOException e) {
 
@@ -34,13 +34,13 @@ public class ConfigManager {
 		}
 	}
 	
-	public File getFile(){
+	public static File getFile(){
 
 		return new File(Main.getSharedInstance().getDataFolder(), "config.yml");
 	}
 	
 	@SuppressWarnings("unused")
-	private void saveDefaultConfig() throws Throwable
+	private static void saveDefaultConfig() throws Throwable
 	{
 		if (!Main.getSharedInstance().getDataFolder().exists()) {
 			Main.getSharedInstance().getDataFolder().mkdir();

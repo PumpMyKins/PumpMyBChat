@@ -66,7 +66,12 @@ public class Main  extends Plugin implements Listener{
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
 		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
 		
-		
+		try {
+			ConfigManager.init();
+		} catch (Throwable e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		};
 		
 		mySQL.openConnection();
 		if(mySQL.isConnected()) {
