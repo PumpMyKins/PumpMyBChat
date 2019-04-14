@@ -11,6 +11,10 @@ public class Formator {
 		ChatColor.translateAlternateColorCodes('&', message);
 		
 		TextComponent tc = new TextComponent(prefix);
+		
+		TextComponent bet = new TextComponent(">");
+		bet.setColor(ChatColor.GOLD);
+		tc.addExtra(bet);
 		tc.addExtra(message);
 		
 		return tc;
