@@ -1,5 +1,7 @@
 package fr.pumpmykins.pumpmyprefix;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
@@ -17,8 +19,11 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.ChatEvent;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
+import net.md_5.bungee.event.EventHandler;
 
 public class Main  extends Plugin{
 
@@ -66,14 +71,61 @@ public class Main  extends Plugin{
 			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer (`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT '0', `warn` INT NOT NULL DEFAULT `0`, `modification` INT NOT NULL DEFAULT `0`";
 			mySQL.update(createprefixtable);
 			
+			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX);
+			try {
+				
+				while(rs.next()) {
+					
+					if(rs.getInt("warn") < 3) {
+						
+						String prefix = rs.getString("prefix");
+						
+						if(prefix != null) {
+							
+							UUID playerUuid = UUID.fromString(rs.getString("uuid"));
+							
+							this.prefix.put(playerUuid, prefix);
+							
+						}
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		TextComponent ERROR_NO_PREFIX = new TextComponent(STRING_ERROR_NO_PREFIX);
 		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
 		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://pumpmykins.buycraft.net/"));
+		
+		
 	}
 
+	@EventHandler
+	public void onMessage(ChatEvent event) {
+		
+		if(!event.isCommand()) {
 
+			event.setCancelled(true);
+			
+			String p = new String();
+			
+			for(ProxiedPlayer pa : ProxyServer.getInstance().getPlayers()) {
+				
+				if(event.getSender() == pa.getAddress())
+				{
+					p = prefix.get(pa.getUniqueId());
+				}
+			}
+			TextComponent message = Formator.format(p ,event.getMessage());
+			
+			ProxyServer.getInstance().broadcast(message);
+		}
+	}
+	
+	
 	public static Main getSharedInstance() {
 		return sharedInstance;
 	}
