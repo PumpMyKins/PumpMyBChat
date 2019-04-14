@@ -40,7 +40,7 @@ public class ConfigManager {
 	}
 	
 	@SuppressWarnings("unused")
-	private void saveDefaultConfig() throws Throwable
+	private void saveDefaultConfig()
 	{
 		if (!Main.getSharedInstance().getDataFolder().exists()) {
 			Main.getSharedInstance().getDataFolder().mkdir();
