@@ -9,7 +9,7 @@ public class PrefixColorCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return "prefix.hasone";
+		return null;
 	}
 
 	@Override

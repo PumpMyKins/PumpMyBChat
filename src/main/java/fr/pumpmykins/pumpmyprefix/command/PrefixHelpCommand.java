@@ -13,7 +13,7 @@ public class PrefixHelpCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		
-		return "prefix.hasone";
+		return null;
 	}
 
 	@Override

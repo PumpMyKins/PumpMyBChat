@@ -6,7 +6,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public abstract class QSubCommand {
 
 	public abstract String getPermission();
-	
+		
     public abstract void onCommand(CommandSender sender, String[] args);
 	
 	public boolean runCommand(CommandSender p, String[] args) {

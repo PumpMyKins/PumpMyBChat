@@ -15,13 +15,14 @@ public class PrefixResetCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return "prefix.hasone";
+		return null;
 	}
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 		
 		if(sender instanceof ProxiedPlayer) {
+			
 			ProxiedPlayer p = (ProxiedPlayer) sender;
 			
 			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` =" +p.getUniqueId());

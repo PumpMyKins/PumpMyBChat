@@ -15,7 +15,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return "prefix.staff";
+		return "rank.staff.moderateur";
 	}
 
 	@Override
