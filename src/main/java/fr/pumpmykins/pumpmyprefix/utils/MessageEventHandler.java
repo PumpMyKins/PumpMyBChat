@@ -45,7 +45,7 @@ public class MessageEventHandler implements Listener {
 				nickname = this.chatPlayer.getNickname().get(pp.getUniqueId());
 			}
 			
-			if(nickname == null)
+			if(nickname.isEmpty())
 				nickname = pp.getDisplayName();	
 			
 			TextComponent message = Formator.format(pp, nickname ,prefix , event.getMessage());
