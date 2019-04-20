@@ -15,13 +15,13 @@ public class Formator {
 		
 		TextComponent name = new TextComponent(n);
 		
-		TextComponent bet = new TextComponent(">");
+		TextComponent bet = new TextComponent(" > ");
 		bet.setColor(ChatColor.GOLD);
 		
 		if(!prefix.isEmpty()) {
 			
 			TextComponent tcStartPrefix = new TextComponent("[");
-			TextComponent tcEndPrefix = new TextComponent("]");
+			TextComponent tcEndPrefix = new TextComponent("] ");
 			TextComponent tcPrefix = new TextComponent(prefix);
 			
 			tcStartPrefix.addExtra(tcPrefix);
