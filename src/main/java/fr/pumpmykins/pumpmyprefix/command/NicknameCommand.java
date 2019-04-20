@@ -28,21 +28,37 @@ public class NicknameCommand extends Command {
 			
 			ProxiedPlayer player = (ProxiedPlayer) sender;
 			
-			if(!nickList.containsKey(player.getUniqueId())) {
-				
-				nickList.put(player.getUniqueId(), args[0]);
+			if(args.length > 0) {
+			
+				if(!nickList.containsKey(player.getUniqueId())) {
+					
+					nickList.put(player.getUniqueId(), args[0]);
+					
+					TextComponent desactive = new TextComponent("NickName appliqué !");
+					desactive.setColor(ChatColor.GOLD);
+					sender.sendMessage(desactive);
+				} else {
+					
+					nickList.remove(player.getUniqueId());
+					nickList.put(player.getUniqueId(), args[0]);
+					
+					TextComponent desactive = new TextComponent("NickName appliqué !");
+					desactive.setColor(ChatColor.GOLD);
+					sender.sendMessage(desactive);
+				}
 			} else {
 				
-				nickList.remove(player.getUniqueId());
-				nickList.put(player.getUniqueId(), args[0]);
-				
+				if(nickList.containsKey(player.getUniqueId())) {
+					
+					nickList.remove(player.getUniqueId());
+					TextComponent desactive = new TextComponent("NickName supprimé !");
+					desactive.setColor(ChatColor.GOLD);
+					sender.sendMessage(desactive);
+				}
 			}
 			
 			this.chatPlayer.setNickname(nickList);
 			
-			TextComponent desactive = new TextComponent("NickName set !");
-			desactive.setColor(ChatColor.GOLD);
-			sender.sendMessage(desactive);
 		} else {
 			
 			TextComponent desactive = new TextComponent("Vous n'avez pas de nickname !");
