@@ -45,7 +45,7 @@ public class PrefixReloadCommand extends QSubCommand {
 								
 								UUID playerUuid = UUID.fromString(rs.getString("uuid"));
 								
-								Map<UUID, String> prefixList = chatPlayer.getPrefix();
+								Map<UUID, String> prefixList = this.chatPlayer.getPrefix();
 								
 								prefixList.remove(playerUuid);
 								prefixList.put(playerUuid, prefix);

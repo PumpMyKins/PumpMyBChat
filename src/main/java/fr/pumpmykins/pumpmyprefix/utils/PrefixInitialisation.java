@@ -2,6 +2,7 @@ package fr.pumpmykins.pumpmyprefix.utils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,9 +16,9 @@ public class PrefixInitialisation {
 	
 	public PrefixInitialisation(ChatPlayer cp) {
 		
-		this.chatPlayer = cp;
+		this.chatPlayer = new ChatPlayer();
 		
-		Map<UUID, String> prefixList = chatPlayer.getPrefix();
+		Map<UUID, String> prefixList = new HashMap<UUID, String>();
 		
 		MySql mySQL = Main.getMySQL();
 		

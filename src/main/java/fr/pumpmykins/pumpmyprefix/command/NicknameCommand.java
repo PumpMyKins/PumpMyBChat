@@ -24,7 +24,7 @@ public class NicknameCommand extends Command {
 		
 		if(sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
 			
-			Map<UUID, String> nickList = chatPlayer.getNickname();
+			Map<UUID, String> nickList = this.chatPlayer.getNickname();
 			
 			ProxiedPlayer player = (ProxiedPlayer) sender;
 			
