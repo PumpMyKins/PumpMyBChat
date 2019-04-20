@@ -23,16 +23,15 @@ public class MessageEventHandler implements Listener {
 	public void onMessage(ChatEvent event) {
 		
 		if(!event.isCommand()) {
-
-			event.setCancelled(true);
 			
 			ProxiedPlayer pp = null;
 			
 			for(ProxiedPlayer pa : ProxyServer.getInstance().getPlayers()) {
 				
-				if(event.getSender() == pa.getAddress())
+				if(event.getSender().getAddress() == pa.getAddress())
 				{
 					pp = pa;
+					event.setCancelled(true);
 					break;
 				}
 			}
