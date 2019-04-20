@@ -50,6 +50,8 @@ public class Main  extends Plugin implements Listener{
 		
 		sharedInstance = this;
 		
+		this.chatPlayer = new ChatPlayer();
+		
 		PluginManager pm = ProxyServer.getInstance().getPluginManager();
 		
 		//START PREFIX COMMAND REGISTERING

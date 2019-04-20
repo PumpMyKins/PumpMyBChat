@@ -36,9 +36,15 @@ public class MessageEventHandler implements Listener {
 					break;
 				}
 			}
+			String prefix = new String();
+			String nickname = new String();
 			
-			String prefix = this.chatPlayer.getPrefix().get(pp.getUniqueId());
-			String nickname = this.chatPlayer.getNickname().get(pp.getUniqueId());
+			if(!this.chatPlayer.getPrefix().isEmpty()) {
+				prefix = this.chatPlayer.getPrefix().get(pp.getUniqueId());
+			}
+			if(!this.chatPlayer.getNickname().isEmpty()) {
+				nickname = this.chatPlayer.getNickname().get(pp.getUniqueId());
+			}
 			
 			if(nickname == null)
 				nickname = pp.getDisplayName();	

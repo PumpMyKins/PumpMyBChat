@@ -1,5 +1,6 @@
 package fr.pumpmykins.pumpmyprefix;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,6 +22,10 @@ public class ChatPlayer {
 		this.nickname = nickname;
 	}
 	
-	
+	public ChatPlayer() {
+		
+		this.prefix = new HashMap<UUID, String>();
+		this.nickname = new HashMap<UUID, String>();
+	}
 	
 }
