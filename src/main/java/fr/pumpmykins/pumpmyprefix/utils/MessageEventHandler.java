@@ -22,21 +22,13 @@ public class MessageEventHandler implements Listener {
 	@EventHandler
 	public void onMessage(ChatEvent event) {
 		
-		if(!event.isCommand()) {
-			
-			ProxiedPlayer pp = null;
-			
-			for(ProxiedPlayer pa : ProxyServer.getInstance().getPlayers()) {
-				
-				if(event.getSender().getAddress() == pa.getAddress())
-				{
-					pp = pa;
-					event.setCancelled(true);
-					break;
-				}
-			}
-			String prefix = new String();
-			String nickname = new String();
+        if (event.isCommand()) return;
+        if (!(event.getSender() instanceof ProxiedPlayer)) return;
+
+        ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
+		
+		String prefix = new String();
+		String nickname = new String();
 			
 			if(!this.chatPlayer.getPrefix().isEmpty()) {
 				prefix = this.chatPlayer.getPrefix().get(pp.getUniqueId());
