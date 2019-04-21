@@ -30,19 +30,19 @@ public class MessageEventHandler implements Listener {
 		String prefix = new String();
 		String nickname = new String();
 			
-			if(!this.chatPlayer.getPrefix().isEmpty()) {
-				prefix = this.chatPlayer.getPrefix().get(pp.getUniqueId());
-			}
-			if(!this.chatPlayer.getNickname().isEmpty()) {
-				nickname = this.chatPlayer.getNickname().get(pp.getUniqueId());
-			}
-			
-			if(nickname == null)
-				nickname = pp.getDisplayName();	
-			
-			TextComponent message = Formator.format(pp, nickname ,prefix , event.getMessage());
-			
-			ProxyServer.getInstance().broadcast(message);
+		if(!this.chatPlayer.getPrefix().isEmpty()) {
+			prefix = this.chatPlayer.getPrefix().get(player.getUniqueId());
 		}
+		if(!this.chatPlayer.getNickname().isEmpty()) {
+			nickname = this.chatPlayer.getNickname().get(player.getUniqueId());
+		}
+			
+		if(nickname == null)
+			nickname = player.getDisplayName();	
+			
+		TextComponent message = Formator.format(player, nickname ,prefix , event.getMessage());
+			
+		ProxyServer.getInstance().broadcast(message);
+		
 	}
 }
