@@ -20,6 +20,8 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 		// TODO Auto-generated method stub
 		if(sender instanceof ProxiedPlayer) {
 			
+			if(sender.hasPermission("rank.staff.responsable"))
+			
 			if(args.length >= 2) {
 				
 				ProxiedPlayer deletescope = ProxyServer.getInstance().getPlayer(args[1]);

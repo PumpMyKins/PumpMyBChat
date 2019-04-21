@@ -1,7 +1,6 @@
 package fr.pumpmykins.pumpmyprefix.command;
 
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.chat.TextComponent;
 
 public abstract class QSubCommand {
 
@@ -11,15 +10,7 @@ public abstract class QSubCommand {
 	
 	public boolean runCommand(CommandSender p, String[] args) {
 		
-		if(!p.hasPermission(getPermission())) {
-				
-			p.sendMessage(new TextComponent("Vous n'avez pas la permission de faire ceci"));
-			return false;
-		}
-		else {
-				
 			onCommand(p, args);
-		}
 		return true;
 	}
 }
