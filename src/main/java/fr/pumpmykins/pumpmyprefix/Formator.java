@@ -10,9 +10,9 @@ public class Formator {
 		
 		ChatColor.translateAlternateColorCodes('&', prefix);
 		
-		if(pp.hasPermission("rank.tier2") || pp.hasPermission("rank.tier3"))
+		if(pp.hasPermission("rank.tier2") || pp.hasPermission("rank.tier3")) {
 			ChatColor.translateAlternateColorCodes('&', message);
-		
+		}
 		TextComponent name = new TextComponent(n);
 		
 		TextComponent bet = new TextComponent(" > ");

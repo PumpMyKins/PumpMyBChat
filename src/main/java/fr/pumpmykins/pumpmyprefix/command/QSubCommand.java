@@ -11,19 +11,13 @@ public abstract class QSubCommand {
 	
 	public boolean runCommand(CommandSender p, String[] args) {
 		
-		String perm = getPermission();
-		if(!(perm == null)) {
-			if(!p.hasPermission(getPermission())) {
+		if(!p.hasPermission(getPermission())) {
 				
-				p.sendMessage(new TextComponent("Vous n'avez pas la permission de faire ceci"));
-				return false;
-			}
-			else {
+			p.sendMessage(new TextComponent("Vous n'avez pas la permission de faire ceci"));
+			return false;
+		}
+		else {
 				
-				onCommand(p, args);
-			}
-		} else {
-			
 			onCommand(p, args);
 		}
 		return true;
