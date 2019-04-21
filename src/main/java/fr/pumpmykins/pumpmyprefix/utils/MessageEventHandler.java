@@ -42,7 +42,9 @@ public class MessageEventHandler implements Listener {
 			
 		TextComponent message = Formator.format(player, nickname ,prefix , event.getMessage());
 			
-		ProxyServer.getInstance().broadcast(message);
+		for (ProxiedPlayer receiver : player.getServer().getInfo().getPlayers()) {
+			receiver.sendMessage(message);
+		}
 		
 	}
 }
