@@ -64,11 +64,14 @@ public class MessageEventHandler implements Listener {
 		
 		TextComponent bet = new TextComponent(" > ");
 		bet.setColor(ChatColor.GOLD);
+		bet.setBold(true);
 		
 		if(!prefix.isEmpty()) {
 			
 			TextComponent tcStartPrefix = new TextComponent("[");
-			TextComponent tcEndPrefix = new TextComponent("] ");
+			TextComponent tcEndPrefix = new TextComponent("]");
+			tcStartPrefix.setColor(ChatColor.GOLD);
+			tcEndPrefix.setColor(ChatColor.GOLD);
 			TextComponent tcPrefix = new TextComponent(prefix);
 			
 			tcStartPrefix.addExtra(tcPrefix);
