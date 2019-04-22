@@ -48,7 +48,7 @@ public class PrefixSetCommand extends QSubCommand {
 						}
 					} else {
 						
-						Main.getMySQL().update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ("+p.getUniqueId()+","+prefix+","+true+","+0+","+1+")");
+						Main.getMySQL().update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
 					}
 					
 				} catch (SQLException e) {
