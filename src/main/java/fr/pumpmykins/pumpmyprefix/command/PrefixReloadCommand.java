@@ -39,21 +39,21 @@ public class PrefixReloadCommand extends QSubCommand {
 						
 						if(rs.getInt("warn") < 3) {
 							
-							if(rs.getBoolean("active")) {
-							
-								String prefix = rs.getString("prefix");
+							String prefix = rs.getString("prefix");
 								
-								if(prefix != null) {
+							if(prefix != null) {
 									
-									UUID playerUuid = UUID.fromString(rs.getString("uuid"));
+								UUID playerUuid = UUID.fromString(rs.getString("uuid"));
 									
-									Map<UUID, String> prefixList = this.chatPlayer.getPrefix();
+								Map<UUID, String> prefixList = this.chatPlayer.getPrefix();
 									
-									prefixList.remove(playerUuid);
+								prefixList.remove(playerUuid);
+								
+								if(rs.getBoolean("active")) {
 									prefixList.put(playerUuid, prefix);
-									
-									this.chatPlayer.setPrefix(prefixList);
 								}
+									
+								this.chatPlayer.setPrefix(prefixList);
 							}
 						}
 					}
