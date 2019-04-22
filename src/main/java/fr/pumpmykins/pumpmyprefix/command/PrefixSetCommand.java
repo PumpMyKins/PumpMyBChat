@@ -43,9 +43,6 @@ public class PrefixSetCommand extends QSubCommand {
 						mod++;
 						if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
 							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"',`modification`="+mod+" WHERE `uuid`= '"+p.getUniqueId()+"'");
-						else {
-							
-						}
 					} else {
 						
 						Main.getMySQL().update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
