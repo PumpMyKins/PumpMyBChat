@@ -27,7 +27,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 				ProxiedPlayer deletescope = ProxyServer.getInstance().getPlayer(args[1]);
 				if(deletescope == null) {
 					
-					for(ProxiedPlayer i :ProxyServer.getInstance().getPlayers()) {
+					for(ProxiedPlayer i : ProxyServer.getInstance().getPlayers()) {
 						
 						if(i.getDisplayName().toLowerCase() == args[1].toLowerCase()) {
 							
@@ -48,7 +48,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 				}
 				if(deletescope != null) {	
 					
-					Main.getMySQL().update("DELETE * FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
+					Main.getMySQL().update("DELETE FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
 					
 				}
 			}
