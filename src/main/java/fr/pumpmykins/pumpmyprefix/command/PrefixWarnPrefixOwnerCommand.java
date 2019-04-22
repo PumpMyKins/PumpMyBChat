@@ -40,7 +40,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 							int warn = rs.getInt("warn");
 							warn++;
 							
-							TextComponent desactive = new TextComponent("Préfix supprimer !");
+							TextComponent desactive = new TextComponent("Préfix warn !");
 							desactive.setColor(ChatColor.RED);
 							sender.sendMessage(desactive);
 							
