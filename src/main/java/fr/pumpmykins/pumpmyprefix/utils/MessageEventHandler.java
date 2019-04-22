@@ -48,10 +48,10 @@ public class MessageEventHandler implements Listener {
 			
 		String message = event.getMessage();
 		
-		ChatColor.translateAlternateColorCodes('&', prefix);
+		prefix = ChatColor.translateAlternateColorCodes('&', prefix);
 		
 		if(player.hasPermission("rank.tier2") || player.hasPermission("rank.tier3")) {
-			ChatColor.translateAlternateColorCodes('&', message);
+			message = ChatColor.translateAlternateColorCodes('&', message);
 		}
 		
 		TextComponent messages = new TextComponent();
