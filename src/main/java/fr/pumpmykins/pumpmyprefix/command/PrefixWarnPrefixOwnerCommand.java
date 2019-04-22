@@ -28,7 +28,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 				ProxiedPlayer p = ProxyServer.getInstance().getPlayer(args[1]);
 				
 				if(p != null) {
-					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` =" +p.getUniqueId());
+					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` = '"+p.getUniqueId()+"'");
 					try {
 						if(!rs.next()) {
 							
@@ -44,7 +44,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 							desactive.setColor(ChatColor.RED);
 							sender.sendMessage(desactive);
 							
-							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `warn`="+warn+" WHERE `uuid`= `"+p.getUniqueId()+"`");
+							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `warn`="+warn+" WHERE `uuid`= '"+p.getUniqueId()+"'");
 							
 							ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 							

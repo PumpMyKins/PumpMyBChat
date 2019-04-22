@@ -24,7 +24,7 @@ public class PrefixActivationCommand extends QSubCommand {
 		if(sender instanceof ProxiedPlayer) {
 			ProxiedPlayer p = (ProxiedPlayer) sender;
 			
-			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` = '"+p.getUniqueId()+"'");
+			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +" WHERE `uuid` = '"+p.getUniqueId()+"'");
 			try {
 				if(!rs.next()) {
 					
@@ -46,7 +46,7 @@ public class PrefixActivationCommand extends QSubCommand {
 						sender.sendMessage(activate);
 					}
 					
-					Main.getMySQL().update("UPDATE `PrefixPlayer` SET `active`="+active+" WHERE `uuid`= `"+p.getUniqueId()+"`");
+					Main.getMySQL().update("UPDATE `PrefixPlayer` SET `active`="+active+" WHERE `uuid`= '"+p.getUniqueId()+"'");
 					
 					ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 					
