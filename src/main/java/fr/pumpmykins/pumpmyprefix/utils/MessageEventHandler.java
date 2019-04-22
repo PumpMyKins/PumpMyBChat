@@ -2,6 +2,9 @@ package fr.pumpmykins.pumpmyprefix.utils;
 
 import fr.pumpmykins.pumpmyprefix.ChatPlayer;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
@@ -54,6 +57,8 @@ public class MessageEventHandler implements Listener {
 		TextComponent messages = new TextComponent();
 		
 		TextComponent name = new TextComponent(nickname);
+		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo = "+player.getDisplayName()).create()));
+		name.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "msg "+player.getDisplayName()));
 		
 		TextComponent bet = new TextComponent(" > ");
 		bet.setColor(ChatColor.GOLD);
