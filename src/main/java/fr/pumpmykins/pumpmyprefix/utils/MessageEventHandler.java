@@ -85,5 +85,7 @@ public class MessageEventHandler implements Listener {
 			receiver.sendMessage(messages);
 		}
 		
+		event.setCancelled(true);
+		
 	}
 }

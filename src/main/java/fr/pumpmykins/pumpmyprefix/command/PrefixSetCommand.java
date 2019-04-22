@@ -35,14 +35,14 @@ public class PrefixSetCommand extends QSubCommand {
 				
 				try {
 					
-					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = "+p.getUniqueId());
+					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = '"+p.getUniqueId()+"'");
 					
 					if(rs.first()) {
 						
 						int mod = rs.getInt("modification");
 						mod++;
 						if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
-							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`="+prefix+",`modification`="+mod+" WHERE `uuid`= `"+p.getUniqueId()+"`");
+							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`='+prefix+',`modification`='+mod+' WHERE `uuid`= '"+p.getUniqueId()+"'");
 						else {
 							
 						}
