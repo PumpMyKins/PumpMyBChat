@@ -25,7 +25,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 			
 			if(sender.hasPermission("rank.staff.moderateur")) {
 			
-				ProxiedPlayer p = ProxyServer.getInstance().getPlayer(args[0]);
+				ProxiedPlayer p = ProxyServer.getInstance().getPlayer(args[1]);
 				
 				if(p != null) {
 					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` =" +p.getUniqueId());

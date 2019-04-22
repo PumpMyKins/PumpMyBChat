@@ -48,7 +48,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 				}
 				if(deletescope != null) {	
 					
-					Main.getMySQL().update("DELETE * FROM PrefixPlayer WHERE `uuid` ="+deletescope.getUniqueId());
+					Main.getMySQL().update("DELETE * FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
 					
 				}
 			}

@@ -27,7 +27,7 @@ public class PrefixSetCommand extends QSubCommand {
 			
 				ProxiedPlayer p = (ProxiedPlayer) sender;
 				
-				String prefix = args[0];
+				String prefix = args[1];
 				
 				TextComponent desactive = new TextComponent("Préfix set !");
 				desactive.setColor(ChatColor.RED);

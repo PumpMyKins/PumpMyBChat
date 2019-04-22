@@ -62,7 +62,7 @@ public class Main  extends Plugin implements Listener{
 		
 		//PREFIX COMMAND WHICH REQUIRE A RELOAD
 		PrefixCommand.addCommand(Arrays.asList("set"), new PrefixSetCommand());
-		PrefixCommand.addCommand(Arrays.asList("active", "a"), new PrefixActivationCommand());
+		PrefixCommand.addCommand(Arrays.asList("activate", "a"), new PrefixActivationCommand());
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
 		PrefixCommand.addCommand(Arrays.asList("forcedelete"), new PrefixForceDeleteCommand());
 		PrefixCommand.addCommand(Arrays.asList("reset"), new PrefixResetCommand());
