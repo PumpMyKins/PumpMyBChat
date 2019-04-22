@@ -65,34 +65,25 @@ public class MessageEventHandler implements Listener {
 		TextComponent bet = new TextComponent(" >");
 		bet.setColor(ChatColor.GOLD);
 		bet.setBold(true);
-		
-		TextComponent colorReset = new TextComponent();
-		
+				
 		if(!prefix.isEmpty()) {
 			
 			TextComponent tcStartPrefix = new TextComponent("[");
 			TextComponent tcEndPrefix = new TextComponent("]");
-			colorReset.setColor(ChatColor.RESET);
 			tcStartPrefix.setColor(ChatColor.GOLD);
 			tcEndPrefix.setColor(ChatColor.GOLD);
 			TextComponent tcPrefix = new TextComponent(prefix);
 			
-			tcStartPrefix.addExtra(colorReset);
-			tcStartPrefix.addExtra(tcPrefix);
-			tcStartPrefix.addExtra(colorReset);
-			tcStartPrefix.addExtra(tcEndPrefix);
-			tcStartPrefix.addExtra(colorReset);
-			tcStartPrefix.addExtra(name);
-			tcStartPrefix.addExtra(colorReset);
-			tcStartPrefix.addExtra(bet);
-			tcStartPrefix.addExtra(colorReset);
-			tcStartPrefix.addExtra(message);
+			messages.addExtra(tcStartPrefix);
+			messages.addExtra(tcPrefix);
+			messages.addExtra(tcEndPrefix);
+			messages.addExtra(name);
+			messages.addExtra(bet);
+			messages.addExtra(message);
 			
-			messages = tcStartPrefix;
 		} else {
 			
 			name.addExtra(bet);
-			name.addExtra(colorReset);
 			name.addExtra(message);
 			
 			messages = name;
