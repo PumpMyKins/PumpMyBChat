@@ -53,6 +53,8 @@ public class MessageEventHandler implements Listener {
 		if(player.hasPermission("rank.tier2") || player.hasPermission("rank.tier3")) {
 			message = ChatColor.translateAlternateColorCodes('&', message);
 		}
+		if(player.hasPermission("rank.tier3"))
+			nickname = ChatColor.translateAlternateColorCodes('&', nickname);
 		
 		TextComponent messages = new TextComponent();
 		
