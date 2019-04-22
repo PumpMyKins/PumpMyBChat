@@ -41,7 +41,7 @@ public class PrefixResetCommand extends QSubCommand {
 					desactive.setColor(ChatColor.RED);
 					sender.sendMessage(desactive);
 					
-					Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`="+prefix+" WHERE `uuid`= '"+p.getUniqueId()+"'");
+					Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"' WHERE `uuid`= '"+p.getUniqueId()+"'");
 					
 					ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 					
