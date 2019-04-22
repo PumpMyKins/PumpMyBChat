@@ -59,7 +59,7 @@ public class MessageEventHandler implements Listener {
 		TextComponent messages = new TextComponent();
 		
 		TextComponent name = new TextComponent(nickname);
-		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo = "+player.getDisplayName()).create()));
+		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo :"+player.getDisplayName()).create()));
 		name.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg "+player.getDisplayName()));
 		
 		TextComponent bet = new TextComponent(" >");
