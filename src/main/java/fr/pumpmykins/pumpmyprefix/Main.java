@@ -95,7 +95,7 @@ public class Main  extends Plugin implements Listener{
 			mySQL.update(createprefixtable);	
 		}
 		
-		new PrefixInitialisation(chatPlayer); //Get all the existing prefix
+		new PrefixInitialisation(this.chatPlayer); //Get all the existing prefix
 		
 		TextComponent ERROR_NO_PREFIX = new TextComponent(STRING_ERROR_NO_PREFIX);
 		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
