@@ -62,7 +62,7 @@ public class MessageEventHandler implements Listener {
 		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo = "+player.getDisplayName()).create()));
 		name.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg "+player.getDisplayName()));
 		
-		TextComponent bet = new TextComponent(" > ");
+		TextComponent bet = new TextComponent(" >");
 		bet.setColor(ChatColor.GOLD);
 		bet.setBold(true);
 		
@@ -76,7 +76,6 @@ public class MessageEventHandler implements Listener {
 			
 			tcStartPrefix.addExtra(tcPrefix);
 			tcStartPrefix.addExtra(tcEndPrefix);
-			tcStartPrefix.addExtra(" ");
 			tcStartPrefix.addExtra(name);
 			tcStartPrefix.addExtra(bet);
 			tcStartPrefix.addExtra(message);
