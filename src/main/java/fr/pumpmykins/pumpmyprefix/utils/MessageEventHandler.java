@@ -38,6 +38,8 @@ public class MessageEventHandler implements Listener {
 			nickname = this.chatPlayer.getNickname().get(player.getUniqueId());
 			if(nickname == null)
 				nickname = player.getDisplayName();	
+		} else {
+			nickname = player.getDisplayName();
 		}
 			
 			
