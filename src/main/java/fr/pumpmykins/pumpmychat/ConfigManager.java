@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmyprefix;
+package fr.pumpmykins.pumpmychat;
 
 import java.io.File;
 import java.io.FileOutputStream;

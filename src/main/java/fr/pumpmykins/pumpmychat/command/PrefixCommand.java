@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmyprefix.command;
+package fr.pumpmykins.pumpmychat.command;
 
 import java.util.HashMap;
 import java.util.List;

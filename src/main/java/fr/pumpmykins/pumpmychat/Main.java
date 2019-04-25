@@ -1,20 +1,20 @@
-package fr.pumpmykins.pumpmyprefix;
+package fr.pumpmykins.pumpmychat;
 
 import java.util.Arrays;
 
-import fr.pumpmykins.pumpmyprefix.MySql.MySQLCredentials;
-import fr.pumpmykins.pumpmyprefix.command.NicknameCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixActivationCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixColorCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixForceDeleteCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixHelpCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixReloadCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixResetCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixSetCommand;
-import fr.pumpmykins.pumpmyprefix.command.PrefixWarnPrefixOwnerCommand;
-import fr.pumpmykins.pumpmyprefix.utils.MessageEventHandler;
-import fr.pumpmykins.pumpmyprefix.utils.PrefixInitialisation;
+import fr.pumpmykins.pumpmychat.MySql.MySQLCredentials;
+import fr.pumpmykins.pumpmychat.command.NicknameCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixActivationCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixColorCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixForceDeleteCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixHelpCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixReloadCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixResetCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixSetCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixWarnPrefixOwnerCommand;
+import fr.pumpmykins.pumpmychat.utils.MessageEventHandler;
+import fr.pumpmykins.pumpmychat.utils.PrefixInitialisation;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;

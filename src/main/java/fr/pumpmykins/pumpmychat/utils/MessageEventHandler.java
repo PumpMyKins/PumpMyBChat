@@ -1,6 +1,6 @@
-package fr.pumpmykins.pumpmyprefix.utils;
+package fr.pumpmykins.pumpmychat.utils;
 
-import fr.pumpmykins.pumpmyprefix.ChatPlayer;
+import fr.pumpmykins.pumpmychat.ChatPlayer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;

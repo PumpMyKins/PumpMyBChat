@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmyprefix;
+package fr.pumpmykins.pumpmychat;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

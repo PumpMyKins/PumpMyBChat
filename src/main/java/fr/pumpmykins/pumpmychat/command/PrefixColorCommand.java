@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmyprefix.command;
+package fr.pumpmykins.pumpmychat.command;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;

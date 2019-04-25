@@ -1,9 +1,9 @@
-package fr.pumpmykins.pumpmyprefix.command;
+package fr.pumpmykins.pumpmychat.command;
 
 import java.util.Map;
 import java.util.UUID;
 
-import fr.pumpmykins.pumpmyprefix.ChatPlayer;
+import fr.pumpmykins.pumpmychat.ChatPlayer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;

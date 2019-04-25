@@ -1,13 +1,13 @@
-package fr.pumpmykins.pumpmyprefix.command;
+package fr.pumpmykins.pumpmychat.command;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.UUID;
 
-import fr.pumpmykins.pumpmyprefix.ChatPlayer;
-import fr.pumpmykins.pumpmyprefix.Main;
-import fr.pumpmykins.pumpmyprefix.MySql;
+import fr.pumpmykins.pumpmychat.ChatPlayer;
+import fr.pumpmykins.pumpmychat.Main;
+import fr.pumpmykins.pumpmychat.MySql;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
