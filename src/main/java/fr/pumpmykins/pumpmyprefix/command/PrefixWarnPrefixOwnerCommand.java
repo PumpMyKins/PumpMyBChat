@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.pumpmykins.pumpmyprefix.Main;
+import fr.pumpmykins.pumpmyprefix.MySql;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -28,30 +29,38 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 				ProxiedPlayer p = ProxyServer.getInstance().getPlayer(args[1]);
 				
 				if(p != null) {
-					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` = '"+p.getUniqueId()+"'");
-					try {
-						if(!rs.next()) {
+					
+					MySql mySQL = Main.getMySQL();
+					mySQL.openConnection();
+					if(mySQL.isConnected()) {
+					
+						ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX +"WHERE `uuid` = '"+p.getUniqueId()+"'");
+						try {
+							if(!rs.next()) {
+								
+								sender.sendMessage(Main.getERROR_NO_PREFIX());
+								
+							} else {
+								
+								rs.first();
+								int warn = rs.getInt("warn");
+								warn++;
+								
+								TextComponent desactive = new TextComponent("Préfix warn !");
+								desactive.setColor(ChatColor.RED);
+								sender.sendMessage(desactive);
+								
+								Main.getMySQL().update("UPDATE `PrefixPlayer` SET `warn`="+warn+" WHERE `uuid`= '"+p.getUniqueId()+"'");
+								
+								ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
+								
+							}
 							
-							sender.sendMessage(Main.getERROR_NO_PREFIX());
-							
-						} else {
-							
-							rs.first();
-							int warn = rs.getInt("warn");
-							warn++;
-							
-							TextComponent desactive = new TextComponent("Préfix warn !");
-							desactive.setColor(ChatColor.RED);
-							sender.sendMessage(desactive);
-							
-							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `warn`="+warn+" WHERE `uuid`= '"+p.getUniqueId()+"'");
-							
-							ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
-							
+							mySQL.closeConnection();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
 				}
 			}

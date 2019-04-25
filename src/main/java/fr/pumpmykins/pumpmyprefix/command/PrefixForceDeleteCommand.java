@@ -1,6 +1,7 @@
 package fr.pumpmykins.pumpmyprefix.command;
 
 import fr.pumpmykins.pumpmyprefix.Main;
+import fr.pumpmykins.pumpmyprefix.MySql;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -48,8 +49,18 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 				}
 				if(deletescope != null) {	
 					
-					Main.getMySQL().update("DELETE FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
-					
+					MySql mySQL = Main.getMySQL();
+					mySQL.openConnection();
+					if(mySQL.isConnected()) {
+						mySQL.update("DELETE FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
+						
+						mySQL.closeConnection();
+					} else {
+						
+						TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
+						activate.setColor(ChatColor.RED);
+						sender.sendMessage(activate);
+					}
 				}
 			}
 		}

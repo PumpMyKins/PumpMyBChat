@@ -22,6 +22,7 @@ public class PrefixInitialisation {
 		
 		MySql mySQL = Main.getMySQL();
 		
+		mySQL.openConnection();
 		if(mySQL.isConnected()) {
 			
 			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX);
@@ -49,6 +50,7 @@ public class PrefixInitialisation {
 				e.printStackTrace();
 			}
 			
+			mySQL.closeConnection();
 		}
 	}
 }

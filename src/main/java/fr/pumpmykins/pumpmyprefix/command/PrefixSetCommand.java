@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.pumpmykins.pumpmyprefix.Main;
+import fr.pumpmykins.pumpmyprefix.MySql;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -33,26 +34,32 @@ public class PrefixSetCommand extends QSubCommand {
 				desactive.setColor(ChatColor.RED);
 				sender.sendMessage(desactive);
 				
-				try {
-					
-					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = '"+p.getUniqueId()+"'");
-					
-					if(rs.first()) {
+				MySql mySQL = Main.getMySQL();
+				mySQL.openConnection();
+				if(mySQL.isConnected()) {
+					try {
 						
-						int mod = rs.getInt("modification");
-						mod++;
-						if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
-							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"',`modification`="+mod+" WHERE `uuid`= '"+p.getUniqueId()+"'");
-					} else {
+						ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = '"+p.getUniqueId()+"'");
 						
-						Main.getMySQL().update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
+						if(rs.first()) {
+							
+							int mod = rs.getInt("modification");
+							mod++;
+							if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
+								mySQL.update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"',`modification`="+mod+" WHERE `uuid`= '"+p.getUniqueId()+"'");
+						} else {
+							
+							mySQL.update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
+						}
+						
+						
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					mySQL.closeConnection();
 				}
-				
 				ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 			}
 		}
