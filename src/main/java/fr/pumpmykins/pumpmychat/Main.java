@@ -95,7 +95,6 @@ public class Main  extends Plugin implements Listener{
 			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer(`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT 0, `warn` INT NOT NULL DEFAULT 0, `modification` INT NOT NULL DEFAULT 0)";
 			mySQL.update(createprefixtable);
 			
-			mySQL.closeConnection();
 		}
 		
 		new PrefixInitialisation(this.chatPlayer); //Get all the existing prefix
