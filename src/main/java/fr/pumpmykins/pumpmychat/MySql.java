@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
 
 import net.md_5.bungee.api.ProxyServer;
 
@@ -91,15 +92,26 @@ public class MySql {
 	}
 
 	public boolean isConnected() {
-		return this.conn != null;
+		try {
+			if(this.conn != null && !(this.conn.isClosed()))
+				return true;
+			else
+				return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void openConnection() {
 		if (!isConnected()) {
 			try {
+				
 				this.conn = DriverManager.getConnection(
 						"jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database + "?autoReconnect=true",
 						this.username, this.password);
+				this.conn.setNetworkTimeout(Executors.newFixedThreadPool(1), -1);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -108,11 +120,30 @@ public class MySql {
 
 	public void closeConnection() {
 		if (isConnected()) {
-			try {
-				this.conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if(!this.host.isEmpty() && !this.username.isEmpty() && !this.database.isEmpty()) {
+				try {
+					
+					this.conn.close();
+				
+				} catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
 			}
+		}
+	}
+
+	public void refreshConnection() throws SQLException {
+		
+		if(this.conn.isClosed()) {
+			
+			this.conn = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database + "?autoReconnect=true",
+						this.username, this.password);
+		} else {
+			
+			this.conn.close();
+			
+			refreshConnection();
 		}
 	}
 

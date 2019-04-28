@@ -24,48 +24,44 @@ public class PrefixActivationCommand extends QSubCommand {
 		// TODO Auto-generated method stub
 		if(sender instanceof ProxiedPlayer) {
 			ProxiedPlayer p = (ProxiedPlayer) sender;
-			
-			MySql mySQL = Main.getMySQL();
-			mySQL.openConnection();
-			if(mySQL.isConnected()) {
+
+			try {
+				MySql mySQL = Main.getMySQL();
 				ResultSet rs = mySQL.getResult(Main.REQUEST_GET_USER_PREFIX +" WHERE `uuid` = '"+p.getUniqueId()+"'");
-				try {
-					if(!rs.next()) {
-						
-						sender.sendMessage(Main.getERROR_NO_PREFIX());
-						
+				if(!rs.next()) {
+
+					sender.sendMessage(Main.getERROR_NO_PREFIX());
+
+				} else {
+
+					rs.first();
+					boolean active = rs.getBoolean("active");
+					if(active) {
+						active = false;
+						TextComponent desactive = new TextComponent("Préfix désactiver !");
+						desactive.setColor(ChatColor.RED);
+						sender.sendMessage(desactive);
 					} else {
-						
-						rs.first();
-						boolean active = rs.getBoolean("active");
-						if(active) {
-							active = false;
-							TextComponent desactive = new TextComponent("Préfix désactiver !");
-							desactive.setColor(ChatColor.RED);
-							sender.sendMessage(desactive);
-						} else {
-							active = true;
-							TextComponent activate = new TextComponent("Préfix activer !");
-							activate.setColor(ChatColor.GREEN);
-							sender.sendMessage(activate);
-						}
-						
-						Main.getMySQL().update("UPDATE `PrefixPlayer` SET `active`="+active+" WHERE `uuid`= '"+p.getUniqueId()+"'");
-						
-						ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
-						
-						mySQL.closeConnection();
+						active = true;
+						TextComponent activate = new TextComponent("Préfix activer !");
+						activate.setColor(ChatColor.GREEN);
+						sender.sendMessage(activate);
 					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+					mySQL.update("UPDATE `PrefixPlayer` SET `active`="+active+" WHERE `uuid`= '"+p.getUniqueId()+"'");
+
+					ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
+
 				}
-			} else {
-				
-				TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
-				activate.setColor(ChatColor.RED);
-				sender.sendMessage(activate);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		} else {
+
+			TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
+			activate.setColor(ChatColor.RED);
+			sender.sendMessage(activate);
 		}
 	}
 }

@@ -21,48 +21,43 @@ public class PrefixSetCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
-		
+
 		if(sender instanceof ProxiedPlayer) {
-			
+
 			if(sender.hasPermission("rank.tier1") || sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
-			
+
 				ProxiedPlayer p = (ProxiedPlayer) sender;
-				
+
 				String prefix = args[1];
-				
+
 				TextComponent desactive = new TextComponent("Préfix set !");
 				desactive.setColor(ChatColor.RED);
 				sender.sendMessage(desactive);
-				
-				MySql mySQL = Main.getMySQL();
-				mySQL.openConnection();
-				if(mySQL.isConnected()) {
-					try {
-						
-						ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = '"+p.getUniqueId()+"'");
-						
-						if(rs.first()) {
-							
-							int mod = rs.getInt("modification");
-							mod++;
-							if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
-								mySQL.update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"',`modification`="+mod+" WHERE `uuid`= '"+p.getUniqueId()+"'");
-						} else {
-							
-							mySQL.update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
-						}
-						
-						
-						
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				try {
+					MySql mySQL = Main.getMySQL();
+
+
+					ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = '"+p.getUniqueId()+"'");
+
+					if(rs.first()) {
+
+						int mod = rs.getInt("modification");
+						mod++;
+						if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
+							mySQL.update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"',`modification`="+mod+" WHERE `uuid`= '"+p.getUniqueId()+"'");
+					} else {
+
+						mySQL.update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
 					}
-					mySQL.closeConnection();
+
+
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 			}
+			ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 		}
 	}
-
 }

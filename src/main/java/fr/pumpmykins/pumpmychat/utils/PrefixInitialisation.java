@@ -11,46 +11,40 @@ import fr.pumpmykins.pumpmychat.Main;
 import fr.pumpmykins.pumpmychat.MySql;
 
 public class PrefixInitialisation {
-	
+
 	private ChatPlayer chatPlayer;
-	
+
 	public PrefixInitialisation(ChatPlayer cp) {
-		
+
 		this.chatPlayer = new ChatPlayer();
-		
+
 		Map<UUID, String> prefixList = new HashMap<UUID, String>();
-		
-		MySql mySQL = Main.getMySQL();
-		
-		mySQL.openConnection();
-		if(mySQL.isConnected()) {
-			
-			ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX);
-			try {
-				
-				while(rs.next()) {
-					
-					if(rs.getInt("warn") < 3) {
-						
-						String prefix = rs.getString("prefix");
-						
-						if(prefix != null) {
-							
-							UUID playerUuid = UUID.fromString(rs.getString("uuid"));
-							
-							prefixList.put(playerUuid, prefix);
-							
-						}
+
+		try {
+			MySql mySQL = Main.getMySQL();
+
+			ResultSet rs = mySQL.getResult(Main.REQUEST_GET_USER_PREFIX);
+
+			while(rs.next()) {
+
+				if(rs.getInt("warn") < 3) {
+
+					String prefix = rs.getString("prefix");
+
+					if(prefix != null) {
+
+						UUID playerUuid = UUID.fromString(rs.getString("uuid"));
+
+						prefixList.put(playerUuid, prefix);
+
 					}
 				}
-			this.chatPlayer.setPrefix(prefixList);
-			
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			
-			mySQL.closeConnection();
+			this.chatPlayer.setPrefix(prefixList);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

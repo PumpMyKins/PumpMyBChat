@@ -1,5 +1,6 @@
 package fr.pumpmykins.pumpmychat;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 
 import fr.pumpmykins.pumpmychat.MySql.MySQLCredentials;
@@ -110,15 +111,21 @@ public class Main  extends Plugin implements Listener{
 		return sharedInstance;
 	}
 
-
+	public static MySql getMySQL() throws SQLException {
+		if(mySQL.isConnected()) {
+			return mySQL;
+		} else {
+			mySQL.refreshConnection();
+			if(mySQL.isConnected()) {
+				return mySQL;
+			}
+		}
+		return null;
+	}
+	
 	public static void setSharedInstance(Main sharedInstance) {
 		Main.sharedInstance = sharedInstance;
 	}
-
-	public static MySql getMySQL() {
-		return mySQL;
-	}
-
 
 	public static TextComponent getERROR_NO_PREFIX() {
 		return ERROR_NO_PREFIX;

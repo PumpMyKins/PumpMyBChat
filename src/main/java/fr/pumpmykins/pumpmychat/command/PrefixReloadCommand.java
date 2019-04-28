@@ -16,15 +16,15 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 public class PrefixReloadCommand extends QSubCommand {
 
 	private ChatPlayer chatPlayer;
-	
+
 	public PrefixReloadCommand(ChatPlayer cp) {
-		
+
 		this.chatPlayer = cp;
 	}
 
 	@Override
 	public String getPermission() {
-		
+
 		return null;
 	}
 
@@ -34,51 +34,45 @@ public class PrefixReloadCommand extends QSubCommand {
 		if(sender instanceof ProxiedPlayer) {
 
 			if(sender.hasPermission("rank.tier1") || sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
-			
-				MySql mySQL = Main.getMySQL();
-				mySQL.openConnection();
-				
-				if(mySQL.isConnected()) {
+				try {
+					MySql mySQL = Main.getMySQL();
 					ResultSet rs = mySQL.getResult(Main.REQUEST_GET_USER_PREFIX);
-					try {
-						
-						while(rs.next()) {
-							
-							if(rs.getInt("warn") < 3) {
-								
-								String prefix = rs.getString("prefix");
-									
-								if(prefix != null) {
-										
-									UUID playerUuid = UUID.fromString(rs.getString("uuid"));
-										
-									Map<UUID, String> prefixList = this.chatPlayer.getPrefix();
-										
-									prefixList.remove(playerUuid);
-									
-									if(rs.getBoolean("active")) {
-										prefixList.put(playerUuid, prefix);
-									}
-										
-									this.chatPlayer.setPrefix(prefixList);
+
+
+					while(rs.next()) {
+
+						if(rs.getInt("warn") < 3) {
+
+							String prefix = rs.getString("prefix");
+
+							if(prefix != null) {
+
+								UUID playerUuid = UUID.fromString(rs.getString("uuid"));
+
+								Map<UUID, String> prefixList = this.chatPlayer.getPrefix();
+
+								prefixList.remove(playerUuid);
+
+								if(rs.getBoolean("active")) {
+									prefixList.put(playerUuid, prefix);
 								}
+
+								this.chatPlayer.setPrefix(prefixList);
 							}
 						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
-					
-					mySQL.closeConnection();
-					
-				} else {
-					
-					TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
-					activate.setColor(ChatColor.RED);
-					sender.sendMessage(activate);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+
+			} else {
+
+				TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
+				activate.setColor(ChatColor.RED);
+				sender.sendMessage(activate);
 			}
 		}
 	}
-
 }
+

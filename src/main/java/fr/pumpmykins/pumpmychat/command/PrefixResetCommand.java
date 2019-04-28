@@ -21,47 +21,43 @@ public class PrefixResetCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
-		
+
 		if(sender instanceof ProxiedPlayer) {
-			
+
 			ProxiedPlayer p = (ProxiedPlayer) sender;
-			
-			MySql mySQL = Main.getMySQL();
-			mySQL.openConnection();
-			if(mySQL.isConnected()) {
+			try {
+				MySql mySQL = Main.getMySQL();
 				ResultSet rs = mySQL.getResult(Main.REQUEST_GET_USER_PREFIX +" WHERE `uuid` = '"+p.getUniqueId()+"'");
-				try {
-					if(!rs.next()) {
-						
-						sender.sendMessage(Main.getERROR_NO_PREFIX());
-						
-					} else {
-						
-						rs.first();
-						String prefix = rs.getString("prefix");
-						prefix = "";
-						
-						TextComponent desactive = new TextComponent("Préfix supprimer !");
-						desactive.setColor(ChatColor.RED);
-						sender.sendMessage(desactive);
-						
-						mySQL.update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"' WHERE `uuid`= '"+p.getUniqueId()+"'");
-						
-						ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
-						
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+				if(!rs.next()) {
+
+					sender.sendMessage(Main.getERROR_NO_PREFIX());
+
+				} else {
+
+					rs.first();
+					String prefix = rs.getString("prefix");
+					prefix = "";
+
+					TextComponent desactive = new TextComponent("Préfix supprimer !");
+					desactive.setColor(ChatColor.RED);
+					sender.sendMessage(desactive);
+
+					mySQL.update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"' WHERE `uuid`= '"+p.getUniqueId()+"'");
+
+					ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
+
 				}
-				mySQL.closeConnection();
-			} else {
-				
-				TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
-				activate.setColor(ChatColor.RED);
-				sender.sendMessage(activate);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		} else {
+
+			TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
+			activate.setColor(ChatColor.RED);
+			sender.sendMessage(activate);
 		}
 	}
-
 }
+
