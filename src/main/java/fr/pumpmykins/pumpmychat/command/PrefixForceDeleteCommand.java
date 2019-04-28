@@ -53,18 +53,17 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 
 						try {
 							MySql mySQL = Main.getMySQL();
-							
+
 							mySQL.update("DELETE FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
+
+							TextComponent playerunknown = new TextComponent("Prefix Supprimer !");
+							playerunknown.setColor(ChatColor.DARK_RED);
+							sender.sendMessage(playerunknown);
 							
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					} else {
-
-						TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
-						activate.setColor(ChatColor.RED);
-						sender.sendMessage(activate);
 					}
 				}
 		}

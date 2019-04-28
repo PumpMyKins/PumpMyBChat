@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import fr.pumpmykins.pumpmychat.ChatPlayer;
+import fr.pumpmykins.pumpmychat.Main;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -54,6 +55,9 @@ public class NicknameCommand extends Command {
 					TextComponent desactive = new TextComponent("NickName supprimé !");
 					desactive.setColor(ChatColor.GOLD);
 					sender.sendMessage(desactive);
+				} else {
+					
+					sender.sendMessage(Main.getERROR_NO_PREFIX());
 				}
 			}
 			

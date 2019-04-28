@@ -15,6 +15,11 @@ public class PrefixColorCommand extends QSubCommand {
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 
+		TextComponent intro = new TextComponent("Liste des couleurs :");
+		intro.setColor(ChatColor.WHITE);
+		TextComponent preColor = new TextComponent("******************");
+		preColor.setObfuscated(true);
+		preColor.setColor(ChatColor.GOLD);
 		TextComponent black = new TextComponent("&0 Couleur Noir");
 		black.setColor(ChatColor.BLACK);
 		TextComponent dark_blue = new TextComponent("&1 Couleur bleu foncé");

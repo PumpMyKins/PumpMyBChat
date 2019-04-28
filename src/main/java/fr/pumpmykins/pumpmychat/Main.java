@@ -41,10 +41,8 @@ public class Main  extends Plugin implements Listener{
 	
 	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer ";
 	
-	public static String STRING_ERROR_NO_PREFIX = "Vous n'avez pas de préfix !";
-	
-	public static TextComponent ERROR_NO_PREFIX = new TextComponent();
-	
+	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces :";
+		
 	private ChatPlayer chatPlayer;
 	@Override
 	public void onEnable() {
@@ -99,10 +97,6 @@ public class Main  extends Plugin implements Listener{
 		
 		new PrefixInitialisation(this.chatPlayer); //Get all the existing prefix
 		
-		TextComponent ERROR_NO_PREFIX = new TextComponent(STRING_ERROR_NO_PREFIX);
-		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
-		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://pumpmykins.buycraft.net/"));
-		
 	}
 	
 	
@@ -127,14 +121,11 @@ public class Main  extends Plugin implements Listener{
 	}
 
 	public static TextComponent getERROR_NO_PREFIX() {
+		
+		TextComponent ERROR_NO_PREFIX = new TextComponent(STRING_ERROR_NO_PREFIX);
+		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
+		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://pumpmykins.buycraft.net/"));
+		
 		return ERROR_NO_PREFIX;
 	}
-
-
-	public static void setERROR_NO_PREFIX(TextComponent eRROR_NO_PREFIX) {
-		ERROR_NO_PREFIX = eRROR_NO_PREFIX;
-	}
-
-	
-	
 }

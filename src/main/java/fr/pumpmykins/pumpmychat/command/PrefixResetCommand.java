@@ -52,11 +52,6 @@ public class PrefixResetCommand extends QSubCommand {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-
-			TextComponent activate = new TextComponent("Connection à la base de donnée impossible !");
-			activate.setColor(ChatColor.RED);
-			sender.sendMessage(activate);
 		}
 	}
 }

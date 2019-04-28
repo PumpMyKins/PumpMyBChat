@@ -43,11 +43,11 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 							int warn = rs.getInt("warn");
 							warn++;
 
-							TextComponent desactive = new TextComponent("Préfix warn !");
-							desactive.setColor(ChatColor.RED);
+							TextComponent desactive = new TextComponent("Préfix warn ! ("+p.getName()+" a "+warn+" warn");
+							desactive.setColor(ChatColor.DARK_RED);
 							sender.sendMessage(desactive);
 
-							Main.getMySQL().update("UPDATE `PrefixPlayer` SET `warn`="+warn+" WHERE `uuid`= '"+p.getUniqueId()+"'");
+							mySQL.update("UPDATE `PrefixPlayer` SET `warn`="+warn+" WHERE `uuid`= '"+p.getUniqueId()+"'");
 
 							ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 

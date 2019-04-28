@@ -61,6 +61,9 @@ public class PrefixSetCommand extends QSubCommand {
 				}
 				ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
 			}
+		} else {
+			
+			ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix");
 		}
 	}
 }
