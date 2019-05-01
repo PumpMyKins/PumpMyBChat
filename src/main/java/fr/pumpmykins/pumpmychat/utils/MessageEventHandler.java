@@ -33,9 +33,11 @@ public class MessageEventHandler implements Listener {
 		String nickname = new String();
 		
 		if(!this.chatPlayer.getPrefix().isEmpty()) {
-			prefix = this.chatPlayer.getPrefix().get(player.getUniqueId());
-			if(prefix == null)
-				prefix = "";
+			if(player.hasPermission("rank.tier1") || player.hasPermission("rank.tier2") || player.hasPermission("rank.tier3")) {
+				prefix = this.chatPlayer.getPrefix().get(player.getUniqueId());
+				if(prefix == null)
+					prefix = "";
+			}
 		}
 		if(!this.chatPlayer.getNickname().isEmpty()) {
 			nickname = this.chatPlayer.getNickname().get(player.getUniqueId());
