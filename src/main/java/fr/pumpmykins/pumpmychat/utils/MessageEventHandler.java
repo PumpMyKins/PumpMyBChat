@@ -25,6 +25,9 @@ public class MessageEventHandler implements Listener {
 	public void onMessage(ChatEvent event) {
 		
         if (event.isCommand()) return;
+        if(event.getMessage().isEmpty()) return;
+		if(event.getMessage() == null) return;
+		if(event.isCancelled()) return;
         if (!(event.getSender() instanceof ProxiedPlayer)) return;
 
         ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
