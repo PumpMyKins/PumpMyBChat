@@ -49,8 +49,6 @@ public class Main  extends Plugin implements Listener{
 		
 		sharedInstance = this;
 		
-		this.chatPlayer = new ChatPlayer();
-		
 		PluginManager pm = ProxyServer.getInstance().getPluginManager();
 		
 		//START PREFIX COMMAND REGISTERING
@@ -95,8 +93,9 @@ public class Main  extends Plugin implements Listener{
 			
 		}
 		
+		this.chatPlayer = new ChatPlayer();
 		new PrefixInitialisation(this.chatPlayer); //Get all the existing prefix
-		
+
 	}
 	
 	
