@@ -58,10 +58,10 @@ public class MessageEventHandler implements Listener {
 		
 		prefix = ChatColor.translateAlternateColorCodes('&', prefix);
 		
-		if(player.hasPermission("rank.tier2") || player.hasPermission("rank.tier3")) {
+		if(player.hasPermission("pumpmykins.vip.tier2") || player.hasPermission("pumpmykins.vip.tier3")) {
 			message = ChatColor.translateAlternateColorCodes('&', message);
 		}
-		if(player.hasPermission("rank.tier3"))
+		if(player.hasPermission("pumpmykins.vip.tier3"))
 			nickname = ChatColor.translateAlternateColorCodes('&', nickname);
 		
 		TextComponent messages = new TextComponent();

@@ -20,7 +20,7 @@ public class NicknameCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 
-		if(sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
+		if(sender.hasPermission("pumpmykins.vip.tier2") || sender.hasPermission("pumpmykins.vip.tier3")) {
 
 			ProxiedPlayer player = (ProxiedPlayer) sender;
 

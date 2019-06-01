@@ -25,7 +25,7 @@ public class PrefixReloadCommand extends QSubCommand {
 		
 		if(sender instanceof ProxiedPlayer) {
 
-			if(sender.hasPermission("rank.tier1") || sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
+			if(sender.hasPermission("pumpmykins.vip.tier1") || sender.hasPermission("pumpmykins.vip.tier2") || sender.hasPermission("pumpmykins.vip.tier3")) {
 
 				this.chatPlayer = new ChatPlayer();
 				
