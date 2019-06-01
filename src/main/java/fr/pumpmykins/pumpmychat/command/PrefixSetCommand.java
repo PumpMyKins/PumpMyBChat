@@ -29,38 +29,44 @@ public class PrefixSetCommand extends QSubCommand {
 
 			if(sender instanceof ProxiedPlayer) {
 
-				if(sender.hasPermission("rank.tier1") || sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
+				if(sender.hasPermission("pumpmykins.vip.tier1") || sender.hasPermission("pumpmykins.vip.tier2") || sender.hasPermission("pumpmykins.vip.tier3")) {
 
 					ProxiedPlayer p = (ProxiedPlayer) sender;
 
 					String prefix = args[1];
 
+					boolean canSet = true;
+					
 					if(this.cp.hasPrefix(p.getUniqueId())) {
-
+						
 						int mod = this.cp.getPrefix().get(p.getUniqueId()).getModification();
 
-						if(sender.hasPermission("rank.tier2")) {
+						if(sender.hasPermission("pumpmykins.vip.tier2")) {
 
 							if(mod >= 2) {
 
+								canSet = false;
+								
 								TextComponent desactive = new TextComponent("Vous avez atteint le nombre de modification maximum !");
 								desactive.setColor(ChatColor.RED);
-								desactive.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder("Contacter un staff si votre prefix actuel est bug").create()));
+								desactive.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Contacter un staff si votre prefix actuel est bug").create()));
 								sender.sendMessage(desactive);
 							}
 						} 
-						if(sender.hasPermission("rank.tier1")) {
+						else if(sender.hasPermission("pumpmykins.vip.tier1")) {
 							if(mod >= 1) {
 
+								canSet = false;
+								
 								TextComponent desactive = new TextComponent("Vous avez atteint le nombre de modification maximum !");
 								desactive.setColor(ChatColor.RED);
-								desactive.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder("Contacter un staff si votre prefix actuel est bug").create()));
+								desactive.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Contacter un staff si votre prefix actuel est bug").create()));
 								sender.sendMessage(desactive);
 							}
 						}
 					}
-					if(this.cp.setPrefix(p.getUniqueId(), prefix)) {
-
+					if(canSet && this.cp.setPrefix(((ProxiedPlayer) sender).getUniqueId(), prefix)) {
+						
 						TextComponent desactive = new TextComponent("Préfix set !");
 						desactive.setColor(ChatColor.GREEN);
 						sender.sendMessage(desactive);

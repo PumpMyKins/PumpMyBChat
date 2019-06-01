@@ -19,7 +19,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 	@Override
 	public String getPermission() {
 		// TODO Auto-generated method stub
-		return "rank.staff.responsable";
+		return "pumpmykins.staff.responsable";
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 		// TODO Auto-generated method stub
 		if(sender instanceof ProxiedPlayer) {
 
-			if(sender.hasPermission("rank.staff.responsable"))
+			if(sender.hasPermission("pumpmykins.staff.responsable"))
 
 				if(args.length >= 2) {
 
@@ -36,7 +36,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 
 						for(ProxiedPlayer i : ProxyServer.getInstance().getPlayers()) {
 
-							if(i.getDisplayName().toLowerCase() == args[1].toLowerCase()) {
+							if(i.getName().toLowerCase() == args[1].toLowerCase()) {
 
 								deletescope = ProxyServer.getInstance().getPlayer(i.getName());
 								break;
@@ -63,7 +63,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 						
 						TextComponent deleteprefix = new TextComponent("Votre Prefix a ete supprime par "+sender.getName()+" !");
 						deleteprefix.setColor(ChatColor.DARK_RED);
-						sender.sendMessage(deleteprefix);
+						deletescope.sendMessage(deleteprefix);
 					}
 				}
 		}

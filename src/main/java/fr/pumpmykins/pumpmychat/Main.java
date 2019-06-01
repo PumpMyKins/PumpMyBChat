@@ -12,7 +12,6 @@ import fr.pumpmykins.pumpmychat.command.PrefixCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixForceDeleteCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixHelpCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixReloadCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixResetCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixSetCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixWarnPrefixOwnerCommand;
 import fr.pumpmykins.pumpmychat.utils.MessageEventHandler;
@@ -41,7 +40,7 @@ public class Main  extends Plugin implements Listener{
 	
 	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer ";
 	
-	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces : https://pumpmykins.buycraft.net/ ";
+	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces : http://store.pumpmykins.eu/ ";
 		
 	private ChatPlayer chatPlayer;
 	@Override
@@ -83,7 +82,6 @@ public class Main  extends Plugin implements Listener{
 		PrefixCommand.addCommand(Arrays.asList("activate", "a"), new PrefixActivationCommand(this.chatPlayer));
 		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand(this.chatPlayer));
 		PrefixCommand.addCommand(Arrays.asList("forcedelete"), new PrefixForceDeleteCommand(this.chatPlayer));
-		PrefixCommand.addCommand(Arrays.asList("reset"), new PrefixResetCommand(this.chatPlayer));
 		PrefixCommand.addCommand(Arrays.asList("buy"), new PrefixBuyCommand(this.chatPlayer));
 		//RELOAD COMMAND
 		PrefixCommand.addCommand(Arrays.asList("reload", "r"), new PrefixReloadCommand(this.chatPlayer));
@@ -120,7 +118,7 @@ public class Main  extends Plugin implements Listener{
 		
 		TextComponent ERROR_NO_PREFIX = new TextComponent(STRING_ERROR_NO_PREFIX);
 		ERROR_NO_PREFIX.setColor(ChatColor.DARK_RED);
-		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://pumpmykins.buycraft.net/"));
+		ERROR_NO_PREFIX.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://store.pumpmykins.eu/"));
 		
 		return ERROR_NO_PREFIX;
 	}

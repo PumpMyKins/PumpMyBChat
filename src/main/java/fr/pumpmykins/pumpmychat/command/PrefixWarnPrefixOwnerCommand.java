@@ -28,7 +28,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 
 		if(sender instanceof ProxiedPlayer) {
 
-			if(sender.hasPermission("rank.staff.moderateur") || sender.hasPermission("rank.staff.responsable") || sender.hasPermission("rank.staff.admin")) {
+			if(sender.hasPermission("pumpmykins.staff.modo") || sender.hasPermission("pumpmykins.staff.admin") || sender.hasPermission("pumpmykins.staff.responsable")) {
 
 				ProxiedPlayer p = ProxyServer.getInstance().getPlayer(args[1]);
 
