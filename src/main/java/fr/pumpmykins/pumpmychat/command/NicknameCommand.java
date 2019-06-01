@@ -1,8 +1,5 @@
 package fr.pumpmykins.pumpmychat.command;
 
-import java.util.Map;
-import java.util.UUID;
-
 import fr.pumpmykins.pumpmychat.ChatPlayer;
 import fr.pumpmykins.pumpmychat.Main;
 import net.md_5.bungee.api.ChatColor;
@@ -14,7 +11,7 @@ import net.md_5.bungee.api.plugin.Command;
 public class NicknameCommand extends Command {
 
 	private ChatPlayer chatPlayer;
-	
+
 	public NicknameCommand(String name, ChatPlayer cp) {
 		super(name);
 		this.chatPlayer = cp;
@@ -22,53 +19,35 @@ public class NicknameCommand extends Command {
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		
+
 		if(sender.hasPermission("rank.tier2") || sender.hasPermission("rank.tier3")) {
-			
-			Map<UUID, String> nickList = this.chatPlayer.getNickname();
-			
+
 			ProxiedPlayer player = (ProxiedPlayer) sender;
-			
+
 			if(args.length > 0) {
-			
-				if(!nickList.containsKey(player.getUniqueId())) {
-					
-					nickList.put(player.getUniqueId(), args[0]);
-					
-					TextComponent desactive = new TextComponent("NickName appliqué !");
-					desactive.setColor(ChatColor.GOLD);
-					sender.sendMessage(desactive);
-				} else {
-					
-					nickList.remove(player.getUniqueId());
-					nickList.put(player.getUniqueId(), args[0]);
-					
-					TextComponent desactive = new TextComponent("NickName appliqué !");
-					desactive.setColor(ChatColor.GOLD);
-					sender.sendMessage(desactive);
-				}
-			} else {
+
+				this.chatPlayer.addNickname(player.getUniqueId(), args[0]);
 				
-				if(nickList.containsKey(player.getUniqueId())) {
+				TextComponent desactive = new TextComponent("NickName appliqué !");
+				desactive.setColor(ChatColor.GOLD);
+				sender.sendMessage(desactive);
+
+			} else {
+
+				if(this.chatPlayer.hasNickname(player.getUniqueId())) {
+
+					this.chatPlayer.removeNickname(player.getUniqueId());
 					
-					nickList.remove(player.getUniqueId());
 					TextComponent desactive = new TextComponent("NickName supprimé !");
 					desactive.setColor(ChatColor.GOLD);
 					sender.sendMessage(desactive);
-				} else {
-					
-					sender.sendMessage(Main.getERROR_NO_PREFIX());
 				}
 			}
-			
-			this.chatPlayer.setNickname(nickList);
-			
 		} else {
-			
-			TextComponent desactive = new TextComponent("Vous n'avez pas de nickname !");
-			desactive.setColor(ChatColor.GOLD);
-			sender.sendMessage(desactive);
+
+			sender.sendMessage(Main.getERROR_NO_PREFIX());
 		}
+
 	}
 
 }

@@ -1,6 +1,7 @@
 package fr.pumpmykins.pumpmychat.utils;
 
 import fr.pumpmykins.pumpmychat.ChatPlayer;
+import fr.pumpmykins.pumpmychat.Prefix;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -35,18 +36,19 @@ public class MessageEventHandler implements Listener {
 		String prefix = new String();
 		String nickname = new String();
 		
-		if(!this.chatPlayer.getPrefix().isEmpty()) {
-			if(player.hasPermission("rank.tier1") || player.hasPermission("rank.tier2") || player.hasPermission("rank.tier3")) {
-				prefix = this.chatPlayer.getPrefix().get(player.getUniqueId());
-				if(prefix == null)
-					prefix = "";
+		if(this.chatPlayer.hasPrefix(player.getUniqueId())) {
+			
+			Prefix p = this.chatPlayer.getPrefix().get(player.getUniqueId());
+			if(p.getWarn() < 3 && p.isActive()) {
 				
+				prefix = p.getPrefix();
 			}
 		}
-		if(!this.chatPlayer.getNickname().isEmpty()) {
+		
+		if(this.chatPlayer.hasNickname(player.getUniqueId())) {
 			nickname = this.chatPlayer.getNickname().get(player.getUniqueId());
 			if(nickname == null)
-				nickname = player.getDisplayName();	
+				nickname = player.getDisplayName();
 		} else {
 			nickname = player.getDisplayName();
 		}
@@ -65,7 +67,7 @@ public class MessageEventHandler implements Listener {
 		TextComponent messages = new TextComponent();
 		
 		TextComponent name = new TextComponent(nickname);
-		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo :"+player.getDisplayName()).create()));
+		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo d'origine : "+player.getName()).create()));
 		name.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg "+player.getDisplayName()));
 		
 		TextComponent bet = new TextComponent(" > ");

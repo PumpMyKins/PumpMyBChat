@@ -1,9 +1,6 @@
 package fr.pumpmykins.pumpmychat.command;
 
-import java.sql.SQLException;
-
-import fr.pumpmykins.pumpmychat.Main;
-import fr.pumpmykins.pumpmychat.MySql;
+import fr.pumpmykins.pumpmychat.ChatPlayer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -11,6 +8,13 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class PrefixForceDeleteCommand extends QSubCommand {
+
+	private ChatPlayer cp;
+	
+	public PrefixForceDeleteCommand(ChatPlayer chatPlayer) {
+
+		this.cp = chatPlayer;
+	}
 
 	@Override
 	public String getPermission() {
@@ -51,19 +55,15 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 					}
 					if(deletescope != null) {	
 
-						try {
-							MySql mySQL = Main.getMySQL();
-
-							mySQL.update("DELETE FROM PrefixPlayer WHERE `uuid` = '"+deletescope.getUniqueId()+"'");
-
-							TextComponent playerunknown = new TextComponent("Prefix Supprimer !");
-							playerunknown.setColor(ChatColor.DARK_RED);
-							sender.sendMessage(playerunknown);
-							
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						this.cp.forceDelete(deletescope.getUniqueId());
+						
+						TextComponent playerunknown = new TextComponent("Prefix Supprimer !");
+						playerunknown.setColor(ChatColor.DARK_RED);
+						sender.sendMessage(playerunknown);
+						
+						TextComponent deleteprefix = new TextComponent("Votre Prefix a ete supprime par "+sender.getName()+" !");
+						deleteprefix.setColor(ChatColor.DARK_RED);
+						sender.sendMessage(deleteprefix);
 					}
 				}
 		}

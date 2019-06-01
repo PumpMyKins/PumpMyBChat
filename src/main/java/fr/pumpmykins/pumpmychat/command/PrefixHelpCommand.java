@@ -47,7 +47,7 @@ public class PrefixHelpCommand extends QSubCommand {
 		tosend.add(set);
 		tosend.add(color);
 		
-		if(sender.hasPermission("prefix.staff")) {
+		if(sender.hasPermission("rank.staff.moderateur") || sender.hasPermission("rank.staff.admin") || sender.hasPermission("rank.staff.responsable")) {
 			
 			TextComponent staff = new TextComponent("---[Staff]---");
 			staff.setColor(ChatColor.DARK_RED);
