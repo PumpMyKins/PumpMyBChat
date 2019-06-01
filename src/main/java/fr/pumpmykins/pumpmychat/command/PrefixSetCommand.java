@@ -1,17 +1,20 @@
 package fr.pumpmykins.pumpmychat.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import fr.pumpmykins.pumpmychat.Main;
-import fr.pumpmykins.pumpmychat.MySql;
+import fr.pumpmykins.pumpmychat.ChatPlayer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class PrefixSetCommand extends QSubCommand {
+
+	private ChatPlayer cp;
+
+	public PrefixSetCommand(ChatPlayer chatPlayer) {
+		this.cp = chatPlayer;
+	}
 
 	@Override
 	public String getPermission() {
@@ -32,38 +35,38 @@ public class PrefixSetCommand extends QSubCommand {
 
 					String prefix = args[1];
 
-					TextComponent desactive = new TextComponent("Préfix set !");
-					desactive.setColor(ChatColor.RED);
-					sender.sendMessage(desactive);
-					try {
-						MySql mySQL = Main.getMySQL();
+					if(this.cp.hasPrefix(p.getUniqueId())) {
 
+						int mod = this.cp.getPrefix().get(p.getUniqueId()).getModification();
 
-						ResultSet rs = Main.getMySQL().getResult(Main.REQUEST_GET_USER_PREFIX+" WHERE `uuid` = '"+p.getUniqueId()+"'");
+						if(sender.hasPermission("rank.tier2")) {
 
-						if(rs.first()) {
+							if(mod >= 2) {
 
-							int mod = rs.getInt("modification");
-							mod++;
-							if(sender.hasPermission("rank.tier2") && mod < 3 || sender.hasPermission("rank.tier3"))
-								mySQL.update("UPDATE `PrefixPlayer` SET `prefix`= '"+prefix+"',`modification`="+mod+" WHERE `uuid`= '"+p.getUniqueId()+"'");
-						} else {
+								TextComponent desactive = new TextComponent("Vous avez atteint le nombre de modification maximum !");
+								desactive.setColor(ChatColor.RED);
+								desactive.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder("Contacter un staff si votre prefix actuel est bug").create()));
+								sender.sendMessage(desactive);
+							}
+						} 
+						if(sender.hasPermission("rank.tier1")) {
+							if(mod >= 1) {
 
-							mySQL.update("INSERT INTO `PrefixPlayer`(`uuid`, `prefix`, `active`, `warn`, `modification`) VALUES ('"+p.getUniqueId()+"','"+prefix+"',"+true+","+0+","+1+")");
+								TextComponent desactive = new TextComponent("Vous avez atteint le nombre de modification maximum !");
+								desactive.setColor(ChatColor.RED);
+								desactive.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder("Contacter un staff si votre prefix actuel est bug").create()));
+								sender.sendMessage(desactive);
+							}
 						}
-
-
-
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
-				}
-				ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix reload");
+					if(this.cp.setPrefix(p.getUniqueId(), prefix)) {
+
+						TextComponent desactive = new TextComponent("Préfix set !");
+						desactive.setColor(ChatColor.GREEN);
+						sender.sendMessage(desactive);
+					} 
+				} 
 			}
-		} else {
-			
-			ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, "prefix");
-		}
+		} 
 	}
 }

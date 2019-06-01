@@ -6,6 +6,7 @@ import java.util.Arrays;
 import fr.pumpmykins.pumpmychat.MySql.MySQLCredentials;
 import fr.pumpmykins.pumpmychat.command.NicknameCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixActivationCommand;
+import fr.pumpmykins.pumpmychat.command.PrefixBuyCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixColorCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixForceDeleteCommand;
@@ -15,7 +16,6 @@ import fr.pumpmykins.pumpmychat.command.PrefixResetCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixSetCommand;
 import fr.pumpmykins.pumpmychat.command.PrefixWarnPrefixOwnerCommand;
 import fr.pumpmykins.pumpmychat.utils.MessageEventHandler;
-import fr.pumpmykins.pumpmychat.utils.PrefixInitialisation;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -41,7 +41,7 @@ public class Main  extends Plugin implements Listener{
 	
 	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer ";
 	
-	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces :";
+	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces : https://pumpmykins.buycraft.net/ ";
 		
 	private ChatPlayer chatPlayer;
 	@Override
@@ -49,38 +49,11 @@ public class Main  extends Plugin implements Listener{
 		
 		sharedInstance = this;
 		
-		this.chatPlayer = new ChatPlayer();
-		
-		PluginManager pm = ProxyServer.getInstance().getPluginManager();
-		
-		//START PREFIX COMMAND REGISTERING
-		pm.registerCommand(this, new PrefixCommand("prefix"));
-		
-		PrefixCommand.addCommand(Arrays.asList("help", "h"), new PrefixHelpCommand());
-		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
-		
-		//PREFIX COMMAND WHICH REQUIRE A RELOAD
-		PrefixCommand.addCommand(Arrays.asList("set"), new PrefixSetCommand());
-		PrefixCommand.addCommand(Arrays.asList("activate", "a"), new PrefixActivationCommand());
-		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand());
-		PrefixCommand.addCommand(Arrays.asList("forcedelete"), new PrefixForceDeleteCommand());
-		PrefixCommand.addCommand(Arrays.asList("reset"), new PrefixResetCommand());
-		
-		//RELOAD COMMAND
-		PrefixCommand.addCommand(Arrays.asList("reload", "r"), new PrefixReloadCommand(this.chatPlayer));
-
-		//NICK COMMAND
-		pm.registerCommand(this, new NicknameCommand("nick", this.chatPlayer));
-		
-		//CHAT FORMATAGE
-		pm.registerListener(this, new MessageEventHandler(this.chatPlayer));
-		
 		configManager = new ConfigManager();
 		
 		try {
 			configManager.init();
 		} catch (Throwable e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -95,8 +68,31 @@ public class Main  extends Plugin implements Listener{
 			
 		}
 		
-		new PrefixInitialisation(this.chatPlayer); //Get all the existing prefix
+		this.chatPlayer = new ChatPlayer();
 		
+		PluginManager pm = ProxyServer.getInstance().getPluginManager();
+		
+		//START PREFIX COMMAND REGISTERING
+		pm.registerCommand(this, new PrefixCommand("prefix"));
+		
+		PrefixCommand.addCommand(Arrays.asList("help", "h"), new PrefixHelpCommand());
+		PrefixCommand.addCommand(Arrays.asList("color"), new PrefixColorCommand());
+		
+		//PREFIX COMMAND WHICH REQUIRE A RELOAD
+		PrefixCommand.addCommand(Arrays.asList("set"), new PrefixSetCommand(this.chatPlayer));
+		PrefixCommand.addCommand(Arrays.asList("activate", "a"), new PrefixActivationCommand(this.chatPlayer));
+		PrefixCommand.addCommand(Arrays.asList("warn"), new PrefixWarnPrefixOwnerCommand(this.chatPlayer));
+		PrefixCommand.addCommand(Arrays.asList("forcedelete"), new PrefixForceDeleteCommand(this.chatPlayer));
+		PrefixCommand.addCommand(Arrays.asList("reset"), new PrefixResetCommand(this.chatPlayer));
+		PrefixCommand.addCommand(Arrays.asList("buy"), new PrefixBuyCommand(this.chatPlayer));
+		//RELOAD COMMAND
+		PrefixCommand.addCommand(Arrays.asList("reload", "r"), new PrefixReloadCommand(this.chatPlayer));
+
+		//NICK COMMAND
+		pm.registerCommand(this, new NicknameCommand("nick", this.chatPlayer));
+		
+		//CHAT FORMATAGE
+		pm.registerListener(this, new MessageEventHandler(this.chatPlayer));
 	}
 	
 	
