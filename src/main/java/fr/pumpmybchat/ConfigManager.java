@@ -23,16 +23,6 @@ public class ConfigManager {
 		this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
 	}
 
-	public void init() throws IOException{
-
-			
-			/*Main.host = this.configuration.getString("mysql.host");
-			Main.port = this.configuration.getInt("mysql.port");
-			Main.username = this.configuration.getString("mysql.username");
-			Main.password = this.configuration.getString("mysql.password");
-			Main.database = this.configuration.getString("mysql.database");*/
-	}
-
 	private final File getFile(){
 		return new File(this.main.getDataFolder(), "config.yml");
 	}
@@ -55,15 +45,11 @@ public class ConfigManager {
 			ByteStreams.copy(is, os);
 			os.close();
 			is.close();
-
+			
+			this.main.getLogger().info("Default configuration file created !");
 
 		}
 
-	}
-
-	public void save() throws IOException
-	{
-		ConfigurationProvider.getProvider(YamlConfiguration.class).save(this.configuration, getFile());
 	}
 
 	public String getHost() {
