@@ -36,7 +36,20 @@ public class ChatManager implements Listener {
 	private ChatProfile getProfile(UUID uuid) {
 		return this.profiles.get(uuid.toString());		
 	}
-	
+
+	private void deleteProfile(UUID uuid) {		
+		this.profiles.remove(uuid.toString());
+	}
+
+	public void initSQL() throws Exception {
+		String createtable = "CREATE TABLE IF NOT EXISTS `prefixplayer` ( `uuid` VARCHAR(50) NOT NULL , `prefix` VARCHAR(50) NULL DEFAULT NULL , `active` BOOLEAN NOT NULL , `modification` INT NOT NULL , PRIMARY KEY (`uuid`)) ENGINE = InnoDB;";
+		this.mySQL.sendUpdate(createtable);	
+		createtable = "CREATE TABLE IF NOT EXISTS `prefixhistory` ( `uuid` VARCHAR(50) NOT NULL , `prefix` VARCHAR(50) NOT NULL , `date` DATETIME NOT NULL DEFAULT NOW() ) ENGINE = InnoDB;";
+		this.mySQL.sendUpdate(createtable);
+		createtable = "CREATE TABLE IF NOT EXISTS `nickhistory` ( `uuid` VARCHAR(50) NOT NULL , `nick` VARCHAR(50) NOT NULL , `date` DATETIME NOT NULL DEFAULT NOW() ) ENGINE = InnoDB;";
+		this.mySQL.sendUpdate(createtable);
+	}
+
 	@EventHandler
 	public void onProxiedPlayerJoin(PostLoginEvent event) {
 		
