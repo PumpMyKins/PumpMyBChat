@@ -95,7 +95,7 @@ public class ChatManager implements Listener {
 
 	private void addPrefixInMySqlHistory(String uuid, String prefix) throws Exception {
 
-		this.mySQL.sendUpdate("");
+		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`) VALUES (\"" + uuid + "\",\"" + prefix + "\");");
 
 	}
 
