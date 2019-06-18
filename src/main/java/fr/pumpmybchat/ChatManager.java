@@ -140,7 +140,7 @@ public class ChatManager implements Listener {
 		Prefix prefix = this.getMySqlPrefix(uuid);	
 
 		try {
-			this.addProfile(event.getPlayer().getUniqueId(), new ChatProfile(prefix,prefixHistory,nickHistory));
+			this.addProfile(event.getPlayer().getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,7 +151,7 @@ public class ChatManager implements Listener {
 
 
 
-		this.deleteProfile(event.getPlayer().getUniqueId());
+		this.deleteProfile(event.getPlayer().getUniqueId().toString());
 	}
 
 	@EventHandler
@@ -164,7 +164,7 @@ public class ChatManager implements Listener {
 		if (!(event.getSender() instanceof ProxiedPlayer)) return;
 
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
-		ChatProfile chatProfile = this.getProfile(player.getUniqueId());
+		ChatProfile chatProfile = this.getProfile(player.getUniqueId().toString());
 
 		/*String prefix = new String();
 		String nickname = new String();
