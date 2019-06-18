@@ -14,12 +14,14 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 public class ConfigManager {
 
-	Configuration configuration = null;
+	private Configuration configuration = null;
+	private Main main;
 
-	public void init() throws Throwable {
-
+	public ConfigManager(Main m) throws IOException {
+		this.main = m;
 		saveDefaultConfig();
-		try {
+		this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
+	}
 
 			this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
 			Main.host = this.configuration.getString("mysql.host");
