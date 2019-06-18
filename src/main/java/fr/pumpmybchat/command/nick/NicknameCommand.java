@@ -21,34 +21,81 @@ public class NicknameCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 
-		/*if(sender.hasPermission("pumpmykins.vip.tier2") || sender.hasPermission("pumpmykins.vip.tier3")) {
+		if(!(sender instanceof ProxiedPlayer)) {
+			sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cVous devez etre un joueur pour faire cela !"));
+			return;
+		}
+		
+		if(sender.hasPermission("pumpmybchat.command.nick")) {
 
 			ProxiedPlayer player = (ProxiedPlayer) sender;
 
-			if(args.length > 0) {
+			if(args.length == 1) {
 
-				this.chatPlayer.addNickname(player.getUniqueId(), args[0]);
-				
-				TextComponent desactive = new TextComponent("NickName appliqué !");
-				desactive.setColor(ChatColor.GOLD);
-				sender.sendMessage(desactive);
-
-			} else {
-
-				if(this.chatPlayer.hasNickname(player.getUniqueId())) {
-
-					this.chatPlayer.removeNickname(player.getUniqueId());
+				String nickname = args[0];
+				if(nickname.trim().isEmpty()) {
 					
-					TextComponent desactive = new TextComponent("NickName supprimé !");
-					desactive.setColor(ChatColor.GOLD);
-					sender.sendMessage(desactive);
+					
+					
+				}else {
+					
+					this.chatManager.setNickname(player,ChatColor.translateAlternateColorCodes('&', args[0]));				
+					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "Surnom (\"§r" + nickname + "§r§f\") appliqué !"));
+					sender.sendMessage(new TextComponent("§fVotre surnom sera automatiquement supprimé lors de votre déconnexion du serveur."));
+					TextComponent txt = new TextComponent("§fUtilisez la commande : \"");
+					TextComponent cmd = new TextComponent("§1/nick");
+					cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
+					txt.addExtra(cmd);
+					txt.addExtra("§f\" pour supprimer votre surnom.");
+					sender.sendMessage(txt);
+					
+					
 				}
+				
+
+
+			} else if(args.length == 0){
+
+				if(this.chatManager.hasNickname(player)) {
+
+					this.chatManager.unsetNickname(player);					
+					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "Surnom supprimé !"));
+					
+				}else {
+					
+					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cVous ne possedez pas de surnom !"));
+					
+				}
+				
+			}else {
+				
+				sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cErreur de synthaxe dans votre commande !"));
+				TextComponent txt = new TextComponent("§fDéfinir un surnom : ");
+				TextComponent cmd = new TextComponent("§1/nick <surnom>");
+				cmd.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/nick PumpMyKins"));
+				txt.addExtra(cmd);
+				sender.sendMessage(new TextComponent(txt));
+				
+				TextComponent txt1 = new TextComponent("§fSupprimer un surnom : ");
+				TextComponent cmd1 = new TextComponent("§1/nick");
+				cmd1.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
+				txt1.addExtra(cmd1);
+				sender.sendMessage(new TextComponent(txt1));
+				
 			}
+			
 		} else {
 
-			sender.sendMessage(Main.getERROR_NO_PREFIX());
+			sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cCette fonctionnalité doit etre acheté en boutique."));
+			TextComponent link = new TextComponent("§l§1http://store.pumpmykins.eu/");
+			link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://store.pumpmykins.eu/"));
+			TextComponent txt = new TextComponent("§fVoir : ");
+			txt.addExtra(link);
+			sender.sendMessage(txt);
+			
+			
 		}
-*/
+
 	}
 
 }
