@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class ChatPlayer {
 
-	private Map<UUID , Prefix> prefix;
+	/*private Map<UUID , Prefix> prefix;
 	private Map<UUID , String> nickname;	
 
 	public Map<UUID, Prefix> getPrefix() {
@@ -285,5 +285,5 @@ public class ChatPlayer {
 			
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
