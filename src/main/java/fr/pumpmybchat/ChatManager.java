@@ -55,17 +55,101 @@ public class ChatManager implements Listener {
 		
 		
 		
-	}
-	
-	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
-		
-			
-		
+		try {
+			this.addProfile(event.getPlayer().getUniqueId(), new ChatProfile());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void initSQL() throws Exception {
-		String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer(`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT 0, `warn` INT NOT NULL DEFAULT 0, `modification` INT NOT NULL DEFAULT 0)";
-		this.mySQL.sendUpdate(createprefixtable);		
+	@EventHandler
+	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
+		this.deleteProfile(event.getPlayer().getUniqueId());
 	}
-	
+
+	@EventHandler
+	public void onMessage(ChatEvent event) {
+
+		if (event.isCommand()) return;
+		if(event.getMessage() == null) return;
+		if(event.getMessage().isEmpty()) return;
+		if(event.isCancelled()) return;
+		if (!(event.getSender() instanceof ProxiedPlayer)) return;
+
+		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
+		ChatProfile chatProfile = this.getProfile(player.getUniqueId());
+
+		/*String prefix = new String();
+		String nickname = new String();
+
+		if(this.chatPlayer.hasPrefix(player.getUniqueId())) {
+
+			Prefix p = this.chatPlayer.getPrefix().get(player.getUniqueId());
+			if(p.getWarn() < 3 && p.isActive()) {
+
+				prefix = p.getPrefix();
+			}
+		}
+
+		if(this.chatPlayer.hasNickname(player.getUniqueId())) {
+			nickname = this.chatPlayer.getNickname().get(player.getUniqueId());
+			if(nickname == null)
+				nickname = player.getDisplayName();
+		} else {
+			nickname = player.getDisplayName();
+		}
+
+
+		String message = event.getMessage();
+
+		prefix = ChatColor.translateAlternateColorCodes('&', prefix);
+
+		if(player.hasPermission("pumpmykins.vip.tier2") || player.hasPermission("pumpmykins.vip.tier3")) {
+			message = ChatColor.translateAlternateColorCodes('&', message);
+		}
+		if(player.hasPermission("pumpmykins.vip.tier3"))
+			nickname = ChatColor.translateAlternateColorCodes('&', nickname);
+
+		TextComponent messages = new TextComponent();
+
+		TextComponent name = new TextComponent(nickname);
+		name.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Pseudo d'origine : "+player.getName()).create()));
+		name.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg "+player.getDisplayName()));
+
+		TextComponent bet = new TextComponent(" > ");
+		bet.setColor(ChatColor.GOLD);
+		bet.setBold(true);
+
+		if(!prefix.isEmpty()) {
+
+			TextComponent tcStartPrefix = new TextComponent("[");
+			TextComponent tcEndPrefix = new TextComponent("]");
+			tcStartPrefix.setColor(ChatColor.GOLD);
+			tcEndPrefix.setColor(ChatColor.GOLD);
+			TextComponent tcPrefix = new TextComponent(prefix);
+
+			messages.addExtra(tcStartPrefix);
+			messages.addExtra(tcPrefix);
+			messages.addExtra(tcEndPrefix);
+			messages.addExtra(name);
+			messages.addExtra(bet);
+			messages.addExtra(message);
+
+		} else {
+
+			name.addExtra(bet);
+			name.addExtra(message);
+
+			messages = name;
+		}
+
+
+		for (ProxiedPlayer receiver : player.getServer().getInfo().getPlayers()) {
+			receiver.sendMessage(messages);
+		}*/
+
+		event.setCancelled(true);
+
+	}
+
 }
