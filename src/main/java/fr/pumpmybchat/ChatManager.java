@@ -29,7 +29,7 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addProfile(UUID uuid, ChatProfile chatProfile) throws Exception {
+	private void addProfile(String uuid, ChatProfile chatProfile) throws Exception {
 
 		if(this.profiles.containsKey(uuid.toString())) {
 			throw new Exception("ChatProfile \"" + uuid.toString() + "\" already exists");
@@ -39,11 +39,11 @@ public class ChatManager implements Listener {
 
 	}
 
-	private ChatProfile getProfile(UUID uuid) {
+	private ChatProfile getProfile(String uuid) {
 		return this.profiles.get(uuid.toString());		
 	}
 
-	private void deleteProfile(UUID uuid) {		
+	private void deleteProfile(String uuid) {		
 		this.profiles.remove(uuid.toString());
 	}
 
