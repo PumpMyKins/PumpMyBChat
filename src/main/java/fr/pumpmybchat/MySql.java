@@ -37,7 +37,7 @@ public class MySql {
 
 			Statement st = this.conn.createStatement();
 			ResultSet rs = st.executeQuery(query);
-			
+
 			st.close();
 			return rs;
 
@@ -54,8 +54,9 @@ public class MySql {
 			// close
 			statement.close();
 
+		}else {
+			throw new Exception("SQL connection closed !");
 		}
-		throw new Exception("SQL connection closed !");
 
 	}
 
