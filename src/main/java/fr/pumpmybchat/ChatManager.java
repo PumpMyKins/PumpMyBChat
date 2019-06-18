@@ -57,13 +57,101 @@ public class ChatManager implements Listener {
 		this.mySQL.sendUpdate(createtable);
 	}
 
+	private List<SimpleEntry<String,String>> getMySqlNickHistory(String uuid) throws Exception {
+
+		List<SimpleEntry<String,String>> l = new ArrayList<>();
+
+		ResultSet rs = this.mySQL.sendQuery("");
+		while (rs.next()) {
+
+			String gettedUuid = rs.getString("uuid");
+			if(!gettedUuid.equals(uuid)) {
+				new Exception("Cette erreur n'aurait jamais du avoir lieu !").printStackTrace();
+				continue;
+			}
+
+			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("nick"),rs.getString("date"));
+			l.add(simpleEntry);
+
+		}
+
+		return l;		
+
+	}
+
+	private void addNickInMySqlHistory(String uuid,String nick) {
+
+	}
+
+	private List<SimpleEntry<String,String>> getMySqlPrefixHistory(String uuid) throws Exception {
+
+		List<SimpleEntry<String,String>> l = new ArrayList<>();
+
+		ResultSet rs = this.mySQL.sendQuery("");
+		while (rs.next()) {
+
+			String gettedUuid = rs.getString("uuid");
+			if(!gettedUuid.equals(uuid)) {
+				new Exception("Cette erreur n'aurait jamais du avoir lieu !").printStackTrace();
+				continue;
+			}
+
+			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("prefix"),rs.getString("date"));
+			l.add(simpleEntry);
+
+		}
+
+		return l;
+	}
+
+	private void addPrefixInMySqlHistory(String uuid, String prefix) throws Exception {
+
+		this.mySQL.sendUpdate("");
+
+	}
+
+	private Prefix getMySqlPrefix(String uuid) {
+		return new Prefix(null, null, false, false, 0, 0);
+	}
+
+	private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
+
+		this.mySQL.sendUpdate("");
+
+	}
+
+	private void unsetMySqlPrefix(String uuid) throws Exception {
+
+		this.mySQL.sendUpdate("");
+
+	}
+
 	@EventHandler
 	public void onProxiedPlayerJoin(PostLoginEvent event) {
-		
-		
-		
+
+		ProxiedPlayer player = event.getPlayer();
+		String uuid = player.getUniqueId().toString();
+
+		List<SimpleEntry<String, String>> prefixHistory = new ArrayList<>();
 		try {
-			this.addProfile(event.getPlayer().getUniqueId(), new ChatProfile());
+			prefixHistory = this.getMySqlPrefixHistory(uuid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<SimpleEntry<String, String>> nickHistory = new ArrayList<>();
+		try {
+			nickHistory = this.getMySqlNickHistory(uuid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Prefix prefix = this.getMySqlPrefix(uuid);	
+
+		try {
+			this.addProfile(event.getPlayer().getUniqueId(), new ChatProfile(prefix,prefixHistory,nickHistory));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,6 +159,9 @@ public class ChatManager implements Listener {
 
 	@EventHandler
 	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
+
+
+
 		this.deleteProfile(event.getPlayer().getUniqueId());
 	}
 
