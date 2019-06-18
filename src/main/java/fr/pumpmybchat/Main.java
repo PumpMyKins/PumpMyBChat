@@ -25,23 +25,21 @@ import net.md_5.bungee.api.plugin.PluginManager;
 public class Main  extends Plugin implements Listener{
 
 	static Main sharedInstance = null;
-	
+
 	public static TextComponent PREFIX = new TextComponent("[PumpMyPrefix]");
-	
-	static MySql mySQL;
-	public static String host = "";
-	public static String username = "";
-	public static String password = "";
-	public static String database = "";
-	public static int port = 3306;
-	
-	public static ConfigManager configManager;
-	
+
 	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer ";
-	
+
 	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces : http://store.pumpmykins.eu/ ";
-		
+
 	private ChatPlayer chatPlayer;
+	private MySql mySQL;
+	private ConfigManager configManager;
+	
+	public ChatPlayer getChatPlayer() {return this.chatPlayer;}
+	public MySql getMySQL() {return this.mySQL;}
+	public ConfigManager getConfigManager() {return this.configManager;}
+
 	@Override
 	public void onEnable() {
 		
