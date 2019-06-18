@@ -42,28 +42,31 @@ public class Main  extends Plugin implements Listener{
 
 	@Override
 	public void onEnable() {
-		
-		sharedInstance = this;
-		
-		configManager = new ConfigManager();
-		
+
 		try {
-			configManager.init();
-		} catch (Throwable e1) {
-			e1.printStackTrace();
-		}
-		
-		MySQLCredentials credentials = new MySQLCredentials(host, port, username, password, database);
-		mySQL = new MySql(credentials);
-		
-		mySQL.openConnection();
-		if(mySQL.isConnected()) {
 			
+			configManager = new ConfigManager(this);
+			configManager.init();
+			
+		} catch (Throwable e) {
+			
+			e.printStackTrace();
+			this.getLogger().severe("Configuration error, plugin disabled !");
+			return;
+			
+		}
+
+		MySQLCredentials credentials = new MySQLCredentials(this.configManager.getHost(),this.configManager.getPort(), this.configManager.getUser(), this.configManager.getPassword(), this.configManager.getDatabase());
+		this.mySQL = new MySql(credentials);
+
+		/*mySQL.openConnection();
+		if(mySQL.isConnected()) {
+
 			String createprefixtable = "CREATE TABLE IF NOT EXISTS PrefixPlayer(`uuid` VARCHAR(191) NOT NULL UNIQUE, `prefix` VARCHAR(191), `active` TINYINT NOT NULL DEFAULT 0, `warn` INT NOT NULL DEFAULT 0, `modification` INT NOT NULL DEFAULT 0)";
 			mySQL.update(createprefixtable);
-			
-		}
-		
+
+		}*/
+
 		this.chatPlayer = new ChatPlayer();
 		
 		PluginManager pm = ProxyServer.getInstance().getPluginManager();
