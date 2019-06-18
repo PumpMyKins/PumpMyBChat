@@ -15,17 +15,8 @@ public class MySql {
 		this.credentials = credentials;
 	}
 
-	public boolean isConnected() {
-		try {
-			if(this.conn != null && !(this.conn.isClosed()))
-				return true;
-			else
-				return false;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
+	public boolean isConnected() throws SQLException {
+		return conn != null && !conn.isClosed();
 	}
 
 	public void openConnection() throws SQLException, ClassNotFoundException {
