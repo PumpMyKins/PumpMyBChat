@@ -1,23 +1,9 @@
 package fr.pumpmybchat;
 
-import java.util.Arrays;
+import java.sql.SQLException;
 
 import fr.pumpmybchat.MySql.MySQLCredentials;
-import fr.pumpmybchat.command.NicknameCommand;
-import fr.pumpmybchat.command.PrefixActivationCommand;
-import fr.pumpmybchat.command.PrefixBuyCommand;
-import fr.pumpmybchat.command.PrefixColorCommand;
-import fr.pumpmybchat.command.PrefixCommand;
-import fr.pumpmybchat.command.PrefixForceDeleteCommand;
-import fr.pumpmybchat.command.PrefixHelpCommand;
-import fr.pumpmybchat.command.PrefixReloadCommand;
-import fr.pumpmybchat.command.PrefixSetCommand;
-import fr.pumpmybchat.command.PrefixWarnPrefixOwnerCommand;
-import fr.pumpmybchat.utils.MessageEventHandler;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
+import fr.pumpmybchat.command.nick.NicknameCommand;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
