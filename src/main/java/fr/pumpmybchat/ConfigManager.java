@@ -65,4 +65,25 @@ public class ConfigManager {
 	{
 		ConfigurationProvider.getProvider(YamlConfiguration.class).save(this.configuration, getFile());
 	}
+
+	public String getHost() {
+		return this.configuration.getString("mysql.host");
+	}
+
+	public int getPort() {
+		return this.configuration.getInt("mysql.port");
+	}
+
+	public String getUser() {
+		return this.configuration.getString("mysql.username");
+	}
+
+	public String getPassword() {
+		return this.configuration.getString("mysql.password");
+	}
+
+	public String getDatabase() {
+		return this.configuration.getString("mysql.database");
+	}
+
 }
