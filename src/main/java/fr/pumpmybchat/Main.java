@@ -12,11 +12,7 @@ public class Main  extends Plugin implements Listener{
 
 	static Main sharedInstance = null;
 
-	public static TextComponent PREFIX = new TextComponent("[PumpMyPrefix]");
-
-	public static String REQUEST_GET_USER_PREFIX = "SELECT * FROM PrefixPlayer ";
-
-	public static String STRING_ERROR_NO_PREFIX = "Pour avoir ces acces : http://store.pumpmykins.eu/ ";
+	public final static String PLUGIN_PREFIX = "§l§6[§2Pump§eMy§3BShutdown§6]§r§f ";
 
 	private ChatPlayer chatPlayer;
 	private MySql mySQL;
