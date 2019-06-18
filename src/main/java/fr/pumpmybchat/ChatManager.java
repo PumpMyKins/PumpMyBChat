@@ -22,17 +22,19 @@ public class ChatManager implements Listener {
 		this.configManager = configManager;
 		this.mySQL = mySQL;
 	}
-	
-	private void addProfiles() {
-		
-		
-		
+
+	private void addProfile(UUID uuid, ChatProfile chatProfile) throws Exception {
+
+		if(this.profiles.containsKey(uuid.toString())) {
+			throw new Exception("ChatProfile \"" + uuid.toString() + "\" already exists");
+		}else {
+			this.profiles.put(uuid.toString(), chatProfile);
+		}
+
 	}
-	
-	private void deleteProfiles() {
-		
-		
-		
+
+	private ChatProfile getProfile(UUID uuid) {
+		return this.profiles.get(uuid.toString());		
 	}
 	
 	@EventHandler
