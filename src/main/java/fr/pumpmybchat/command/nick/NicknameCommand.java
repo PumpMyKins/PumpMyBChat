@@ -11,11 +11,11 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class NicknameCommand extends Command {
 
-	private ChatPlayer chatPlayer;
+	private ChatManager chatManager;
 
-	public NicknameCommand(String name, ChatPlayer cp) {
+	public NicknameCommand(String name, ChatManager chatManager) {
 		super(name);
-		this.chatPlayer = cp;
+		this.chatManager = chatManager;
 	}
 
 	@Override
