@@ -23,89 +23,46 @@ public class ConfigManager {
 		this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
 	}
 
-			this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
-			Main.host = this.configuration.getString("mysql.host");
+	public void init() throws IOException{
+
+			
+			/*Main.host = this.configuration.getString("mysql.host");
 			Main.port = this.configuration.getInt("mysql.port");
 			Main.username = this.configuration.getString("mysql.username");
 			Main.password = this.configuration.getString("mysql.password");
-			Main.database = this.configuration.getString("mysql.database");
-
-		} catch(IOException e) {
-
-			e.printStackTrace();
-		}
+			Main.database = this.configuration.getString("mysql.database");*/
 	}
-	
-	public File getFile(){
 
-		return new File(Main.getSharedInstance().getDataFolder(), "config.yml");
+	private final File getFile(){
+		return new File(this.main.getDataFolder(), "config.yml");
 	}
-	
-	@SuppressWarnings("unused")
-	private void saveDefaultConfig()
+
+	private void saveDefaultConfig() throws IOException
 	{
-		if (!Main.getSharedInstance().getDataFolder().exists()) {
-			Main.getSharedInstance().getDataFolder().mkdir();
+		if (!this.main.getDataFolder().exists()) {
+			this.main.getDataFolder().mkdir();
+			this.main.getLogger().info("Default configuration directory created !");
 		}
+
 		File file = getFile();
 		if (!file.exists()) {
-			try
-			{
-				file.createNewFile();
-				InputStream is = Main.getSharedInstance().getResourceAsStream("config.yml");Throwable localThrowable6 = null;
-				try
-				{
-					OutputStream os = new FileOutputStream(file);Throwable localThrowable7 = null;
-					try
-					{
-						ByteStreams.copy(is, os);
-						os.close();
-						is.close();
-					}
-					catch (Throwable localThrowable1)
-					{
-						localThrowable7 = localThrowable1;throw localThrowable1;
-					}
-					finally {}
-				}
-				catch (Throwable localThrowable4)
-				{
-					localThrowable6 = localThrowable4;throw localThrowable4;
-				}
-				finally
-				{
-					if (is != null) {
-						if (localThrowable6 != null) {
-							try
-							{
-								is.close();
-							}
-							catch (Throwable localThrowable5)
-							{
-								localThrowable6.addSuppressed(localThrowable5);
-							}
-						} else {
-							is.close();
-						}
-					}
-				}
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+
+			file.createNewFile();
+			InputStream is = this.main.getResourceAsStream("config.yml");
+
+			OutputStream os = new FileOutputStream(file);
+
+			ByteStreams.copy(is, os);
+			os.close();
+			is.close();
+
+
 		}
+
 	}
 
-	public void save()
+	public void save() throws IOException
 	{
-		try
-		{
-			ConfigurationProvider.getProvider(YamlConfiguration.class).save(this.configuration, getFile());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+		ConfigurationProvider.getProvider(YamlConfiguration.class).save(this.configuration, getFile());
 	}
 }
