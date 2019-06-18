@@ -25,7 +25,9 @@ public class PrefixActivationCommand extends QSubCommand {
 		
 		if(sender instanceof ProxiedPlayer) {
 			ProxiedPlayer p = (ProxiedPlayer) sender;
-
+			
+			if(sender.hasPermission("pumpmykins.vip.tier1") || sender.hasPermission("pumpmykins.vip.tier2") || sender.hasPermission("pumpmykins.vip.tier3"))
+			
 			if(this.cp.changeActivation(p.getUniqueId())) {
 
 				if(this.cp.getPrefix().get(p.getUniqueId()).isActive()) {
