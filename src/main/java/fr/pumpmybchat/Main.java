@@ -1,6 +1,5 @@
 package fr.pumpmybchat;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 
 import fr.pumpmybchat.MySql.MySQLCredentials;
