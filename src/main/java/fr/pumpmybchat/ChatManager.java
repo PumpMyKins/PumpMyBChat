@@ -82,14 +82,8 @@ public class ChatManager implements Listener {
 
 		List<SimpleEntry<String,String>> l = new ArrayList<>();
 
-		ResultSet rs = this.mySQL.sendQuery("");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `date` FROM `prefixhistory` WHERE `uuid`=\"" + uuid + "\";");
 		while (rs.next()) {
-
-			String gettedUuid = rs.getString("uuid");
-			if(!gettedUuid.equals(uuid)) {
-				new Exception("Cette erreur n'aurait jamais du avoir lieu !").printStackTrace();
-				continue;
-			}
 
 			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("prefix"),rs.getString("date"));
 			l.add(simpleEntry);
