@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmychat;
+package fr.pumpmybchat;
 
 import java.util.UUID;
 

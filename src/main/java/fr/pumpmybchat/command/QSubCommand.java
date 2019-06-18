@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmychat.command;
+package fr.pumpmybchat.command;
 
 import net.md_5.bungee.api.CommandSender;
 

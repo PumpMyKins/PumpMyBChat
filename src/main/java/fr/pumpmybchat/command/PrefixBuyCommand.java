@@ -1,8 +1,8 @@
-package fr.pumpmykins.pumpmychat.command;
+package fr.pumpmybchat.command;
 
 import java.util.UUID;
 
-import fr.pumpmykins.pumpmychat.ChatPlayer;
+import fr.pumpmybchat.ChatPlayer;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 

@@ -1,20 +1,20 @@
-package fr.pumpmykins.pumpmychat;
+package fr.pumpmybchat;
 
 import java.sql.SQLException;
 import java.util.Arrays;
 
-import fr.pumpmykins.pumpmychat.MySql.MySQLCredentials;
-import fr.pumpmykins.pumpmychat.command.NicknameCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixActivationCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixBuyCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixColorCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixForceDeleteCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixHelpCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixReloadCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixSetCommand;
-import fr.pumpmykins.pumpmychat.command.PrefixWarnPrefixOwnerCommand;
-import fr.pumpmykins.pumpmychat.utils.MessageEventHandler;
+import fr.pumpmybchat.MySql.MySQLCredentials;
+import fr.pumpmybchat.command.NicknameCommand;
+import fr.pumpmybchat.command.PrefixActivationCommand;
+import fr.pumpmybchat.command.PrefixBuyCommand;
+import fr.pumpmybchat.command.PrefixColorCommand;
+import fr.pumpmybchat.command.PrefixCommand;
+import fr.pumpmybchat.command.PrefixForceDeleteCommand;
+import fr.pumpmybchat.command.PrefixHelpCommand;
+import fr.pumpmybchat.command.PrefixReloadCommand;
+import fr.pumpmybchat.command.PrefixSetCommand;
+import fr.pumpmybchat.command.PrefixWarnPrefixOwnerCommand;
+import fr.pumpmybchat.utils.MessageEventHandler;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;

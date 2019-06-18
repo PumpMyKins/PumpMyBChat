@@ -1,4 +1,4 @@
-package fr.pumpmykins.pumpmychat;
+package fr.pumpmybchat;
 
 import java.io.File;
 import java.io.FileOutputStream;
