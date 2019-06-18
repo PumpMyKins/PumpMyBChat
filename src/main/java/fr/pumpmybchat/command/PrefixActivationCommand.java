@@ -23,7 +23,7 @@ public class PrefixActivationCommand extends QSubCommand {
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 		
-		if(sender instanceof ProxiedPlayer) {
+	/*	if(sender instanceof ProxiedPlayer) {
 			ProxiedPlayer p = (ProxiedPlayer) sender;
 
 			if(this.cp.changeActivation(p.getUniqueId())) {
@@ -46,6 +46,6 @@ public class PrefixActivationCommand extends QSubCommand {
 				desactive.setColor(ChatColor.RED);
 				sender.sendMessage(desactive);
 			}
-		}
+		}*/
 	}
 }

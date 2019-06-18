@@ -26,7 +26,7 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 
-		if(sender instanceof ProxiedPlayer) {
+	/*	if(sender instanceof ProxiedPlayer) {
 
 			if(sender.hasPermission("pumpmykins.staff.modo") || sender.hasPermission("pumpmykins.staff.admin") || sender.hasPermission("pumpmykins.staff.responsable")) {
 
@@ -44,6 +44,6 @@ public class PrefixWarnPrefixOwnerCommand extends QSubCommand {
 
 				}
 			}
-		}
+		}*/
 	}
 }

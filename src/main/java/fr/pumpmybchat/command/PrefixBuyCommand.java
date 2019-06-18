@@ -23,10 +23,10 @@ public class PrefixBuyCommand extends QSubCommand {
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
 		
-		if(!(sender instanceof ProxiedPlayer)) {
+		/*if(!(sender instanceof ProxiedPlayer)) {
 			
 			this.cp.resetModification(UUID.fromString(args[1]));
-		}
+		}*/
 	}
 
 }

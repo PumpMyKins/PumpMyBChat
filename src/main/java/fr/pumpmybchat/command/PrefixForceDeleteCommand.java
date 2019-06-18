@@ -24,7 +24,7 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
+		/*// TODO Auto-generated method stub
 		if(sender instanceof ProxiedPlayer) {
 
 			if(sender.hasPermission("pumpmykins.staff.responsable"))
@@ -66,6 +66,6 @@ public class PrefixForceDeleteCommand extends QSubCommand {
 						deletescope.sendMessage(deleteprefix);
 					}
 				}
-		}
+		}*/
 	}
 }

@@ -24,7 +24,7 @@ public class PrefixSetCommand extends QSubCommand {
 
 	@Override
 	public void onCommand(CommandSender sender, String[] args) {
-
+/*
 		if(args.length > 0) {
 
 			if(sender instanceof ProxiedPlayer) {
@@ -73,6 +73,6 @@ public class PrefixSetCommand extends QSubCommand {
 					} 
 				} 
 			}
-		} 
+		} */
 	}
 }
