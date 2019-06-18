@@ -21,10 +21,13 @@ public class ChatManager implements Listener {
 	private ConfigManager configManager;
 	private MySql mySQL;
 
-	public ChatManager(ConfigManager configManager, MySql mySQL) {
+	public ChatManager(ConfigManager configManager, MySql mySQL) throws Exception {
 		this.profiles = new HashMap<String, ChatProfile>();
 		this.configManager = configManager;
 		this.mySQL = mySQL;
+
+		this.initMySql();
+
 	}
 
 	private void addProfile(UUID uuid, ChatProfile chatProfile) throws Exception {
@@ -45,7 +48,7 @@ public class ChatManager implements Listener {
 		this.profiles.remove(uuid.toString());
 	}
 
-	public void initSQL() throws Exception {
+	private void initMySql() throws Exception {
 		String createtable = "CREATE TABLE IF NOT EXISTS `prefixplayer` ( `uuid` VARCHAR(50) NOT NULL , `prefix` VARCHAR(50) NULL DEFAULT NULL , `active` BOOLEAN NOT NULL , `modification` INT NOT NULL , PRIMARY KEY (`uuid`)) ENGINE = InnoDB;";
 		this.mySQL.sendUpdate(createtable);	
 		createtable = "CREATE TABLE IF NOT EXISTS `prefixhistory` ( `uuid` VARCHAR(50) NOT NULL , `prefix` VARCHAR(50) NOT NULL , `date` DATETIME NOT NULL DEFAULT NOW() ) ENGINE = InnoDB;";
