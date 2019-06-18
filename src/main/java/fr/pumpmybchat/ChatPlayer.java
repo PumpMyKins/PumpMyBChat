@@ -107,7 +107,7 @@ public class ChatPlayer {
 		return false;
 	}
 
-	public void dbChangeActivation(UUID player, Prefix p) {
+	private void dbChangeActivation(UUID player, Prefix p) {
 
 		try {
 			Main.getMySQL().update("UPDATE `PrefixPlayer` SET `active`="+p.isActive()+" WHERE `uuid`= '"+player+"'");
@@ -136,7 +136,7 @@ public class ChatPlayer {
 		return false;
 	}
 
-	public void dbResetPrefix(UUID player, Prefix p) {
+	private void dbResetPrefix(UUID player, Prefix p) {
 
 		try {
 			Main.getMySQL().update("UPDATE `PrefixPlayer` SET `prefix`= '"+p.getPrefix()+"' WHERE `uuid`= '"+player+"'");
@@ -171,7 +171,7 @@ public class ChatPlayer {
 			return false;
 	}
 
-	public void dbForceDelete(UUID player) {
+	private void dbForceDelete(UUID player) {
 
 		try {
 			Main.getMySQL().update("DELETE FROM PrefixPlayer WHERE `uuid` = '"+player+"'");
@@ -200,7 +200,7 @@ public class ChatPlayer {
 		return false;
 	}
 	
-	public void dbWarnPrefix(UUID player, Prefix p) {
+	private void dbWarnPrefix(UUID player, Prefix p) {
 			
 		try {
 			Main.getMySQL().update("UPDATE `PrefixPlayer` SET `warn`="+p.getWarn()+" WHERE `uuid`= '"+player+"'");
@@ -241,7 +241,7 @@ public class ChatPlayer {
 		}
 	}
 	
-	public void dbSetPrefix(UUID player, Prefix p, boolean hadone) {
+	private void dbSetPrefix(UUID player, Prefix p, boolean hadone) {
 		
 		if(hadone) {
 			
@@ -277,7 +277,7 @@ public class ChatPlayer {
 		}
 	}
 	
-	public void dbResetModification(UUID player) {
+	private void dbResetModification(UUID player) {
 		
 		try {
 			Main.getMySQL().update("UPDATE `PrefixPlayer` SET `modification`="+0+" WHERE `uuid`= '"+player+"'");
