@@ -72,8 +72,10 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addNickInMySqlHistory(String uuid,String nick) {
+	private void addNickInMySqlHistory(String uuid,String nick) throws Exception {
 
+		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES (\"" + uuid + "\",\"" + nick + "\");");
+		
 	}
 
 	private List<SimpleEntry<String,String>> getMySqlPrefixHistory(String uuid) throws Exception {
