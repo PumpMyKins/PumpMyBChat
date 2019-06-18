@@ -35,7 +35,7 @@ public class Main  extends Plugin implements Listener{
 	private ChatPlayer chatPlayer;
 	private MySql mySQL;
 	private ConfigManager configManager;
-	
+
 	public ChatPlayer getChatPlayer() {return this.chatPlayer;}
 	public MySql getMySQL() {return this.mySQL;}
 	public ConfigManager getConfigManager() {return this.configManager;}
@@ -44,20 +44,32 @@ public class Main  extends Plugin implements Listener{
 	public void onEnable() {
 
 		try {
-			
+
 			configManager = new ConfigManager(this);
-			configManager.init();
-			
-		} catch (Throwable e) {
-			
+			this.getLogger().info("Configuration OK");
+
+		} catch (Exception e) {
+
 			e.printStackTrace();
 			this.getLogger().severe("Configuration error, plugin disabled !");
 			return;
-			
+
 		}
 
-		MySQLCredentials credentials = new MySQLCredentials(this.configManager.getHost(),this.configManager.getPort(), this.configManager.getUser(), this.configManager.getPassword(), this.configManager.getDatabase());
-		this.mySQL = new MySql(credentials);
+		try {
+			MySQLCredentials credentials = new MySQLCredentials(this.configManager.getHost(),this.configManager.getPort(), this.configManager.getUser(), this.configManager.getPassword(), this.configManager.getDatabase());
+			this.mySQL = new MySql(credentials);
+			this.mySQL.openConnection();
+			this.getLogger().info("MySQL OK");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			this.getLogger().severe("JDBC error, plugin disabled !");
+			return;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			this.getLogger().severe("MySQL connection error, plugin disabled !");
+			return;
+		}
 
 		/*mySQL.openConnection();
 		if(mySQL.isConnected()) {
