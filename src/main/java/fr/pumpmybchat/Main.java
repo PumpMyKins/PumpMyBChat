@@ -52,6 +52,17 @@ public class Main  extends Plugin implements Listener{
 			this.getLogger().severe("MySQL connection error, plugin disabled !");
 			return;
 		}
+		
+		PluginManager pm = this.getProxy().getPluginManager();
+		
+		try {
+			this.chatManager = new ChatManager(this.configManager,this.mySQL);
+			pm.registerListener(this, this.chatManager);
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.getLogger().severe("MySQL error, plugin disabled !");
+			return;
+		}
 
 		/*mySQL.openConnection();
 		if(mySQL.isConnected()) {
