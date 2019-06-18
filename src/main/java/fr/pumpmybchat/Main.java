@@ -14,11 +14,11 @@ public class Main  extends Plugin implements Listener{
 
 	public final static String PLUGIN_PREFIX = "§l§6[§2Pump§eMy§3BShutdown§6]§r§f ";
 
-	private ChatPlayer chatPlayer;
+	private ChatManager chatManager;
 	private MySql mySQL;
 	private ConfigManager configManager;
 
-	public ChatPlayer getChatPlayer() {return this.chatPlayer;}
+	public ChatManager getChatManager() {return this.chatManager;}
 	public MySql getMySQL() {return this.mySQL;}
 	public ConfigManager getConfigManager() {return this.configManager;}
 
