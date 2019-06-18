@@ -239,4 +239,23 @@ public class ChatManager implements Listener {
 
 	}
 
+	public void setNickname(ProxiedPlayer player, String string) {
+		
+		String uuid = player.getUniqueId().toString();
+		ChatProfile chatProfile = this.getProfile(uuid);
+		
+		chatProfile.setNickname(string);
+		
+	}
+
+	public void unsetNickname(ProxiedPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean hasNickname(ProxiedPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
