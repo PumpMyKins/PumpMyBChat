@@ -13,12 +13,12 @@ import net.md_5.bungee.event.EventHandler;
 
 public class ChatManager implements Listener {
 
-	private Map<UUID , ChatProfile> profiles;
+	private Map<String , ChatProfile> profiles;
 	private ConfigManager configManager;
 	private MySql mySQL;
 
 	public ChatManager(ConfigManager configManager, MySql mySQL) {
-		this.profiles = new HashMap<UUID, ChatProfile>();
+		this.profiles = new HashMap<String, ChatProfile>();
 		this.configManager = configManager;
 		this.mySQL = mySQL;
 	}
