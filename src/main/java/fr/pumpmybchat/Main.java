@@ -12,7 +12,7 @@ public class Main  extends Plugin implements Listener{
 
 	static Main sharedInstance = null;
 
-	public final static String PLUGIN_PREFIX = "§l§6[§2Pump§eMy§3BShutdown§6]§r§f ";
+	public final static String PLUGIN_PREFIX = "§l§6[§2Pump§eMy§3BChat§6]§r§f ";
 
 	private ChatManager chatManager;
 	private MySql mySQL;
