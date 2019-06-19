@@ -72,4 +72,8 @@ public class ConfigManager {
 		return this.configuration.getString("mysql.database");
 	}
 
+	public String getWebHookUrl() {
+		return this.configuration.getString("webhook.url");
+	}
+
 }
