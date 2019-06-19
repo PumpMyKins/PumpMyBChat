@@ -230,11 +230,11 @@ public class ChatManager implements Listener {
 
 			messages = name;
 		}
-
+		 */
 
 		for (ProxiedPlayer receiver : player.getServer().getInfo().getPlayers()) {
 			receiver.sendMessage(messages);
-		}*/
+		}
 
 		event.setCancelled(true);
 
