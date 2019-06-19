@@ -85,6 +85,28 @@ public class ChatManager implements Listener {
 		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES (\"" + uuid + "\",\"" + nick + "\");");
 
 	}
+	
+	public void setNickname(ProxiedPlayer player, String string) throws Exception {
+
+		String uuid = player.getUniqueId().toString();
+		ChatProfile chatProfile = this.getProfile(uuid);
+		chatProfile.getNickname().setNickname(string);
+		this.addNickInMySqlHistory(uuid, string);
+		
+	}
+
+	public void unsetNickname(ProxiedPlayer player) {
+		
+		ChatProfile chatProfile = this.getProfile(player.getUniqueId().toString());
+		chatProfile.getNickname().unsetNickname();
+		
+	}
+
+	public boolean hasNickname(ProxiedPlayer player) {
+		
+		return this.getProfile(player.getUniqueId().toString()).getNickname().hasOne();
+		
+	}
 
 	private List<SimpleEntry<String,String>> getMySqlPrefixHistory(String uuid) throws Exception {
 
@@ -101,17 +123,17 @@ public class ChatManager implements Listener {
 		return l;
 	}
 
-	private void addPrefixInMySqlHistory(String uuid, String prefix) throws Exception {
+	/*private void addPrefixInMySqlHistory(String uuid, String prefix) throws Exception {
 
 		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`) VALUES (\"" + uuid + "\",\"" + prefix + "\");");
 
-	}
+	}*/
 
 	private Prefix getMySqlPrefix(String uuid) {
 		return new Prefix(null, null, false, false, 0, 0);
 	}
 
-	private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
+	/*private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
 		this.mySQL.sendUpdate("");
 
@@ -121,7 +143,7 @@ public class ChatManager implements Listener {
 
 		this.mySQL.sendUpdate("");
 
-	}
+	}*/
 
 	@EventHandler
 	public void onProxiedPlayerJoin(PostLoginEvent event) {
