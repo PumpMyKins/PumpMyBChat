@@ -112,41 +112,37 @@ public class NicknameCommand extends Command {
 				if(this.chatManager.hasNickname(player)) {
 
 					this.chatManager.unsetNickname(player);					
-					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "Surnom supprimé !"));
-					
+					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom supprimé !"));
+
 				}else {
-					
+
 					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cVous ne possedez pas de surnom !"));
-					
+
 				}
-				
+
 			}else {
-				
-				sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cErreur de synthaxe dans votre commande !"));
-				TextComponent txt = new TextComponent("§fDéfinir un surnom : ");
-				TextComponent cmd = new TextComponent("§1/nick <surnom>");
-				cmd.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/nick PumpMyKins"));
-				txt.addExtra(cmd);
-				sender.sendMessage(new TextComponent(txt));
-				
-				TextComponent txt1 = new TextComponent("§fSupprimer un surnom : ");
-				TextComponent cmd1 = new TextComponent("§1/nick");
-				cmd1.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
-				txt1.addExtra(cmd1);
-				sender.sendMessage(new TextComponent(txt1));
-				
+
+				this.sendMessage_CmdSynthaxError(player);
+
 			}
-			
+
 		} else {
 
-			sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cCette fonctionnalité doit etre acheté en boutique."));
-			TextComponent link = new TextComponent("§l§1http://store.pumpmykins.eu/");
-			link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://store.pumpmykins.eu/"));
-			TextComponent txt = new TextComponent("§fVoir : ");
-			txt.addExtra(link);
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("Fonctionnalité achetable en boutique");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
 			sender.sendMessage(txt);
-			
-			
+
+			TextComponent link = new TextComponent("http://store.pumpmykins.eu/");
+			link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://store.pumpmykins.eu/"));
+			link.setBold(true);
+			link.setColor(ChatColor.DARK_BLUE);
+			TextComponent txt2 = new TextComponent("Voir : ");
+			txt2.setColor(ChatColor.RED);
+			txt2.addExtra(link);
+			sender.sendMessage(txt2);
+
 		}
 
 	}
