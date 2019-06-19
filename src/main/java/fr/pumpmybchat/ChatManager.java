@@ -195,6 +195,50 @@ public class ChatManager implements Listener {
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
 		ChatProfile chatProfile = this.getProfile(player.getUniqueId().toString());
 
+		TextComponent messages = new TextComponent();
+		TextComponent tcStartPrefix = new TextComponent("[");
+		tcStartPrefix.setColor(ChatColor.GOLD);
+		
+		if(player.hasPermission("pumpmybchat.prefix.staff")) {
+			TextComponent staff = new TextComponent("۞");
+			staff.setBold(true);
+			staff.setColor(ChatColor.DARK_RED);
+			messages.addExtra(staff);
+		}
+		
+		messages.addExtra(tcStartPrefix);
+
+		Prefix p = chatProfile.getPrefix();
+		if(p!= null && p.isActive()) {
+
+			TextComponent tcEndPrefix = new TextComponent("] §r");
+			tcEndPrefix.setColor(ChatColor.GOLD);
+			TextComponent tcPrefix = new TextComponent("§r" + p.getPrefix() + "§r");
+
+			messages.addExtra(tcPrefix);
+			messages.addExtra(tcEndPrefix);
+
+		}
+		
+		Nickname nickname = chatProfile.getNickname();
+		if(nickname.hasOne()) {
+			
+			messages.addExtra(new TextComponent(nickname.getUnSafeNickname()));
+			
+		}else {
+			
+			messages.addExtra(new TextComponent(player.getDisplayName()));
+			
+		}
+
+		TextComponent bet = new TextComponent(" > ");
+		bet.setColor(ChatColor.GOLD);
+		bet.setBold(true);
+		
+		messages.addExtra(bet);
+		
+		messages.addExtra(new TextComponent(event.getMessage()));
+
 		/*String prefix = new String();
 		String nickname = new String();
 
