@@ -304,6 +304,13 @@ public class ChatManager implements Listener {
 		}
 		 */
 
+		
+		
+		ServerInfo serverInfo = player.getServer().getInfo();
+
+		ProxyServer.getInstance().getLogger().log(CustomLevel.CHAT(serverInfo.getName()), messages.toPlainText());
+		
+		
 		for (ProxiedPlayer receiver : player.getServer().getInfo().getPlayers()) {
 			receiver.sendMessage(messages);
 		}
@@ -311,35 +318,5 @@ public class ChatManager implements Listener {
 		event.setCancelled(true);
 
 	}
-
-	public void setNickname(ProxiedPlayer player, String string) throws Exception {
-
-	}
-
-	public void unsetNickname(ProxiedPlayer player) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public boolean hasNickname(ProxiedPlayer player) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void setPrefix(ProxiedPlayer player, String string) throws Exception {
-
-
-
-	}
-
-	public void unsetPrefix(ProxiedPlayer player) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public boolean hasPrefix(ProxiedPlayer player) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }
