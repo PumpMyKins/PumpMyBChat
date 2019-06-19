@@ -40,6 +40,25 @@ public class NicknameCommand extends Command {
 					this.sendMessage_CmdSynthaxError(player);
 
 				}else {
+
+					for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
+						
+						if(!p.getName().equalsIgnoreCase(player.getName()) && p.getName().equalsIgnoreCase(ChatColorUtils.getWithoutChatColorCodesString(nickname)) &&  !player.hasPermission("pumpmybchat.command.nick.usurp")) {
+							
+							TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+							TextComponent txt1 = new TextComponent("Un joueur possède déjà ce nom.");
+							txt1.setColor(ChatColor.RED);
+							txt.addExtra(txt1);			
+							sender.sendMessage(txt);							
+							return;
+							
+						}else {
+							
+							break;
+							
+						}
+						
+					}
 					
 					this.chatManager.setNickname(player,ChatColor.translateAlternateColorCodes('&', args[0]));				
 					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "Surnom (\"§r" + nickname + "§r§f\") appliqué !"));
