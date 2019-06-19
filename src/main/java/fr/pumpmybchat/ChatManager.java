@@ -25,11 +25,13 @@ public class ChatManager implements Listener {
 	private Map<String , ChatProfile> profiles;
 	private ConfigManager configManager;
 	private MySql mySQL;
+	private Main main;
 
-	public ChatManager(ConfigManager configManager, MySql mySQL) throws Exception {
+	public ChatManager(Main m,ConfigManager configManager, MySql mySQL) throws Exception {
 		this.profiles = new HashMap<String, ChatProfile>();
 		this.configManager = configManager;
 		this.mySQL = mySQL;
+		this.main = m;
 
 		this.initMySql();
 
