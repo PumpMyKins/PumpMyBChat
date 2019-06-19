@@ -3,7 +3,7 @@ package fr.pumpmybchat;
 import java.sql.SQLException;
 
 import fr.pumpmybchat.MySql.MySQLCredentials;
-import fr.pumpmybchat.command.nick.NicknameCommand;
+import fr.pumpmybchat.command.NicknameCommand;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
