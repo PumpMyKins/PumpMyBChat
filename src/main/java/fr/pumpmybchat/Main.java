@@ -56,7 +56,7 @@ public class Main  extends Plugin implements Listener{
 		PluginManager pm = this.getProxy().getPluginManager();
 		
 		try {
-			this.chatManager = new ChatManager(this.configManager,this.mySQL);
+			this.chatManager = new ChatManager(this,this.configManager,this.mySQL);
 			pm.registerListener(this, this.chatManager);
 		} catch (Exception e) {
 			e.printStackTrace();
