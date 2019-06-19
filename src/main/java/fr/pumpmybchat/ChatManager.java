@@ -1,8 +1,10 @@
 package fr.pumpmybchat;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.AbstractMap.SimpleEntry;
 import fr.pumpmybchat.logging.CustomLevel;
+import fr.pumpmybchat.utils.DiscordWebhook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -316,6 +318,29 @@ public class ChatManager implements Listener {
 		}
 
 		event.setCancelled(true);
+		
+		this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
+			
+			@Override
+			public void run() {			
+				
+				try {
+					DiscordWebhook webhook = new DiscordWebhook(configManager.getWebHookUrl());
+					webhook.setTts(false);
+					webhook.setUsername("PumpMyBChat");
+					
+					webhook.setContent("**Serveur :** " + serverInfo.getName());
+					webhook.addEmbed(new DiscordWebhook.EmbedObject().setDescription(messages.toPlainText()));
+					
+					webhook.execute();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
 
 	}
 	
