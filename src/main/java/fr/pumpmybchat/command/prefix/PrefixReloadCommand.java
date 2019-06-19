@@ -1,4 +1,4 @@
-package fr.pumpmybchat.command;
+package fr.pumpmybchat.command.prefix;
 
 import fr.pumpmybchat.ChatPlayer;
 import net.md_5.bungee.api.CommandSender;

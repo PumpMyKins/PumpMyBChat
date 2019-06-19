@@ -1,4 +1,4 @@
-package fr.pumpmybchat.command.nick;
+package fr.pumpmybchat.command;
 
 import fr.pumpmybchat.ChatManager;
 import fr.pumpmybchat.Main;
