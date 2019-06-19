@@ -60,19 +60,51 @@ public class NicknameCommand extends Command {
 						
 					}
 					
-					this.chatManager.setNickname(player,ChatColor.translateAlternateColorCodes('&', args[0]));				
-					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "Surnom (\"§r" + nickname + "§r§f\") appliqué !"));
-					sender.sendMessage(new TextComponent("§fVotre surnom sera automatiquement supprimé lors de votre déconnexion du serveur."));
-					TextComponent txt = new TextComponent("§fUtilisez la commande : \"");
-					TextComponent cmd = new TextComponent("§1/nick");
-					cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
-					txt.addExtra(cmd);
-					txt.addExtra("§f\" pour supprimer votre surnom.");
-					sender.sendMessage(txt);
-					
-					
-				}
-				
+					if(ChatColorUtils.containsChatColorCodes(nickname) && !player.hasPermission("pumpmybchat.command.nick.colored")) {
+
+						TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+						TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");
+						txt1.setColor(ChatColor.RED);
+						txt.addExtra(txt1);			
+						sender.sendMessage(txt);
+						
+						TextComponent txt2 = new TextComponent("Fonctionnalité réservé aux tiers supérieurs");
+						txt2.setColor(ChatColor.RED);	
+						sender.sendMessage(txt2);
+
+						TextComponent link = new TextComponent("http://store.pumpmykins.eu/");
+						link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://store.pumpmykins.eu/"));
+						link.setBold(true);
+						link.setColor(ChatColor.DARK_BLUE);
+						TextComponent txt3 = new TextComponent("Voir : ");
+						txt3.setColor(ChatColor.RED);
+						txt3.addExtra(link);
+						sender.sendMessage(txt3);
+
+					}else {
+
+						nickname = ChatColorUtils.getChatColorCodesTranslatedString(nickname);
+						
+						try {
+							this.chatManager.setNickname(player,nickname);
+							sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom (\"§r" + nickname + "§r§b\") appliqué !"));
+							TextComponent txt = new TextComponent("§bUtilisez la commande : \"");
+							TextComponent cmd = new TextComponent("/nick");
+							cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
+							cmd.setBold(true);
+							cmd.setColor(ChatColor.DARK_BLUE);
+
+							txt.addExtra(cmd);
+							txt.addExtra("§b\" pour supprimer votre surnom.");
+							sender.sendMessage(txt);
+						} catch (Exception e) {
+							e.printStackTrace();
+							sender.sendMessage(new TextComponent(e.getMessage()));
+						}
+
+					}					
+
+				}	
 
 
 			} else if(args.length == 0){
