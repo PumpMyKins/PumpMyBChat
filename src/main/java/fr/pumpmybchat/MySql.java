@@ -38,7 +38,6 @@ public class MySql {
 			Statement st = this.conn.createStatement();
 			ResultSet rs = st.executeQuery(query);
 
-			st.close();
 			return rs;
 
 		}
