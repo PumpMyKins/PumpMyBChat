@@ -27,7 +27,7 @@ public class NicknameCommand extends Command {
 			sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cVous devez etre un joueur pour faire cela !"));
 			return;
 		}
-		
+
 		if(sender.hasPermission("pumpmybchat.command.nick")) {
 
 			ProxiedPlayer player = (ProxiedPlayer) sender;
@@ -36,9 +36,9 @@ public class NicknameCommand extends Command {
 
 				String nickname = args[0];
 				if(nickname.trim().isEmpty()) {
-					
-					
-					
+
+					this.sendMessage_CmdSynthaxError(player);
+
 				}else {
 					
 					this.chatManager.setNickname(player,ChatColor.translateAlternateColorCodes('&', args[0]));				
@@ -97,6 +97,23 @@ public class NicknameCommand extends Command {
 			
 			
 		}
+
+	}
+
+	private void sendMessage_CmdSynthaxError(ProxiedPlayer player) {
+
+		player.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§cErreur de synthaxe dans votre commande !"));
+		TextComponent txt = new TextComponent("§cDéfinir un surnom : ");
+		TextComponent cmd = new TextComponent("§1/nick <surnom>");
+		cmd.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/nick PumpMyKins"));
+		txt.addExtra(cmd);
+		player.sendMessage(new TextComponent(txt));
+
+		TextComponent txt1 = new TextComponent("§cSupprimer un surnom : ");
+		TextComponent cmd1 = new TextComponent("§1/nick");
+		cmd1.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
+		txt1.addExtra(cmd1);
+		player.sendMessage(new TextComponent(txt1));
 
 	}
 
