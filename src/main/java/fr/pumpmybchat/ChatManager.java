@@ -64,7 +64,7 @@ public class ChatManager implements Listener {
 
 		ResultSet rs = this.mySQL.sendQuery("SELECT `nick`, `date` FROM `nickhistory` WHERE `uuid`=\"" + uuid + "\";");
 		while (rs.next()) {
-			
+
 			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("nick"),rs.getString("date"));
 			l.add(simpleEntry);
 
@@ -77,7 +77,7 @@ public class ChatManager implements Listener {
 	private void addNickInMySqlHistory(String uuid,String nick) throws Exception {
 
 		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES (\"" + uuid + "\",\"" + nick + "\");");
-		
+
 	}
 
 	private List<SimpleEntry<String,String>> getMySqlPrefixHistory(String uuid) throws Exception {
@@ -151,9 +151,8 @@ public class ChatManager implements Listener {
 	@EventHandler
 	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
 
-
-
 		this.deleteProfile(event.getPlayer().getUniqueId().toString());
+
 	}
 
 	@EventHandler
@@ -241,21 +240,32 @@ public class ChatManager implements Listener {
 
 	}
 
-	public void setNickname(ProxiedPlayer player, String string) {
-		
-		String uuid = player.getUniqueId().toString();
-		ChatProfile chatProfile = this.getProfile(uuid);
-		
-		chatProfile.setNickname(string);
-		
+	public void setNickname(ProxiedPlayer player, String string) throws Exception {
+
 	}
 
 	public void unsetNickname(ProxiedPlayer player) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public boolean hasNickname(ProxiedPlayer player) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setPrefix(ProxiedPlayer player, String string) throws Exception {
+
+
+
+	}
+
+	public void unsetPrefix(ProxiedPlayer player) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public boolean hasPrefix(ProxiedPlayer player) {
 		// TODO Auto-generated method stub
 		return false;
 	}
