@@ -1,4 +1,4 @@
-package fr.pumpmybchat.command.prefix;
+package fr.pumpmybchat.command.prefix.old;
 
 import java.util.HashMap;
 import java.util.List;
