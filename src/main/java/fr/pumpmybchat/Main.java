@@ -3,6 +3,7 @@ package fr.pumpmybchat;
 import java.sql.SQLException;
 
 import fr.pumpmybchat.MySql.MySQLCredentials;
+import fr.pumpmybchat.command.MsgCommand;
 import fr.pumpmybchat.command.NicknameCommand;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -68,6 +69,8 @@ public class Main  extends Plugin implements Listener{
 		// COMMANDS
 		
 		pm.registerCommand(this, new NicknameCommand("nick",this.chatManager));
+		
+		pm.registerCommand(this, new MsgCommand(this,"msg","w","tell"));
 		
 		/*this.chatPlayer = new ChatPlayer();
 
