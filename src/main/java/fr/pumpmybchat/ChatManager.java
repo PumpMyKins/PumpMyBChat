@@ -53,7 +53,7 @@ public class ChatManager implements Listener {
 
 	}
 
-	private ChatProfile getProfile(String uuid) {
+	public ChatProfile getProfile(String uuid) {
 		return this.profiles.get(uuid.toString());		
 	}
 
