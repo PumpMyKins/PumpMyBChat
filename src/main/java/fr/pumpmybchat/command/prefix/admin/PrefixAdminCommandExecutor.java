@@ -16,19 +16,19 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 
-public class PrefixCommandExecutor extends Command implements TabExecutor{
+public class PrefixAdminCommandExecutor extends Command implements TabExecutor{
 
 	public static final TextComponent NO_PERM = new TextComponent("§cVous n'avez pas la permission de faire cela !");
 	
 	private Main main;
 	private List<SubCommandData> subCommandList;
 	
-	private PrefixCommandExecutor(String name) {
+	private PrefixAdminCommandExecutor(String name) {
 		super(name);
 		this.subCommandList = new ArrayList<>();
 	}
 
-	public PrefixCommandExecutor(Main main) {
+	public PrefixAdminCommandExecutor(Main main) {
 		
 		this("prefix-admin");
 		this.main = main;
