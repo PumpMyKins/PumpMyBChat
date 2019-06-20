@@ -3,7 +3,7 @@ package fr.pumpmybchat.command.prefix.admin;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.pumpmybchat.command.prefix.ISubCommand;
+import fr.pumpmybchat.utils.ISubCommand;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;

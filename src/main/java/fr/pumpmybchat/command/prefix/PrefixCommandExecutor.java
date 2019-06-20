@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.pumpmybchat.Main;
+import fr.pumpmybchat.utils.ISubCommand;
+import fr.pumpmybchat.utils.ISubTabCompleter;
+import fr.pumpmybchat.utils.SubCommandData;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
