@@ -91,7 +91,7 @@ public class MsgCommand extends Command implements TabExecutor{
 					
 				}
 				
-				senderName.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "msg " + sender.getName()));
+				senderName.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/msg " + sender.getName()));
 				
 				
 			}else {
