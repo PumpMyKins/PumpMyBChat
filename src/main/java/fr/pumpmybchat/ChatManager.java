@@ -227,15 +227,21 @@ public class ChatManager implements Listener {
 		}
 		
 		Nickname nickname = chatProfile.getNickname();
+		TextComponent nicknameText;
 		if(nickname.hasOne()) {
 			
-			messages.addExtra(new TextComponent(nickname.getUnSafeNickname()));
+			nicknameText = new TextComponent(nickname.getUnSafeNickname());
+			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bPseudo d'origine : §1" + player.getName() + "\n§bCliquez pour envoyer un message privée !").create()));
 			
 		}else {
 			
-			messages.addExtra(new TextComponent(player.getDisplayName()));
+			nicknameText = new TextComponent(player.getDisplayName());
+			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bCliquez pour envoyer un message privée !").create()));
 			
 		}
+		
+		nicknameText.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "msg " + player.getName()));
+		messages.addExtra(nicknameText);
 
 		TextComponent bet = new TextComponent(" > ");
 		bet.setColor(ChatColor.GOLD);
