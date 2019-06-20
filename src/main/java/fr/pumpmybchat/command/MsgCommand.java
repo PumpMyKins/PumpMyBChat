@@ -105,8 +105,7 @@ public class MsgCommand extends Command implements TabExecutor{
 			
 			TextComponent bet = new TextComponent(" => ");
 			bet.setColor(ChatColor.GOLD);
-			bet.setBold(true);
-			
+
 			messages.addExtra(bet);
 			
 			TextComponent you = new TextComponent("You");
