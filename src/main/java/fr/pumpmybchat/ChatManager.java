@@ -329,8 +329,7 @@ public class ChatManager implements Listener {
 					webhook.setTts(false);
 					webhook.setUsername("PumpMyBChat");
 					
-					webhook.setContent("**Serveur :** " + serverInfo.getName());
-					webhook.addEmbed(new DiscordWebhook.EmbedObject().setDescription(messages.toPlainText()));
+					webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("**Serveur :** " + serverInfo.getName()).setDescription(messages.toPlainText()));
 					
 					webhook.execute();
 					
