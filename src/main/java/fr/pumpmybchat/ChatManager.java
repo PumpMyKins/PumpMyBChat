@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.AbstractMap.SimpleEntry;
 import fr.pumpmybchat.logging.CustomLevel;
+import fr.pumpmybchat.utils.ChatColorUtils;
 import fr.pumpmybchat.utils.DiscordWebhook;
 
 import java.util.ArrayList;
@@ -201,6 +202,35 @@ public class ChatManager implements Listener {
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
 		ChatProfile chatProfile = this.getProfile(player.getUniqueId().toString());
 
+		String message = event.getMessage();
+		
+		if(ChatColorUtils.containsChatColorCodes(message) && !player.hasPermission("pumpmybchat.msg.colored")) {
+
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
+			player.sendMessage(txt);
+			
+			TextComponent txt2 = new TextComponent("Fonctionnalité réservé aux tiers supérieurs");
+			txt2.setColor(ChatColor.RED);	
+			player.sendMessage(txt2);
+
+			TextComponent link = new TextComponent("http://store.pumpmykins.eu/");
+			link.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "http://store.pumpmykins.eu/"));
+			link.setBold(true);
+			link.setColor(ChatColor.DARK_BLUE);
+			TextComponent txt3 = new TextComponent("Voir : ");
+			txt3.setColor(ChatColor.RED);
+			txt3.addExtra(link);
+			player.sendMessage(txt3);
+
+			return;
+			
+		}
+		
+		message = ChatColorUtils.getChatColorCodesTranslatedString(message);
+		
 		TextComponent messages = new TextComponent();
 		TextComponent tcStartPrefix = new TextComponent("[");
 		tcStartPrefix.setColor(ChatColor.GOLD);
@@ -249,7 +279,7 @@ public class ChatManager implements Listener {
 		
 		messages.addExtra(bet);
 		
-		messages.addExtra(new TextComponent(event.getMessage()));
+		messages.addExtra(new TextComponent(message));
 
 		/*String prefix = new String();
 		String nickname = new String();
