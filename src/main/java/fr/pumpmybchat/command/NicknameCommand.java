@@ -43,7 +43,7 @@ public class NicknameCommand extends Command {
 
 					for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
 						
-						if(!p.getName().equalsIgnoreCase(player.getName()) && p.getName().equalsIgnoreCase(ChatColorUtils.getWithoutChatColorCodesString(nickname)) &&  !player.hasPermission("pumpmybchat.command.nick.usurp")) {
+						if(!p.getName().equalsIgnoreCase(player.getName()) && p.getName().equalsIgnoreCase(ChatColorUtils.getWithoutChatColorCodesString(nickname)) &&  !player.hasPermission("pumpmybchat.nick.usurp")) {
 							
 							TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 							TextComponent txt1 = new TextComponent("Un joueur possède déjà ce nom.");
@@ -60,7 +60,7 @@ public class NicknameCommand extends Command {
 						
 					}
 					
-					if(ChatColorUtils.containsChatColorCodes(nickname) && !player.hasPermission("pumpmybchat.command.nick.colored")) {
+					if(ChatColorUtils.containsChatColorCodes(nickname) && !player.hasPermission("pumpmybchat.nick.colored")) {
 
 						TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 						TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");

@@ -35,7 +35,7 @@ public class MsgCommand extends Command implements TabExecutor{
 			
 			String message = this.getMessage(args);
 			
-			if(ChatColorUtils.containsChatColorCodes(message) && !sender.hasPermission("pumpmybchat.command.msg.colored")) {
+			if(ChatColorUtils.containsChatColorCodes(message) && !sender.hasPermission("pumpmybchat.msg.colored")) {
 
 				TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 				TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");
