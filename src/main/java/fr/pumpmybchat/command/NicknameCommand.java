@@ -86,7 +86,7 @@ public class NicknameCommand extends Command {
 						nickname = ChatColorUtils.getChatColorCodesTranslatedString(nickname);
 						
 						try {
-							this.chatManager.setNickname(player,nickname);
+							this.chatManager.setPlayerNickname(player,nickname);
 							sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom (\"§r" + nickname + "§r§b\") appliqué !"));
 							TextComponent txt = new TextComponent("§bUtilisez la commande : \"");
 							TextComponent cmd = new TextComponent("/nick");
@@ -109,9 +109,9 @@ public class NicknameCommand extends Command {
 
 			} else if(args.length == 0){
 
-				if(this.chatManager.hasNickname(player)) {
+				if(this.chatManager.playerHasNickname(player)) {
 
-					this.chatManager.unsetNickname(player);					
+					this.chatManager.unsetPlayerNickname(player);					
 					sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom supprimé !"));
 
 				}else {

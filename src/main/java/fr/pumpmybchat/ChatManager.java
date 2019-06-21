@@ -44,7 +44,7 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addProfile(String uuid, ChatProfile chatProfile) throws Exception {
+	private void addPlayerChatProfile(String uuid, ChatProfile chatProfile) throws Exception {
 
 		if(this.profiles.containsKey(uuid.toString())) {
 			throw new Exception("ChatProfile \"" + uuid.toString() + "\" already exists");
@@ -54,11 +54,11 @@ public class ChatManager implements Listener {
 
 	}
 
-	public ChatProfile getProfile(String uuid) {
+	public ChatProfile getPlayerChatProfile(String uuid) {
 		return this.profiles.get(uuid.toString());		
 	}
 
-	private void deleteProfile(String uuid) {		
+	private void deletePlayerChatProfile(String uuid) {		
 		this.profiles.remove(uuid.toString());
 	}
 
@@ -87,31 +87,31 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addNickInMySqlHistory(String uuid,String nick) throws Exception {
+	private void addPlayerNickInMySqlHistory(String uuid,String nick) throws Exception {
 
 		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES (\"" + uuid + "\",\"" + nick + "\");");
 
 	}
 	
-	public void setNickname(ProxiedPlayer player, String string) throws Exception {
+	public void setPlayerNickname(ProxiedPlayer player, String string) throws Exception {
 
 		String uuid = player.getUniqueId().toString();
-		ChatProfile chatProfile = this.getProfile(uuid);
+		ChatProfile chatProfile = this.getPlayerChatProfile(uuid);
 		chatProfile.getNickname().setNickname(string);
-		this.addNickInMySqlHistory(uuid, string);
+		this.addPlayerNickInMySqlHistory(uuid, string);
 		
 	}
 
-	public void unsetNickname(ProxiedPlayer player) {
+	public void unsetPlayerNickname(ProxiedPlayer player) {
 		
-		ChatProfile chatProfile = this.getProfile(player.getUniqueId().toString());
+		ChatProfile chatProfile = this.getPlayerChatProfile(player.getUniqueId().toString());
 		chatProfile.getNickname().unsetNickname();
 		
 	}
 
-	public boolean hasNickname(ProxiedPlayer player) {
+	public boolean playerHasNickname(ProxiedPlayer player) {
 		
-		return this.getProfile(player.getUniqueId().toString()).getNickname().hasOne();
+		return this.getPlayerChatProfile(player.getUniqueId().toString()).getNickname().hasOne();
 		
 	}
 
@@ -177,7 +177,7 @@ public class ChatManager implements Listener {
 		Prefix prefix = this.getMySqlPrefix(uuid);	
 
 		try {
-			this.addProfile(event.getPlayer().getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
+			this.addPlayerChatProfile(event.getPlayer().getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,7 +186,7 @@ public class ChatManager implements Listener {
 	@EventHandler
 	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
 
-		this.deleteProfile(event.getPlayer().getUniqueId().toString());
+		this.deletePlayerChatProfile(event.getPlayer().getUniqueId().toString());
 
 	}
 
@@ -200,7 +200,7 @@ public class ChatManager implements Listener {
 		if (!(event.getSender() instanceof ProxiedPlayer)) return;
 
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
-		ChatProfile chatProfile = this.getProfile(player.getUniqueId().toString());
+		ChatProfile chatProfile = this.getPlayerChatProfile(player.getUniqueId().toString());
 
 		String message = event.getMessage();
 		
