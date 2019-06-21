@@ -159,15 +159,28 @@ public class ChatManager implements Listener {
 
 	}
 	
-	public void deletePlayerPrefix(String uuid) {
-		// lors de la fin de l'achat
+	public Prefix getPlayerPrefix(ProxiedPlayer player) {
 		
+		try {
+			return this.getMySqlPrefix(player.getUniqueId().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 	
-	public Prefix getPlayerPrefix(String uuid) {
+	private Prefix getMySqlPrefix(String uuid) throws Exception {
 		
-		return null;
+		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `active`, `modification` FROM `prefixplayer` WHERE `uuid`='" + uuid + "';");
+		
+		if(!rs.first()) {
+			
+			return null;
+			
+		}
+		
+		return new Prefix(uuid, rs.getString("prefix"), rs.getBoolean("active"), rs.getInt("modification"));
 		
 	}
 	
