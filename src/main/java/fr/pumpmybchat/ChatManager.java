@@ -118,7 +118,7 @@ public class ChatManager implements Listener {
 
 		List<SimpleEntry<String,SimpleEntry<String, Boolean>>> l = new ArrayList<>();
 
-		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `àctive`, `date` FROM `prefixhistory` WHERE `uuid`='" + uuid + "';");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `active`, `date` FROM `prefixhistory` WHERE `uuid`='" + uuid + "';");
 		while (rs.next()) {
 
 			SimpleEntry<String,SimpleEntry<String, Boolean>> simpleEntry = new SimpleEntry<String,SimpleEntry<String, Boolean>>(rs.getString("date"), new SimpleEntry<String, Boolean>(rs.getString("prefix"),rs.getBoolean("active")));
