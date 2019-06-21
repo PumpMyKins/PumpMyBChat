@@ -220,15 +220,19 @@ public class ChatManager implements Listener {
 	
 	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
 
-	private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
+		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + prefix.isActive() + "');");
 
-		this.mySQL.sendUpdate("");
+	}
+
+	private void updateMySqlPrefix(String uuid, Prefix prefix) throws Exception {
+
+		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + prefix.isActive() + "',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
 
 	}
 
 	private void deleteMySqlPrefix(String uuid) throws Exception {
 
-		this.mySQL.sendUpdate("");
+		this.mySQL.sendUpdate("DELETE FROM `prefixplayer` WHERE `uuid`='" + uuid + "';");
 
 	}
 
