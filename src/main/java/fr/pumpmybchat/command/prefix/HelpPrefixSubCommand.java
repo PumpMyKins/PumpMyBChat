@@ -1,13 +1,15 @@
 package fr.pumpmybchat.command.prefix;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import fr.pumpmybchat.Main;
 import fr.pumpmybchat.utils.ISubCommand;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.HoverEvent.Action;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.plugin.Command;
 
