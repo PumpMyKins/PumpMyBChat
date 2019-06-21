@@ -3,22 +3,21 @@ package fr.pumpmybchat;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.AbstractMap.SimpleEntry;
-import fr.pumpmybchat.logging.CustomLevel;
-import fr.pumpmybchat.utils.ChatColorUtils;
-import fr.pumpmybchat.utils.DiscordWebhook;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.pumpmybchat.logging.CustomLevel;
+import fr.pumpmybchat.utils.ChatColorUtils;
+import fr.pumpmybchat.utils.DiscordWebhook;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
