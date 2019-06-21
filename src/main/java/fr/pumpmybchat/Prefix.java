@@ -1,6 +1,6 @@
 package fr.pumpmybchat;
 
-import java.util.UUID;
+import fr.pumpmybchat.utils.InsufisantModificationPrefixException;
 
 public class Prefix {
 
@@ -23,7 +23,12 @@ public class Prefix {
 	public String getPrefix() {
 		return prefix;
 	}
-	public void setPrefix(String prefix) {
+	public void setPrefix(String prefix) throws InsufisantModificationPrefixException {
+		
+		if(this.modification - 1 <= 0) {
+			throw new InsufisantModificationPrefixException(this);
+		}
+		this.modification-=1;
 		this.prefix = prefix;
 	}
 	public boolean isActive() {
