@@ -24,6 +24,43 @@ public class ActivatePrefixSubCommand implements ISubCommand {
 	@Override
 	public void onSubCommand(Command exec, CommandSender sender, List<String> args) {
 
+		ProxiedPlayer player = (ProxiedPlayer) sender;
+		ChatProfile chatProfile = this.chatManager.getPlayerChatProfile(player);
+		Prefix prefix = chatProfile.getPrefix();
+		
+		if(prefix == null) {
+			
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("ERREUR : Paramètre de prefix introuvable");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
+			player.sendMessage(txt);
+			
+			TextComponent txt2 = new TextComponent("Contactez le staff !");
+			txt2.setColor(ChatColor.RED);
+			
+			player.sendMessage(txt2);
+			return;
+			
+		}
+		
+		boolean active;
+		if(prefix.isActive()) {
+			active = false;
+			sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bPrefix désactivé !"));
+		}else {
+			active = true;
+			sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bPrefix activé !"));			
+		}
+		
+		try {
+			this.chatManager.updatePlayerPrefixActive(player, active);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			sender.sendMessage(new TextComponent(e.getMessage()));
+		}
+		
 	}
 
 }
