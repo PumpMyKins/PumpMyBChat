@@ -12,7 +12,6 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 
@@ -75,7 +74,7 @@ public class PrefixAdminCommandExecutor extends Command implements TabExecutor{
 		if(!sender.hasPermission("pumpmybchat.command.prefix.admin")) {
 			
 			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-			TextComponent txt1 = new TextComponent("Fonctionnalité réservé");
+			TextComponent txt1 = new TextComponent("Fonctionnalité réservé aux membres du staffs");
 			txt1.setColor(ChatColor.RED);
 			txt.addExtra(txt1);			
 			sender.sendMessage(txt);
