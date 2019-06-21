@@ -88,7 +88,10 @@ public class Main  extends Plugin implements Listener{
 		pm.registerCommand(this, prefixCommandExecutor);
 		
 		
-		//PrefixAdminCommandExecutor prefixAdminCommandExecutor = new PrefixAdminCommandExecutor(this);
+		PrefixAdminCommandExecutor prefixAdminCommandExecutor = new PrefixAdminCommandExecutor(this);
+		prefixAdminCommandExecutor.addSubCommand("init", new InitPrefixAdminSubCommand(this));
+		
+		pm.registerCommand(this, prefixAdminCommandExecutor);
 		
 		/*this.chatPlayer = new ChatPlayer();
 
