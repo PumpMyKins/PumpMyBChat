@@ -7,7 +7,6 @@ public class Prefix {
 	private UUID uuid;
 	private String prefix;
 	private boolean active;
-	private int warn;
 	private int modification;
 	
 	public Prefix(UUID uuid, String prefix, boolean staff, boolean active, int warn, int modification) {
@@ -15,7 +14,6 @@ public class Prefix {
 		this.uuid = uuid;
 		this.prefix = prefix;
 		this.active = active;
-		this.warn = warn;
 		this.modification = modification;
 	}
 	
@@ -36,12 +34,6 @@ public class Prefix {
 	}
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-	public int getWarn() {
-		return warn;
-	}
-	public void setWarn(int warn) {
-		this.warn = warn;
 	}
 	public int getModification() {
 		return modification;
