@@ -10,6 +10,7 @@ import fr.pumpmybchat.command.prefix.ColorPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.HelpPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.PrefixCommandExecutor;
 import fr.pumpmybchat.command.prefix.SetPrefixSubCommand;
+import fr.pumpmybchat.command.prefix.admin.InitPrefixAdminSubCommand;
 import fr.pumpmybchat.command.prefix.admin.PrefixAdminCommandExecutor;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
