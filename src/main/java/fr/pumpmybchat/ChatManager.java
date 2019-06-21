@@ -189,6 +189,36 @@ public class ChatManager implements Listener {
 		this.updateMySqlPrefix(uuid, prefix);
 		
 	}
+	
+	public void updatePlayerPrefixContent(ProxiedPlayer player, String content) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Prefix prefix = chatProfile.getPrefix();
+			
+		prefix.setPrefix(content);	
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlPrefix(uuid, prefix);
+		this.addPrefixInMySqlHistory(uuid, prefix);
+		
+	}
+	
+	public void updatePlayerPrefixActive(ProxiedPlayer player, boolean active) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Prefix prefix = chatProfile.getPrefix();
+		
+		prefix.setActive(active);
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlPrefix(uuid, prefix);
+		this.addPrefixInMySqlHistory(uuid, prefix);
+		
+	}
+	
+	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
 
 	private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
