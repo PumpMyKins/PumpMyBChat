@@ -128,12 +128,6 @@ public class ChatManager implements Listener {
 
 		return l;
 	}
-
-	private void addPrefixInMySqlHistory(String uuid, String prefix, boolean active) throws Exception {
-
-		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix + "','" + active + "');");
-
-	}
 	
 	public void initPlayerPrefix(ProxiedPlayer player, int modification) throws Exception {
 		
@@ -183,9 +177,16 @@ public class ChatManager implements Listener {
 		
 	}
 	
-	public boolean isPlayerActivatePrefix(String uuid) {
+	public void updatePlayerPrefixModification(ProxiedPlayer player,int modification) throws Exception {
 		
-		return false;
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Prefix prefix = chatProfile.getPrefix();
+		
+		prefix.setModification(modification);
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlPrefix(uuid, prefix);
 		
 	}
 
