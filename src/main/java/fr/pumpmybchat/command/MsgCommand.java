@@ -78,7 +78,7 @@ public class MsgCommand extends Command implements TabExecutor{
 					messages.addExtra(staff);
 				}
 				
-				ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player.getUniqueId().toString());
+				ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player);
 				if(chatProfile.getNickname().hasOne()) {
 					
 					senderName = new TextComponent(chatProfile.getNickname().getUnSafeNickname());

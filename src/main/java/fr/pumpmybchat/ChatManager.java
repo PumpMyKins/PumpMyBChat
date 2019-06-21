@@ -54,8 +54,8 @@ public class ChatManager implements Listener {
 
 	}
 
-	public ChatProfile getPlayerChatProfile(String uuid) {
-		return this.profiles.get(uuid.toString());		
+	public ChatProfile getPlayerChatProfile(ProxiedPlayer player) {
+		return this.profiles.get(player.getUniqueId().toString());		
 	}
 
 	private void deletePlayerChatProfile(String uuid) {		
