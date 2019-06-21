@@ -25,6 +25,9 @@ Set up on the same database than all the buy Records.
 - Allow you to color you nick : *pumpmybchat.prefix.colored*
 - Add the staff prefix behind your prefix : *pumpmybchat.prefix.staff*
 
+#### /prefix color
+`pumpmybchat.command.prefix.color`
+
 ### /msg /w /tell 
 `pumpmybchat.command.msg`
 
