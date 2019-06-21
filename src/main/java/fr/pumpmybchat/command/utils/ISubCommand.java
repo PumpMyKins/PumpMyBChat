@@ -1,4 +1,4 @@
-package fr.pumpmybchat.utils;
+package fr.pumpmybchat.command.utils;
 
 import java.util.List;
 

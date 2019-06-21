@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.pumpmybchat.Main;
-import fr.pumpmybchat.utils.ISubCommand;
-import fr.pumpmybchat.utils.ISubTabCompleter;
+import fr.pumpmybchat.command.utils.ISubCommand;
+import fr.pumpmybchat.command.utils.ISubTabCompleter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
