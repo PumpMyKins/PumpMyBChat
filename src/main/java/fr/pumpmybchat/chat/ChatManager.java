@@ -1,4 +1,4 @@
-package fr.pumpmybchat;
+package fr.pumpmybchat.chat;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -8,9 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.pumpmybchat.ConfigManager;
+import fr.pumpmybchat.Main;
 import fr.pumpmybchat.logging.CustomLevel;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import fr.pumpmybchat.utils.DiscordWebhook;
+import fr.pumpmybchat.utils.MySql;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;

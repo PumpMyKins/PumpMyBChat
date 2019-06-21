@@ -1,4 +1,4 @@
-package fr.pumpmybchat;
+package fr.pumpmybchat.chat;
 
 import fr.pumpmybchat.utils.InsufisantModificationPrefixException;
 

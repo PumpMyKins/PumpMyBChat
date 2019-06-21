@@ -2,7 +2,7 @@ package fr.pumpmybchat;
 
 import java.sql.SQLException;
 
-import fr.pumpmybchat.MySql.MySQLCredentials;
+import fr.pumpmybchat.chat.ChatManager;
 import fr.pumpmybchat.command.MsgCommand;
 import fr.pumpmybchat.command.NicknameCommand;
 import fr.pumpmybchat.command.prefix.ActivatePrefixSubCommand;
@@ -12,6 +12,8 @@ import fr.pumpmybchat.command.prefix.PrefixCommandExecutor;
 import fr.pumpmybchat.command.prefix.SetPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.admin.InitPrefixAdminSubCommand;
 import fr.pumpmybchat.command.prefix.admin.PrefixAdminCommandExecutor;
+import fr.pumpmybchat.utils.MySql;
+import fr.pumpmybchat.utils.MySql.MySQLCredentials;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;

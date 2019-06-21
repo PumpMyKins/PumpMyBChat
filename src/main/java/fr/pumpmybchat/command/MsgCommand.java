@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import fr.pumpmybchat.ChatProfile;
 import fr.pumpmybchat.Main;
+import fr.pumpmybchat.chat.ChatProfile;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;

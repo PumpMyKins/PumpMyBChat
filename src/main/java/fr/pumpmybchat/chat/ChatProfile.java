@@ -1,4 +1,4 @@
-package fr.pumpmybchat;
+package fr.pumpmybchat.chat;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;

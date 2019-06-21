@@ -1,6 +1,6 @@
 package fr.pumpmybchat.utils;
 
-import fr.pumpmybchat.Prefix;
+import fr.pumpmybchat.chat.Prefix;
 
 public class InsufisantModificationPrefixException extends Exception {
 

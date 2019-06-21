@@ -2,7 +2,7 @@ package fr.pumpmybchat.command.prefix;
 
 import java.util.List;
 
-import fr.pumpmybchat.ChatManager;
+import fr.pumpmybchat.chat.ChatManager;
 import fr.pumpmybchat.command.utils.ISubCommand;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;

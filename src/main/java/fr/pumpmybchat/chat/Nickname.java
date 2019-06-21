@@ -1,4 +1,4 @@
-package fr.pumpmybchat;
+package fr.pumpmybchat.chat;
 
 public class Nickname {
 
