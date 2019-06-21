@@ -30,7 +30,7 @@ public class PrefixAdminCommandExecutor extends Command implements TabExecutor{
 
 	public PrefixAdminCommandExecutor(Main main) {
 		
-		this("prefix-admin");
+		this("bprefix-admin");
 		this.main = main;
 		
 	}
