@@ -75,7 +75,7 @@ public class ChatManager implements Listener {
 
 		List<SimpleEntry<String,String>> l = new ArrayList<>();
 
-		ResultSet rs = this.mySQL.sendQuery("SELECT `nick`, `date` FROM `nickhistory` WHERE `uuid`=\"" + uuid + "\";");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `nick`, `date` FROM `nickhistory` WHERE `uuid`='" + uuid + "';");
 		while (rs.next()) {
 
 			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("nick"),rs.getString("date"));
@@ -89,7 +89,7 @@ public class ChatManager implements Listener {
 
 	private void addPlayerNickInMySqlHistory(String uuid,String nick) throws Exception {
 
-		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES (\"" + uuid + "\",\"" + nick + "\");");
+		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES ('" + uuid + "','" + nick + "');");
 
 	}
 	
@@ -119,7 +119,7 @@ public class ChatManager implements Listener {
 
 		List<SimpleEntry<String,SimpleEntry<String, Boolean>>> l = new ArrayList<>();
 
-		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `àctive`, `date` FROM `prefixhistory` WHERE `uuid`=\"" + uuid + "\";");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `àctive`, `date` FROM `prefixhistory` WHERE `uuid`='" + uuid + "';");
 		while (rs.next()) {
 
 			SimpleEntry<String,SimpleEntry<String, Boolean>> simpleEntry = new SimpleEntry<String,SimpleEntry<String, Boolean>>(rs.getString("date"), new SimpleEntry<String, Boolean>(rs.getString("prefix"),rs.getBoolean("active")));
@@ -132,7 +132,7 @@ public class ChatManager implements Listener {
 
 	private void addPrefixInMySqlHistory(String uuid, String prefix, boolean active) throws Exception {
 
-		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES (\"" + uuid + "\",\"" + prefix + "\",\"" + active + "\");");
+		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix + "','" + active + "');");
 
 	}
 	
