@@ -18,46 +18,49 @@ public class HelpPrefixSubCommand implements ISubCommand{
 	@Override
 	public void onSubCommand(Command exec, CommandSender sender, List<String> args) {
 
-		List<TextComponent> tosend = new ArrayList<TextComponent>();
-
-		TextComponent message1 = new TextComponent("----[HELP]Prefix[HELP]----");
-		message1.setColor(ChatColor.GOLD);
-		message1.setBold(true);
+		TextComponent header = new TextComponent(Main.PLUGIN_PREFIX);
+		TextComponent message = new TextComponent("----[HELP]Prefix[HELP]----");
+		message.setColor(ChatColor.GOLD);
+		message.setBold(true);
+		header.addExtra(message);
 		
-		TextComponent activation = new TextComponent("/prefix activate pour activer ou désactiver votre préfix");
-		activation.setColor(ChatColor.YELLOW);
+		sender.sendMessage(header);
+		
+		TextComponent activation = new TextComponent("/prefix activate");
+		activation.setColor(ChatColor.DARK_BLUE);
+		activation.setBold(true);
 		activation.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix activate"));
+		activation.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bExecuter la commande !").create()));
+		TextComponent txt = new TextComponent(" pour activer ou désactiver votre préfix");
+		txt.setColor(ChatColor.AQUA);
+		activation.addExtra(txt);
 		
-		TextComponent reload = new TextComponent("/prefix reload pour actualiser votre préfix !");
-		reload.setColor(ChatColor.YELLOW);
-		reload.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix reload"));
+		sender.sendMessage(activation);
 		
-		TextComponent reset = new TextComponent("/prefix reset pour remettre à zéro votre préfix (Le désactive aussi)");
-		reset.setColor(ChatColor.YELLOW);
-		reset.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix reset"));
+		TextComponent set = new TextComponent("/prefix set");
+		set.setColor(ChatColor.DARK_BLUE);
+		set.setBold(true);
+		set.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix set &dILOVEPMK"));
+		set.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bExecuter la commande !").create()));
+		TextComponent txt1 = new TextComponent(" pour définir votre préfix");
+		txt1.setColor(ChatColor.AQUA);
+		set.addExtra(txt1);
 		
-		TextComponent set = new TextComponent("/prefix set <prefix> pour mettre en place celui ci");
-		set.setColor(ChatColor.YELLOW);
-		set.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix set"));
+		sender.sendMessage(set);		
 		
 		if(sender.hasPermission("pumpmybchat.prefix.colored")) {
 			
-			TextComponent color = new TextComponent("/prefix color pour voir la liste des couleur disponible pour colorer vos prefix");
-			color.setColor(ChatColor.YELLOW);
+			TextComponent color = new TextComponent("/prefix color");
+			color.setColor(ChatColor.DARK_BLUE);
+			color.setBold(true);
 			color.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix color"));
-			tosend.add(color);
+			color.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bExecuter la commande !").create()));
+			TextComponent txt2 = new TextComponent(" pour définir votre préfix");
+			txt2.setColor(ChatColor.AQUA);
+			color.addExtra(txt2);
 			
-		}
-
-		tosend.add(message1);
-		tosend.add(activation);
-		tosend.add(reload);
-		tosend.add(reset);
-		tosend.add(set);
-
-		for(int i = 0; i < tosend.size(); i++) {
-
-			sender.sendMessage(tosend.get(i));
+			sender.sendMessage(color);
+			
 		}
 
 	}
