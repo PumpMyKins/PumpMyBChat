@@ -331,9 +331,9 @@ public class ChatManager implements Listener {
 		Prefix p = chatProfile.getPrefix();
 		if(p!= null && p.isActive()) {
 
-			TextComponent tcEndPrefix = new TextComponent("] §r");
+			TextComponent tcEndPrefix = new TextComponent("] ");
 			tcEndPrefix.setColor(ChatColor.GOLD);
-			TextComponent tcPrefix = new TextComponent("§r" + p.getPrefix() + "§r");
+			TextComponent tcPrefix = new TextComponent(p.getPrefix());
 
 			messages.addExtra(tcPrefix);
 			messages.addExtra(tcEndPrefix);
