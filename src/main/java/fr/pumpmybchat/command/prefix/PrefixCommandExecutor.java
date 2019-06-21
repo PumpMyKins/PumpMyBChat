@@ -77,6 +77,11 @@ public class PrefixCommandExecutor extends Command implements TabExecutor{
 			
 		}
 		
+		if(!(sender instanceof ProxiedPlayer)) {			
+			sender.sendMessage(new TextComponent("pas fute fute"));	
+			return;
+		}
+		
 		if( args.length < 1 ) {
 
 			new HelpPrefixSubCommand().onSubCommand(this, sender);
