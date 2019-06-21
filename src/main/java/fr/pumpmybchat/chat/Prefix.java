@@ -25,7 +25,7 @@ public class Prefix {
 	}
 	public void setPrefix(String prefix) throws InsufisantModificationPrefixException {
 		
-		if(this.modification - 1 <= 0) {
+		if(this.modification <= 0) {
 			throw new InsufisantModificationPrefixException(this);
 		}
 		this.modification-=1;
