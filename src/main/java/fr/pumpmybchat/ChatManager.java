@@ -96,7 +96,7 @@ public class ChatManager implements Listener {
 	public void setPlayerNickname(ProxiedPlayer player, String string) throws Exception {
 
 		String uuid = player.getUniqueId().toString();
-		ChatProfile chatProfile = this.getPlayerChatProfile(uuid);
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
 		chatProfile.getNickname().setNickname(string);
 		this.addPlayerNickInMySqlHistory(uuid, string);
 		
@@ -104,14 +104,14 @@ public class ChatManager implements Listener {
 
 	public void unsetPlayerNickname(ProxiedPlayer player) {
 		
-		ChatProfile chatProfile = this.getPlayerChatProfile(player.getUniqueId().toString());
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
 		chatProfile.getNickname().unsetNickname();
 		
 	}
 
 	public boolean playerHasNickname(ProxiedPlayer player) {
 		
-		return this.getPlayerChatProfile(player.getUniqueId().toString()).getNickname().hasOne();
+		return this.getPlayerChatProfile(player).getNickname().hasOne();
 		
 	}
 
@@ -166,10 +166,6 @@ public class ChatManager implements Listener {
 		
 	}
 
-	private Prefix getMySqlPrefix(String uuid) {
-		return new Prefix(null, null, false, false, 0, 0);
-	}
-
 	private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
 		this.mySQL.sendUpdate("");
@@ -204,10 +200,10 @@ public class ChatManager implements Listener {
 			e.printStackTrace();
 		}
 
-		Prefix prefix = this.getMySqlPrefix(uuid);	
+		Prefix prefix = this.getPlayerPrefix(player);	
 
 		try {
-			this.addPlayerChatProfile(event.getPlayer().getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
+			this.addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -230,7 +226,7 @@ public class ChatManager implements Listener {
 		if (!(event.getSender() instanceof ProxiedPlayer)) return;
 
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
-		ChatProfile chatProfile = this.getPlayerChatProfile(player.getUniqueId().toString());
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
 
 		String message = event.getMessage();
 		
