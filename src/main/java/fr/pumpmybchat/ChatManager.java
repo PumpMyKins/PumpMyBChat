@@ -115,14 +115,14 @@ public class ChatManager implements Listener {
 		
 	}
 
-	private List<SimpleEntry<String,String>> getMySqlPrefixHistory(String uuid) throws Exception {
+	private List<SimpleEntry<String,SimpleEntry<String, Boolean>>> getMySqlPrefixHistory(String uuid) throws Exception {
 
-		List<SimpleEntry<String,String>> l = new ArrayList<>();
+		List<SimpleEntry<String,SimpleEntry<String, Boolean>>> l = new ArrayList<>();
 
-		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `date` FROM `prefixhistory` WHERE `uuid`=\"" + uuid + "\";");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `àctive`, `date` FROM `prefixhistory` WHERE `uuid`=\"" + uuid + "\";");
 		while (rs.next()) {
 
-			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("prefix"),rs.getString("date"));
+			SimpleEntry<String,SimpleEntry<String, Boolean>> simpleEntry = new SimpleEntry<String,SimpleEntry<String, Boolean>>(rs.getString("date"), new SimpleEntry<String, Boolean>(rs.getString("prefix"),rs.getBoolean("active")));
 			l.add(simpleEntry);
 
 		}
