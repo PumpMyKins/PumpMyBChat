@@ -78,6 +78,17 @@ public class Main  extends Plugin implements Listener{
 		
 		pm.registerCommand(this, new MsgCommand(this,"msg","w","tell"));
 		
+		PrefixCommandExecutor prefixCommandExecutor = new PrefixCommandExecutor(this);
+		prefixCommandExecutor.addSubCommand("help", new HelpPrefixSubCommand());
+		prefixCommandExecutor.addSubCommand("activate", new ActivatePrefixSubCommand(this.chatManager));
+		prefixCommandExecutor.addSubCommand("set", new SetPrefixSubCommand(this.chatManager));
+		prefixCommandExecutor.addSubCommand("color", "pumpmybchat.command.prefix.colored", new ColorPrefixSubCommand());
+		
+		pm.registerCommand(this, prefixCommandExecutor);
+		
+		
+		//PrefixAdminCommandExecutor prefixAdminCommandExecutor = new PrefixAdminCommandExecutor(this);
+		
 		/*this.chatPlayer = new ChatPlayer();
 
 
