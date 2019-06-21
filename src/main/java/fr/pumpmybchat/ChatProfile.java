@@ -32,5 +32,14 @@ public class ChatProfile {
 	public Prefix getPrefix() {
 		return this.prefix;
 	}
+	
+	public void setPrefix(Prefix prefix) throws Exception {
+		
+		if(this.prefix != null){			
+			throw new Exception("Prefix already set in ChatProlies");			
+		}
+		
+		this.prefix = prefix;
+	}
 
 }
