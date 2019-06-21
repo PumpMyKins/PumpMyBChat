@@ -134,23 +134,53 @@ public class ChatManager implements Listener {
 
 		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES (\"" + uuid + "\",\"" + prefix + "\",\"" + active + "\");");
 
-	}*/
+	}
+	
+	public void initPlayerPrefix(ProxiedPlayer player, int modification) {
+		
+				
+		
+	}
+	
+	private void initMySqlPrefix(String uuid) throws Exception {
+
+		this.mySQL.sendUpdate("");
+
+	}
+	
+	public void deletePlayerPrefix(String uuid) {
+		// lors de la fin de l'achat
+		
+		
+	}
+	
+	public Prefix getPlayerPrefix(String uuid) {
+		
+		return null;
+		
+	}
+	
+	public boolean isPlayerActivatePrefix(String uuid) {
+		
+		return false;
+		
+	}
 
 	private Prefix getMySqlPrefix(String uuid) {
 		return new Prefix(null, null, false, false, 0, 0);
 	}
 
-	/*private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
+	private void setMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
 		this.mySQL.sendUpdate("");
 
 	}
 
-	private void unsetMySqlPrefix(String uuid) throws Exception {
+	private void deleteMySqlPrefix(String uuid) throws Exception {
 
 		this.mySQL.sendUpdate("");
 
-	}*/
+	}
 
 	@EventHandler
 	public void onProxiedPlayerJoin(PostLoginEvent event) {
@@ -158,7 +188,7 @@ public class ChatManager implements Listener {
 		ProxiedPlayer player = event.getPlayer();
 		String uuid = player.getUniqueId().toString();
 
-		List<SimpleEntry<String, String>> prefixHistory = new ArrayList<>();
+		List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory = new ArrayList<>();
 		try {
 			prefixHistory = this.getMySqlPrefixHistory(uuid);
 		} catch (Exception e) {
