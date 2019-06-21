@@ -4,12 +4,12 @@ import java.util.UUID;
 
 public class Prefix {
 
-	private UUID uuid;
+	private String uuid;
 	private String prefix;
 	private boolean active;
 	private int modification;
 	
-	public Prefix(UUID uuid, String prefix, boolean staff, boolean active, int warn, int modification) {
+	public Prefix(String uuid, String prefix, boolean active, int modification) {
 		super();
 		this.uuid = uuid;
 		this.prefix = prefix;
@@ -17,11 +17,8 @@ public class Prefix {
 		this.modification = modification;
 	}
 	
-	public UUID getUuid() {
+	public String getUuid() {
 		return uuid;
-	}
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
 	}
 	public String getPrefix() {
 		return prefix;
