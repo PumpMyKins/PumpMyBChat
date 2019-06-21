@@ -7,17 +7,17 @@ public class ChatProfile {
 	
 	private Nickname nickname;
 	private Prefix prefix;
-	private List<SimpleEntry<String, String>> prefixHistory;
+	private List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory;
 	private List<SimpleEntry<String, String>> nickHistory;
 	
-	public ChatProfile(Prefix prefix, List<SimpleEntry<String, String>> prefixHistory, List<SimpleEntry<String, String>> nickHistory) {
+	public ChatProfile(Prefix prefix, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory, List<SimpleEntry<String, String>> nickHistory) {
 		this.nickname = new Nickname();
 		this.prefix = prefix;
 		this.prefixHistory = prefixHistory;
 		this.nickHistory = nickHistory;
 	}
 
-	public List<SimpleEntry<String, String>> getPrefixHistory() {
+	public List<SimpleEntry<String, SimpleEntry<String, Boolean>>> getPrefixHistory() {
 		return prefixHistory;
 	}
 
