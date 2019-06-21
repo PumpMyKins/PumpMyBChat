@@ -130,9 +130,9 @@ public class ChatManager implements Listener {
 		return l;
 	}
 
-	/*private void addPrefixInMySqlHistory(String uuid, String prefix) throws Exception {
+	private void addPrefixInMySqlHistory(String uuid, String prefix, boolean active) throws Exception {
 
-		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`) VALUES (\"" + uuid + "\",\"" + prefix + "\");");
+		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES (\"" + uuid + "\",\"" + prefix + "\",\"" + active + "\");");
 
 	}*/
 
