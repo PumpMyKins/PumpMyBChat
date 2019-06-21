@@ -136,15 +136,26 @@ public class ChatManager implements Listener {
 
 	}
 	
-	public void initPlayerPrefix(ProxiedPlayer player, int modification) {
+	public void initPlayerPrefix(ProxiedPlayer player, int modification) throws Exception {
 		
-				
+		String uuid = player.getUniqueId().toString();
+		this.initMySqlPrefix(uuid, modification);
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		
+		Prefix prefix = this.getPlayerPrefix(player);
+		if(prefix == null) {
+			
+			throw new Exception("Prefix unfound after mysql initialise !");
+			
+		}		
+		chatProfile.setPrefix(this.getMySqlPrefix(uuid));		
 		
 	}
 	
-	private void initMySqlPrefix(String uuid) throws Exception {
+	private void initMySqlPrefix(String uuid, int modification) throws Exception {
 
-		this.mySQL.sendUpdate("");
+		this.mySQL.sendUpdate("INSERT INTO `prefixplayer` (`uuid`, `modification`) VALUES ('" + uuid + "', '" + modification + "')");
 
 	}
 	
