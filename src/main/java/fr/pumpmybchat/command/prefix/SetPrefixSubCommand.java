@@ -29,6 +29,22 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 	@Override
 	public void onSubCommand(Command exec, CommandSender sender, List<String> args) {
+
+		if(args.size() != 1) {
+
+			new HelpPrefixSubCommand().onSubCommand(exec, sender);
+			return;
+
+		}
+
+		String stringPrefix = args.get(0).trim();
+
+		if(stringPrefix.isEmpty()) {
+
+			new HelpPrefixSubCommand().onSubCommand(exec, sender);
+			return;
+
+		}
 		
 		
 
