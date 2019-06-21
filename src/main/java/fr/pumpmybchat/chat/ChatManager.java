@@ -223,13 +223,13 @@ public class ChatManager implements Listener {
 	
 	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
 
-		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + prefix.isActive() + "');");
+		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + (prefix.isActive() ? 1 : 0) + "');");
 
 	}
 
 	private void updateMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
-		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + prefix.isActive() + "',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
+		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
 
 	}
 
