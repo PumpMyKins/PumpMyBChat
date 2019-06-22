@@ -355,7 +355,7 @@ public class ChatManager implements Listener {
 		messages.addExtra(tcStartPrefix);
 
 		Prefix p = chatProfile.getPrefix();
-		if(p!= null && p.isActive()) {
+		if(p!= null && p.isActive() && !p.isBlocked()) {
 
 			TextComponent tcEndPrefix = new TextComponent("] ");
 			tcEndPrefix.setColor(ChatColor.GOLD);
