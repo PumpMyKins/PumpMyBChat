@@ -102,6 +102,22 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 			}
 			
+			if(prefix.isBlocked()) {
+				
+				TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+				TextComponent txt1 = new TextComponent("Cette fonctionnalité vous a été retiré suite à un abus !");
+				txt1.setColor(ChatColor.RED);
+				txt.addExtra(txt1);			
+				player.sendMessage(txt);
+				
+				TextComponent txt2 = new TextComponent("Contactez le staff !");
+				txt2.setColor(ChatColor.RED);
+				
+				player.sendMessage(txt2);
+				return;
+				
+			}
+			
 			try {
 				
 				this.chatManager.updatePlayerPrefixContent(player, stringPrefix);
