@@ -120,9 +120,25 @@ public class SetPrefixSubCommand implements ISubCommand {
 			
 			try {
 				
-				this.chatManager.updatePlayerPrefixContent(player, stringPrefix);
+				boolean modificated = true;
+				if(player.hasPermission("pumpmybchat.prefix.infinite")) {
+					modificated = false;					
+				}
 				
-				sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bPrefix appliqué !"));				
+				this.chatManager.updatePlayerPrefixContent(player, stringPrefix,modificated);
+				
+				sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bPrefix appliqué !"));
+				
+				if(modificated) {
+					
+					TextComponent txt = new TextComponent("Nombre de modifcation restante : ");
+					txt.setColor(ChatColor.AQUA);
+					TextComponent txt1 = new TextComponent("" + prefix.getModification());
+					txt1.setColor(ChatColor.DARK_BLUE);
+					txt.addExtra(txt1);
+					sender.sendMessage(txt);
+					
+				}
 				
 				if(!prefix.isActive()) {
 					
@@ -131,9 +147,9 @@ public class SetPrefixSubCommand implements ISubCommand {
 					activation.setBold(true);
 					activation.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix activate"));
 					activation.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bExecuter la commande !").create()));
-					TextComponent txt = new TextComponent(" pour activer votre préfix");
-					txt.setColor(ChatColor.AQUA);
-					activation.addExtra(txt);
+					TextComponent txt2 = new TextComponent(" pour activer votre préfix");
+					txt2.setColor(ChatColor.AQUA);
+					activation.addExtra(txt2);
 					
 					sender.sendMessage(activation);
 					
