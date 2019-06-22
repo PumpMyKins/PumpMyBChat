@@ -17,13 +17,14 @@ Set up on the same database than all the buy Records.
 
 ### /nick 
 `pumpmybchat.command.nick`
-- Allow you to color you nick : *pumpmybchat.nick.colored*
-- Allow you to take the name of an other user : *pumpmybchat.nick.usurp*
+- Allow you to color you nick : `pumpmybchat.nick.colored`
+- Allow you to take the name of an other user : `pumpmybchat.nick.usurp`
 
 ### /prefix 
 `pumpmychat.command.prefix`
-- Allow you to color you nick : *pumpmybchat.prefix.colored*
-- Add the staff prefix behind your prefix : *pumpmybchat.prefix.staff*
+- Allow you to color you nick : `pumpmybchat.prefix.colored`
+- Add the staff prefix behind your prefix : `pumpmybchat.prefix.staff`
+- Allow you to set you prefix without counting modification : `pumpmybchat.prefix.infinite`
 
 #### /prefix color
 `pumpmybchat.command.prefix.color`
