@@ -242,7 +242,7 @@ public class ChatManager implements Listener {
 
 	private void updateMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
-		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
+		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`blocked`='" + (prefix.isBlocked() ? 1 : 0) +"',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
 
 	}
 
