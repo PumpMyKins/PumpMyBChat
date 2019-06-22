@@ -8,15 +8,25 @@ public class Prefix {
 	private String prefix;
 	private boolean active;
 	private int modification;
+	private boolean blocked;
 	
-	public Prefix(String uuid, String prefix, boolean active, int modification) {
+	public Prefix(String uuid, String prefix, boolean active, boolean blocked, int modification) {
 		super();
 		this.uuid = uuid;
 		this.prefix = prefix;
 		this.active = active;
+		this.blocked = blocked;
 		this.modification = modification;
 	}
 	
+	public boolean isBlocked() {
+		return blocked;
+	}
+
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
+	}
+
 	public String getUuid() {
 		return uuid;
 	}
