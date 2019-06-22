@@ -33,9 +33,9 @@ public class NicknameCommand extends Command {
 			ProxiedPlayer player = (ProxiedPlayer) sender;
 
 			if(args.length == 1) {
-
-				String nickname = args[0];
-				if(nickname.trim().isEmpty()) {
+				
+				String stringNickname = args[0];
+				if(stringNickname.trim().isEmpty() || stringNickname.length() > 16) {
 
 					this.sendMessage_CmdSynthaxError(player);
 
@@ -43,7 +43,7 @@ public class NicknameCommand extends Command {
 
 					for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
 						
-						if(!p.getName().equalsIgnoreCase(player.getName()) && p.getName().equalsIgnoreCase(ChatColorUtils.getWithoutChatColorCodesString(nickname)) &&  !player.hasPermission("pumpmybchat.nick.usurp")) {
+						if(!p.getName().equalsIgnoreCase(player.getName()) && p.getName().equalsIgnoreCase(ChatColorUtils.getWithoutChatColorCodesString(stringNickname)) &&  !player.hasPermission("pumpmybchat.nick.usurp")) {
 							
 							TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 							TextComponent txt1 = new TextComponent("Un joueur possède déjà ce nom.");
@@ -60,7 +60,7 @@ public class NicknameCommand extends Command {
 						
 					}
 					
-					if(ChatColorUtils.containsChatColorCodes(nickname) && !player.hasPermission("pumpmybchat.nick.colored")) {
+					if(ChatColorUtils.containsChatColorCodes(stringNickname) && !player.hasPermission("pumpmybchat.nick.colored")) {
 
 						TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 						TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");
@@ -83,11 +83,11 @@ public class NicknameCommand extends Command {
 
 					}else {
 
-						nickname = ChatColorUtils.getChatColorCodesTranslatedString(nickname);
+						stringNickname = ChatColorUtils.getChatColorCodesTranslatedString(stringNickname);
 						
 						try {
-							this.chatManager.setPlayerNickname(player,nickname);
-							sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom (\"§r" + nickname + "§r§b\") appliqué !"));
+							this.chatManager.setPlayerNickname(player,stringNickname);
+							sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom (\"§r" + stringNickname + "§r§b\") appliqué !"));
 							TextComponent txt = new TextComponent("§bUtilisez la commande : \"");
 							TextComponent cmd = new TextComponent("/nick");
 							cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/nick"));
