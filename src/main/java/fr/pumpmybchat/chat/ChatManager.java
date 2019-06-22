@@ -193,12 +193,12 @@ public class ChatManager implements Listener {
 		
 	}
 	
-	public void updatePlayerPrefixContent(ProxiedPlayer player, String content) throws Exception {
+	public void updatePlayerPrefixContent(ProxiedPlayer player, String content,boolean modificated) throws Exception {
 		
 		ChatProfile chatProfile = this.getPlayerChatProfile(player);
 		Prefix prefix = chatProfile.getPrefix();
 			
-		prefix.setPrefix(content);	
+		prefix.setPrefix(content,modificated);	
 		
 		String uuid = player.getUniqueId().toString();
 		
