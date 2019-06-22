@@ -33,13 +33,18 @@ public class Prefix {
 	public String getPrefix() {
 		return prefix;
 	}
-	public void setPrefix(String prefix) throws InsufisantModificationPrefixException {
+	public void setPrefix(String prefix, boolean m) throws InsufisantModificationPrefixException {
 		
-		if(this.modification <= 0) {
-			throw new InsufisantModificationPrefixException(this);
+		if(m) {
+			
+			if(this.modification <= 0) {
+				throw new InsufisantModificationPrefixException(this);
+			}
+			this.modification-=1;
+			
 		}
-		this.modification-=1;
 		this.prefix = prefix;
+		
 	}
 	public boolean isActive() {
 		return active;
