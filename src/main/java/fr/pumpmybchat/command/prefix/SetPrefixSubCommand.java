@@ -46,6 +46,17 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 		}
 		
+		if(stringPrefix.length() > 10) {
+			
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("Prefix trop long !");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
+			sender.sendMessage(txt);
+			
+			return;
+		}
+		
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 
 		if(ChatColorUtils.containsChatColorCodes(stringPrefix) && !player.hasPermission("pumpmybchat.prefix.colored")) {
