@@ -221,6 +221,19 @@ public class ChatManager implements Listener {
 		
 	}
 	
+	public void updatePlayerPrefixBlocked(ProxiedPlayer player, boolean blocked) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Prefix prefix = chatProfile.getPrefix();
+		
+		prefix.setBlocked(blocked);
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlPrefix(uuid, prefix);
+		
+	}
+	
 	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
 
 		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + (prefix.isActive() ? 1 : 0) + "');");
