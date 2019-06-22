@@ -245,6 +245,16 @@ public class ChatManager implements Listener {
 		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`blocked`='" + (prefix.isBlocked() ? 1 : 0) +"',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
 
 	}
+	
+	public void deletePlayerPrefix(ProxiedPlayer player) throws Exception {
+		
+		String uuid = player.getUniqueId().toString();
+		this.deleteMySqlPrefix(uuid);
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		chatProfile.setPrefix(null);		
+		
+	}
 
 	private void deleteMySqlPrefix(String uuid) throws Exception {
 
