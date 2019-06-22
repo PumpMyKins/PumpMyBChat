@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 import fr.pumpmybchat.ConfigManager;
 import fr.pumpmybchat.Main;
@@ -460,7 +461,7 @@ public class ChatManager implements Listener {
 		
 		ServerInfo serverInfo = player.getServer().getInfo();
 
-		ProxyServer.getInstance().getLogger().log(CustomLevel.CHAT(serverInfo.getName()), messages.toPlainText());
+		ProxyServer.getInstance().getLogger().log(Level.INFO,messages.toLegacyText());
 		
 		
 		for (ProxiedPlayer receiver : player.getServer().getInfo().getPlayers()) {
