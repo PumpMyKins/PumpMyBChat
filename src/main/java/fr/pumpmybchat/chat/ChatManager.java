@@ -168,7 +168,7 @@ public class ChatManager implements Listener {
 	
 	private Prefix getMySqlPrefix(String uuid) throws Exception {
 		
-		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `active`, `modification` FROM `prefixplayer` WHERE `uuid`='" + uuid + "';");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `prefix`, `active`, `blocked` , `modification` FROM `prefixplayer` WHERE `uuid`='" + uuid + "';");
 		
 		if(!rs.first()) {
 			
@@ -176,7 +176,7 @@ public class ChatManager implements Listener {
 			
 		}
 		
-		return new Prefix(uuid, rs.getString("prefix"), rs.getBoolean("active"), rs.getInt("modification"));
+		return new Prefix(uuid, rs.getString("prefix"), rs.getBoolean("active"),rs.getBoolean("blocked"), rs.getInt("modification"));
 		
 	}
 	
