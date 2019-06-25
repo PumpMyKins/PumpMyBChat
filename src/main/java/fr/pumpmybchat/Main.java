@@ -30,9 +30,12 @@ public class Main  extends Plugin implements Listener{
 	private MySql mySQL;
 	private ConfigManager configManager;
 
+	private MsgManager msgManager;
+
 	public ChatManager getChatManager() {return this.chatManager;}
 	public MySql getMySQL() {return this.mySQL;}
 	public ConfigManager getConfigManager() {return this.configManager;}
+	public MsgManager getMsgManager() { return this.msgManager; }
 
 	@Override
 	public void onEnable() {
@@ -76,6 +79,7 @@ public class Main  extends Plugin implements Listener{
 			return;
 		}
 
+		this.msgManager = new MsgManager();	
 		
 		// COMMANDS
 		
