@@ -404,7 +404,7 @@ public class ChatManager implements Listener {
 			
 		}
 		
-		nicknameText.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "msg " + player.getName()));
+		nicknameText.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/msg " + player.getName()));
 		messages.addExtra(nicknameText);
 
 		TextComponent bet = new TextComponent(" > ");
