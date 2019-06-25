@@ -28,6 +28,10 @@ public class ConfigManager {
 		
 		for (String server : this.main.getProxy().getServers().keySet()) {
 			
+			if(this.configuration.contains("webhook." + server + ".url")) {
+				continue;
+			}
+			
 			this.configuration.set("webhook." + server + ".url", "none");
 			
 		}
