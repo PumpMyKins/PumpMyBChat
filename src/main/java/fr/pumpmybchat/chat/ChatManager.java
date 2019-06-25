@@ -46,10 +46,12 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addPlayerChatProfile(String uuid, ChatProfile chatProfile) throws Exception {
+	private void addPlayerChatProfile(String uuid, ChatProfile chatProfile) {
 
 		if(this.profiles.containsKey(uuid.toString())) {
-			throw new Exception("ChatProfile \"" + uuid.toString() + "\" already exists");
+			this.main.getLogger().warning("ChatProfile \"" + uuid.toString() + "\" already exists & will be replace !");
+			this.deletePlayerChatProfile(uuid);
+			this.addPlayerChatProfile(uuid, chatProfile);
 		}else {
 			this.profiles.put(uuid.toString(), chatProfile);
 		}
