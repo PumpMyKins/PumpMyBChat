@@ -122,6 +122,8 @@ public class MsgCommand extends Command implements TabExecutor{
 			
 			ProxiedPlayer player = this.main.getProxy().getPlayer(args[0]);
 			
+			
+			
 			ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player);
 			if(chatProfile.getNickname().hasOne()) {
 				
@@ -142,7 +144,6 @@ public class MsgCommand extends Command implements TabExecutor{
 			messages.addExtra(new TextComponent(message));
 			
 			sender.sendMessage(messages);			
-			
 			
 		}else {
 			
