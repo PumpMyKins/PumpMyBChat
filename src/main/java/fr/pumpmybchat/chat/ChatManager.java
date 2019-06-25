@@ -495,27 +495,37 @@ public class ChatManager implements Listener {
 
 		event.setCancelled(true);
 		
-		this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
+		String webhookUrl = configManager.getWebHookUrl(serverInfo.getName());
+		
+		if(!webhookUrl.equalsIgnoreCase("none")) {
 			
-			@Override
-			public void run() {			
+			this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
 				
-				try {
-					DiscordWebhook webhook = new DiscordWebhook(configManager.getWebHookUrl());
-					webhook.setTts(false);
-					webhook.setUsername("PumpMyBChat");
+				@Override
+				public void run() {			
 					
-					webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("**Serveur :** " + serverInfo.getName()).setDescription(messages.toPlainText()));
+					try {
+						
+						DateFormat shortDateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+						Date now = new Date(System.currentTimeMillis());
+						
+						DiscordWebhook webhook = new DiscordWebhook(webhookUrl);
+						webhook.setTts(false);
+						webhook.setUsername("PumpMyBChat");
+						
+						webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("" + shortDateFormat.format(now)).setDescription(messages.toPlainText()));
+						
+						webhook.execute();
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-					webhook.execute();
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-				
-			}
-		});
+			});
+			
+		}
 
 	}
 	
