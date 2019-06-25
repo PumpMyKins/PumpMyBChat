@@ -269,30 +269,41 @@ public class ChatManager implements Listener {
 
 		ProxiedPlayer player = event.getPlayer();
 		String uuid = player.getUniqueId().toString();
-
-		List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory = new ArrayList<>();
-		try {
-			prefixHistory = this.getMySqlPrefixHistory(uuid);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(this.profiles.containsKey(uuid)) {			
+			this.deletePlayerChatProfile(uuid);
 		}
+		
+		this.addPlayerChatProfile(uuid, new ChatProfile(null, null, null));		
+		
+		this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory = new ArrayList<>();
+				try {
+					prefixHistory = getMySqlPrefixHistory(uuid);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		List<SimpleEntry<String, String>> nickHistory = new ArrayList<>();
-		try {
-			nickHistory = this.getMySqlNickHistory(uuid);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				List<SimpleEntry<String, String>> nickHistory = new ArrayList<>();
+				try {
+					nickHistory = getMySqlNickHistory(uuid);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		Prefix prefix = this.getPlayerPrefix(player);	
+				Prefix prefix = getPlayerPrefix(player);	
 
-		try {
-			this.addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
+				
+			}
+		});
+		
 	}
 
 	@EventHandler
