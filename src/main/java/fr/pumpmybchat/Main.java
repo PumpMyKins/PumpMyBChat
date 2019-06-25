@@ -80,12 +80,14 @@ public class Main  extends Plugin implements Listener{
 		}
 
 		this.msgManager = new MsgManager();	
+		pm.registerListener(this, this.msgManager);
 		
 		// COMMANDS
 		
 		pm.registerCommand(this, new NicknameCommand("nick",this.chatManager));
 		
 		pm.registerCommand(this, new MsgCommand(this,"msg","w","tell"));
+		pm.registerCommand(this, new RCommand(this,"r"));
 		
 		PrefixCommandExecutor prefixCommandExecutor = new PrefixCommandExecutor(this);
 		prefixCommandExecutor.addSubCommand("help", new HelpPrefixSubCommand());
