@@ -120,7 +120,19 @@ public class MsgCommand extends Command implements TabExecutor{
 			
 			messages.addExtra(new TextComponent(message));
 			
-			this.main.getProxy().getPlayer(args[0]).sendMessage(messages);
+			ProxiedPlayer player = this.main.getProxy().getPlayer(args[0]);		
+			player.sendMessage(messages);			
+			
+			ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player);
+			if(chatProfile.getNickname().hasOne()) {
+				
+				senderName = new TextComponent(chatProfile.getNickname().getUnSafeNickname());
+				
+			}else {
+				
+				senderName = new TextComponent(player.getName());
+				
+			}
 			
 			messages = new TextComponent();
 			messages.addExtra(tcStartPrefix);		
@@ -130,8 +142,9 @@ public class MsgCommand extends Command implements TabExecutor{
 			messages.addExtra(bet1);
 			messages.addExtra(new TextComponent(message));
 			
-			sender.sendMessage(messages);			
+			sender.sendMessage(messages);
 			
+			this.main.getMsgManager().addLastMessageSender(player, sender);
 			
 		}else {
 			

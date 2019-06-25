@@ -30,9 +30,12 @@ public class Main  extends Plugin implements Listener{
 	private MySql mySQL;
 	private ConfigManager configManager;
 
+	private MsgManager msgManager;
+
 	public ChatManager getChatManager() {return this.chatManager;}
 	public MySql getMySQL() {return this.mySQL;}
 	public ConfigManager getConfigManager() {return this.configManager;}
+	public MsgManager getMsgManager() { return this.msgManager; }
 
 	@Override
 	public void onEnable() {
@@ -76,12 +79,15 @@ public class Main  extends Plugin implements Listener{
 			return;
 		}
 
+		this.msgManager = new MsgManager();	
+		pm.registerListener(this, this.msgManager);
 		
 		// COMMANDS
 		
 		pm.registerCommand(this, new NicknameCommand("nick",this.chatManager));
 		
 		pm.registerCommand(this, new MsgCommand(this,"msg","w","tell"));
+		pm.registerCommand(this, new RCommand(this,"r"));
 		
 		PrefixCommandExecutor prefixCommandExecutor = new PrefixCommandExecutor(this);
 		prefixCommandExecutor.addSubCommand("help", new HelpPrefixSubCommand());

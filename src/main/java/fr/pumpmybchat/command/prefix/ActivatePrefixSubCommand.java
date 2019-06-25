@@ -25,7 +25,24 @@ public class ActivatePrefixSubCommand implements ISubCommand {
 	public void onSubCommand(Command exec, CommandSender sender, List<String> args) {
 		
 		ProxiedPlayer player = (ProxiedPlayer) sender;
-		ChatProfile chatProfile = this.chatManager.getPlayerChatProfile(player);		
+		ChatProfile chatProfile = this.chatManager.getPlayerChatProfile(player);	
+		
+		if(chatProfile == null) {
+
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("ERREUR : Paramètre ChatProfile introuvable");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
+			player.sendMessage(txt);
+			
+			TextComponent txt3 = new TextComponent("Contactez le staff !");
+			txt3.setColor(ChatColor.RED);
+			
+			player.sendMessage(txt3);
+			return;
+
+		}
+		
 		Prefix prefix = chatProfile.getPrefix();
 		
 		if(prefix == null) {
@@ -36,10 +53,14 @@ public class ActivatePrefixSubCommand implements ISubCommand {
 			txt.addExtra(txt1);			
 			player.sendMessage(txt);
 			
-			TextComponent txt2 = new TextComponent("Contactez le staff !");
-			txt2.setColor(ChatColor.RED);
-			
+			TextComponent txt2 = new TextComponent("Si vous venez d'acheter la fonctionnalité en boutique, patientez quelques minutes.");
+			txt2.setColor(ChatColor.RED);		
 			player.sendMessage(txt2);
+			
+			TextComponent txt3 = new TextComponent("Sinon, contactez le staff !");
+			txt3.setColor(ChatColor.RED);
+			
+			player.sendMessage(txt3);
 			return;
 			
 		}
