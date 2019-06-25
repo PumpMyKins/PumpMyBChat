@@ -2,48 +2,53 @@ package fr.pumpmybchat;
 
 import java.util.HashMap;
 
-import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.event.EventHandler;
 
-public class MsgManager {
+public class MsgManager implements Listener {
 
-	private HashMap<String, String> msg;
+	private HashMap<CommandSender,CommandSender> msg;
 	
 	public MsgManager() {
-		msg = new HashMap<String, String>();
+		msg = new HashMap<CommandSender, CommandSender>();
 	}
 	
-	public void addLastMessageSender(ProxiedPlayer target, ProxiedPlayer sender) {
+	public void addLastMessageSender(CommandSender target, CommandSender sender) {
 		
-		String targetUuid = target.getUniqueId().toString();
-		String senderName = sender.getName();
 		
-		if(msg.containsKey(targetUuid)) {
-			msg.replace(targetUuid, senderName);
+		if(msg.containsKey(target)) {
+			msg.replace(target, sender);
 		}else {
-			msg.put(targetUuid, senderName);
+			msg.put(target, sender);
 		}	
 	}
 	
-	public String getLastMessageSenderName(ProxiedPlayer target) {
+	public CommandSender getLastMessageSenderName(CommandSender target) throws Exception {
 		
-		String targetUuid = target.getUniqueId().toString();
-		
-		if(this.msg.containsKey(targetUuid)) {
+		if(!this.msg.containsKey(target)) {
 			
-			return this.msg.get(targetUuid);
+			throw new Exception("Unfound");
 			
 		}else {
 			
-			throw new NullPointerException("Unfound");
+			return this.msg.get(target);
 			
 		}
 		
 	}
 	
-	public void clearPlayerLastMessage(ProxiedPlayer player) {
+	public void clearPlayerLastMessage(CommandSender player) {
 		
-		String playerUuid = player.getUniqueId().toString();
-		msg.remove(playerUuid);
+		msg.remove(player);
+		
+	}
+	
+	@EventHandler
+	public void onPlayerLeave(PlayerDisconnectEvent event) {
+		
+		this.clearPlayerLastMessage(event.getPlayer());
 		
 	}
 	
