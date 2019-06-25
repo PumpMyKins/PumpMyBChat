@@ -21,6 +21,19 @@ public class ConfigManager {
 		this.main = m;
 		saveDefaultConfig();
 		this.configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(getFile());
+		initWebHooks();
+	}
+
+	private void initWebHooks() throws IOException {
+		
+		for (String server : this.main.getProxy().getServers().keySet()) {
+			
+			this.configuration.set("webhook." + server + ".url", "none");
+			
+		}
+		
+		ConfigurationProvider.getProvider(YamlConfiguration.class).save(this.configuration, getFile());
+		
 	}
 
 	private final File getFile(){
@@ -72,8 +85,14 @@ public class ConfigManager {
 		return this.configuration.getString("mysql.database");
 	}
 
-	public String getWebHookUrl() {
-		return this.configuration.getString("webhook.url");
+	public String getWebHookUrl(String server) {
+		
+		if(this.configuration.contains("webhook." + server + ".url")) {
+			return this.configuration.getString("webhook." + server + ".url");
+		}else {
+			return "none";
+		}
+		
 	}
 
 }
