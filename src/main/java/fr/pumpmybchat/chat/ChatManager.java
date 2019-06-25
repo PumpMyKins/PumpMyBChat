@@ -314,7 +314,7 @@ public class ChatManager implements Listener {
 	}
 
 	@EventHandler
-	public void onMessage(ChatEvent event) {
+	public void onMessage(ChatEvent event) throws Exception {
 
 		if (event.isCommand()) return;
 		if(event.getMessage() == null) return;
@@ -324,6 +324,17 @@ public class ChatManager implements Listener {
 
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
 		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		
+		if(chatProfile == null) {
+			
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("ChatProfile introuvable, contactez le staff !");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
+			player.sendMessage(txt);
+			throw new Exception("Player ChatProfile not found ! " + player.getName() + "/" + player.getUniqueId().toString());		
+			
+		}
 
 		String message = event.getMessage();
 		
