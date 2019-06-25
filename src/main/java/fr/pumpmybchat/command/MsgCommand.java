@@ -120,7 +120,18 @@ public class MsgCommand extends Command implements TabExecutor{
 			
 			messages.addExtra(new TextComponent(message));
 			
-			this.main.getProxy().getPlayer(args[0]).sendMessage(messages);
+			ProxiedPlayer player = this.main.getProxy().getPlayer(args[0]);
+			
+			ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player);
+			if(chatProfile.getNickname().hasOne()) {
+				
+				senderName = new TextComponent(chatProfile.getNickname().getUnSafeNickname());
+				
+			}else {
+				
+				senderName = new TextComponent(player.getName());
+				
+			}
 			
 			messages = new TextComponent();
 			messages.addExtra(tcStartPrefix);		
