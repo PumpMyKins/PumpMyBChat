@@ -122,6 +122,16 @@ public class MsgCommand extends Command implements TabExecutor{
 			
 			this.main.getProxy().getPlayer(args[0]).sendMessage(messages);
 			
+			messages = new TextComponent();
+			messages.addExtra(tcStartPrefix);		
+			messages.addExtra(you);
+			messages.addExtra(bet);
+			messages.addExtra(senderName);
+			messages.addExtra(bet1);
+			messages.addExtra(new TextComponent(message));
+			
+			sender.sendMessage(messages);			
+			
 			
 		}else {
 			
