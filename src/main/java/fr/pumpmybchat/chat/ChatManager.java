@@ -11,7 +11,6 @@ import java.util.logging.Level;
 
 import fr.pumpmybchat.ConfigManager;
 import fr.pumpmybchat.Main;
-import fr.pumpmybchat.logging.CustomLevel;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import fr.pumpmybchat.utils.DiscordWebhook;
 import fr.pumpmybchat.utils.MySql;
