@@ -2,8 +2,10 @@ package fr.pumpmybchat.chat;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.text.DateFormat;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +13,6 @@ import java.util.logging.Level;
 
 import fr.pumpmybchat.ConfigManager;
 import fr.pumpmybchat.Main;
-import fr.pumpmybchat.logging.CustomLevel;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import fr.pumpmybchat.utils.DiscordWebhook;
 import fr.pumpmybchat.utils.MySql;
@@ -47,10 +48,12 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addPlayerChatProfile(String uuid, ChatProfile chatProfile) throws Exception {
+	private void addPlayerChatProfile(String uuid, ChatProfile chatProfile) {
 
 		if(this.profiles.containsKey(uuid.toString())) {
-			throw new Exception("ChatProfile \"" + uuid.toString() + "\" already exists");
+			this.main.getLogger().warning("ChatProfile \"" + uuid.toString() + "\" already exists & will be replace !");
+			this.deletePlayerChatProfile(uuid);
+			this.addPlayerChatProfile(uuid, chatProfile);
 		}else {
 			this.profiles.put(uuid.toString(), chatProfile);
 		}
@@ -268,30 +271,41 @@ public class ChatManager implements Listener {
 
 		ProxiedPlayer player = event.getPlayer();
 		String uuid = player.getUniqueId().toString();
-
-		List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory = new ArrayList<>();
-		try {
-			prefixHistory = this.getMySqlPrefixHistory(uuid);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(this.profiles.containsKey(uuid)) {			
+			this.deletePlayerChatProfile(uuid);
 		}
+		
+		this.addPlayerChatProfile(uuid, new ChatProfile(null, null, null));		
+		
+		this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory = new ArrayList<>();
+				try {
+					prefixHistory = getMySqlPrefixHistory(uuid);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		List<SimpleEntry<String, String>> nickHistory = new ArrayList<>();
-		try {
-			nickHistory = this.getMySqlNickHistory(uuid);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				List<SimpleEntry<String, String>> nickHistory = new ArrayList<>();
+				try {
+					nickHistory = getMySqlNickHistory(uuid);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-		Prefix prefix = this.getPlayerPrefix(player);	
+				Prefix prefix = getPlayerPrefix(player);	
 
-		try {
-			this.addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+				addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
+				
+			}
+		});
+		
 	}
 
 	@EventHandler
@@ -302,7 +316,7 @@ public class ChatManager implements Listener {
 	}
 
 	@EventHandler
-	public void onMessage(ChatEvent event) {
+	public void onMessage(ChatEvent event) throws Exception {
 
 		if (event.isCommand()) return;
 		if(event.getMessage() == null) return;
@@ -312,6 +326,17 @@ public class ChatManager implements Listener {
 
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
 		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		
+		if(chatProfile == null) {
+			
+			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+			TextComponent txt1 = new TextComponent("ChatProfile introuvable, contactez le staff !");
+			txt1.setColor(ChatColor.RED);
+			txt.addExtra(txt1);			
+			player.sendMessage(txt);
+			throw new Exception("Player ChatProfile not found ! " + player.getName() + "/" + player.getUniqueId().toString());		
+			
+		}
 
 		String message = event.getMessage();
 		
@@ -381,7 +406,7 @@ public class ChatManager implements Listener {
 			
 		}
 		
-		nicknameText.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "msg " + player.getName()));
+		nicknameText.setClickEvent(new ClickEvent(net.md_5.bungee.api.chat.ClickEvent.Action.SUGGEST_COMMAND, "/msg " + player.getName()));
 		messages.addExtra(nicknameText);
 
 		TextComponent bet = new TextComponent(" > ");
@@ -470,27 +495,37 @@ public class ChatManager implements Listener {
 
 		event.setCancelled(true);
 		
-		this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
+		String webhookUrl = configManager.getWebHookUrl(serverInfo.getName());
+		
+		if(!webhookUrl.equalsIgnoreCase("none")) {
 			
-			@Override
-			public void run() {			
+			this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
 				
-				try {
-					DiscordWebhook webhook = new DiscordWebhook(configManager.getWebHookUrl());
-					webhook.setTts(false);
-					webhook.setUsername("PumpMyBChat");
+				@Override
+				public void run() {			
 					
-					webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("**Serveur :** " + serverInfo.getName()).setDescription(messages.toPlainText()));
+					try {
+						
+						DateFormat shortDateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT);
+						Date now = new Date(System.currentTimeMillis());
+						
+						DiscordWebhook webhook = new DiscordWebhook(webhookUrl);
+						webhook.setTts(false);
+						webhook.setUsername("PumpMyBChat");
+						
+						webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("" + shortDateFormat.format(now)).setDescription(messages.toPlainText()));
+						
+						webhook.execute();
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
-					webhook.execute();
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-				
-			}
-		});
+			});
+			
+		}
 
 	}
 	
