@@ -1,5 +1,6 @@
-package fr.pumpmybchat;
+package fr.pumpmybchat.command;
 
+import fr.pumpmybchat.Main;
 import fr.pumpmybchat.chat.ChatProfile;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -17,7 +18,7 @@ public class RCommand extends Command {
 	private Main main;
 
 	public RCommand(Main main, String string) {
-		super(string);
+		super(string,"pumpmybchat.command.r");
 		this.main = main;
 	}
 
