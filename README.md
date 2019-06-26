@@ -35,6 +35,5 @@ Set up on the same database than all the buy Records.
 ### /r 
 `pumpmybchat.command.r`
 
-### /nick-admin
-
 ### /prefix-admin
+`pumpmybchat.command.prefix.admin`
