@@ -15,6 +15,7 @@ import fr.pumpmybchat.command.prefix.admin.BlockPrefixAdminSubCommand;
 import fr.pumpmybchat.command.prefix.admin.DeletePrefixAdminSubCommand;
 import fr.pumpmybchat.command.prefix.admin.InitPrefixAdminSubCommand;
 import fr.pumpmybchat.command.prefix.admin.PrefixAdminCommandExecutor;
+import fr.pumpmybchat.command.prefix.admin.RenewPrefixAdminSubCommand;
 import fr.pumpmybchat.utils.MySql;
 import fr.pumpmybchat.utils.MySql.MySQLCredentials;
 import net.md_5.bungee.api.plugin.Listener;
@@ -102,6 +103,7 @@ public class Main  extends Plugin implements Listener{
 		PrefixAdminCommandExecutor prefixAdminCommandExecutor = new PrefixAdminCommandExecutor(this);
 		prefixAdminCommandExecutor.addSubCommand("init", new InitPrefixAdminSubCommand(this));
 		prefixAdminCommandExecutor.addSubCommand("block", new BlockPrefixAdminSubCommand(this));
+		prefixAdminCommandExecutor.addSubCommand("renew", new RenewPrefixAdminSubCommand(this));
 		prefixAdminCommandExecutor.addSubCommand("delete", new DeletePrefixAdminSubCommand(this));
 		
 		pm.registerCommand(this, prefixAdminCommandExecutor);
