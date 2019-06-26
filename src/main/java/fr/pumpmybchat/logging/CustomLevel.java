@@ -4,6 +4,11 @@ import java.util.logging.Level;
 
 public class CustomLevel extends Level {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5503045242273249038L;
+
 	protected CustomLevel(String name, int value) {
 		super(name, value);
 	}
