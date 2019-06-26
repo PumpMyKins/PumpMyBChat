@@ -41,7 +41,7 @@ public class RenewPrefixAdminSubCommand implements ISubCommand, ISubTabCompleter
 					ProxiedPlayer player = this.main.getProxy().getPlayer(args.get(0));
 					
 					try {
-						this.main.getChatManager().initPlayerPrefix(player, modification);
+						this.main.getChatManager().updatePlayerPrefixModification(player, modification);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
