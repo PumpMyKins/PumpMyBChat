@@ -265,11 +265,9 @@ public class ChatManager implements Listener {
 		this.mySQL.sendUpdate("DELETE FROM `prefixplayer` WHERE `uuid`='" + uuid + "';");
 
 	}
-
-	@EventHandler
-	public void onProxiedPlayerJoin(PostLoginEvent event) {
-
-		ProxiedPlayer player = event.getPlayer();
+	
+	private void initPlayerChatProfile(ProxiedPlayer player) {
+		
 		String uuid = player.getUniqueId().toString();
 		
 		if(this.profiles.containsKey(uuid)) {			
@@ -309,6 +307,14 @@ public class ChatManager implements Listener {
 	}
 
 	@EventHandler
+	public void onProxiedPlayerJoin(PostLoginEvent event) {
+
+		ProxiedPlayer player = event.getPlayer();
+		this.initPlayerChatProfile(player);
+		
+	}
+
+	@EventHandler
 	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
 
 		this.deletePlayerChatProfile(event.getPlayer().getUniqueId().toString());
@@ -329,12 +335,8 @@ public class ChatManager implements Listener {
 		
 		if(chatProfile == null) {
 			
-			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-			TextComponent txt1 = new TextComponent("ChatProfile introuvable, contactez le staff !");
-			txt1.setColor(ChatColor.RED);
-			txt.addExtra(txt1);			
-			player.sendMessage(txt);
-			throw new Exception("Player ChatProfile not found ! " + player.getName() + "/" + player.getUniqueId().toString());		
+			this.main.getLogger().severe("Player ChatProfile not found ! " + player.getName() + "/" + player.getUniqueId().toString());		
+			this.initPlayerChatProfile(player);
 			
 		}
 
