@@ -32,6 +32,9 @@ Set up on the same database than all the buy Records.
 ### /msg /w /tell 
 `pumpmybchat.command.msg`
 
+### /r 
+`pumpmybchat.command.r`
+
 ### /nick-admin
 
 ### /prefix-admin
