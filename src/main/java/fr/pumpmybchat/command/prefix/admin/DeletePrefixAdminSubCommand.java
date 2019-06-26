@@ -31,8 +31,6 @@ public class DeletePrefixAdminSubCommand implements ISubCommand,ISubTabCompleter
 			txt.addExtra(txt1);			
 			sender.sendMessage(txt);
 
-			return;
-
 		}else {
 
 			if(args.size() == 1 && this.onTabComplete(exec, sender, args).contains(args.get(0).trim())) {

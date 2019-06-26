@@ -31,8 +31,6 @@ public class InitPrefixAdminSubCommand implements ISubCommand, ISubTabCompleter 
 			txt.addExtra(txt1);			
 			sender.sendMessage(txt);
 			
-			return;
-			
 		}else {
 			
 			if(args.size() == 2 && this.onTabComplete(exec, sender, args).contains(args.get(0).trim()) && !args.get(1).trim().isEmpty()) {
