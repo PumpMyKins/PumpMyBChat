@@ -330,6 +330,8 @@ public class ChatManager implements Listener {
 		if(event.isCancelled()) return;
 		if (!(event.getSender() instanceof ProxiedPlayer)) return;
 
+		event.setCancelled(true);
+		
 		ProxiedPlayer player = ((ProxiedPlayer) event.getSender());
 		ChatProfile chatProfile = this.getPlayerChatProfile(player);
 		
@@ -427,8 +429,6 @@ public class ChatManager implements Listener {
 		for (ProxiedPlayer receiver : player.getServer().getInfo().getPlayers()) {
 			receiver.sendMessage(messages);
 		}
-
-		event.setCancelled(true);
 		
 		String webhookUrl = configManager.getWebHookUrl(serverInfo.getName());
 		
