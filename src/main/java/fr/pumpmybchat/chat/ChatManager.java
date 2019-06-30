@@ -339,6 +339,7 @@ public class ChatManager implements Listener {
 			
 			this.main.getLogger().severe("Player ChatProfile not found ! " + player.getName() + "/" + player.getUniqueId().toString());		
 			this.initPlayerChatProfile(player);
+			chatProfile = new ChatProfile(null, null, null);
 			
 		}
 
