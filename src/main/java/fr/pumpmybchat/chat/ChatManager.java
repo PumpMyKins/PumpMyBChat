@@ -347,7 +347,7 @@ public class ChatManager implements Listener {
 		if(ChatColorUtils.containsChatColorCodes(message) && !player.hasPermission("pumpmybchat.msg.colored")) {
 
 			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-			TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");
+			TextComponent txt1 = new TextComponent("Impossible de colorer votre message");
 			txt1.setColor(ChatColor.RED);
 			txt.addExtra(txt1);			
 			player.sendMessage(txt);
