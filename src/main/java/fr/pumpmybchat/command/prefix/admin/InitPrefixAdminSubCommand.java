@@ -42,6 +42,12 @@ public class InitPrefixAdminSubCommand implements ISubCommand, ISubTabCompleter 
 					
 					try {
 						this.main.getChatManager().initPlayerPrefix(player, modification);
+						TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+						TextComponent txt1 = new TextComponent("Prefix ajouté pour le joueur " + player.getName() + "/" + player.getUniqueId().toString());
+						txt1.setColor(ChatColor.RED);
+						txt.addExtra(txt1);			
+						sender.sendMessage(txt);				
+						return;
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

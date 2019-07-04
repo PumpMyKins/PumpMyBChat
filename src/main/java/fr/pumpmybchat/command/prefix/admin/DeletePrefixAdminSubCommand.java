@@ -39,8 +39,13 @@ public class DeletePrefixAdminSubCommand implements ISubCommand,ISubTabCompleter
 
 				try {
 					this.main.getChatManager().deletePlayerPrefix(player);
+					TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+					TextComponent txt1 = new TextComponent("Prefix supprimé pour le joueur " + player.getName() + "/" + player.getUniqueId().toString());
+					txt1.setColor(ChatColor.RED);
+					txt.addExtra(txt1);			
+					sender.sendMessage(txt);				
+					return;
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
