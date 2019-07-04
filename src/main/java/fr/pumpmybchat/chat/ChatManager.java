@@ -141,6 +141,7 @@ public class ChatManager implements Listener {
 		String uuid = player.getUniqueId().toString();
 		this.initMySqlPrefix(uuid, modification);
 		
+		this.initPlayerChatProfile(player);
 		ChatProfile chatProfile = this.getPlayerChatProfile(player);
 		
 		Prefix prefix = this.getPlayerPrefix(player);
@@ -255,8 +256,7 @@ public class ChatManager implements Listener {
 		String uuid = player.getUniqueId().toString();
 		this.deleteMySqlPrefix(uuid);
 		
-		ChatProfile chatProfile = this.getPlayerChatProfile(player);
-		chatProfile.setPrefix(null);		
+		this.initPlayerChatProfile(player);				
 		
 	}
 
