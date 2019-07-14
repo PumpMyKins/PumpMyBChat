@@ -317,6 +317,7 @@ public class ChatManager implements Listener {
 	@EventHandler
 	public void onProxiedPlayerLeave(PlayerDisconnectEvent event) {
 
+		this.main.getLogger().warning("ChatProfile \"" + event.getPlayer().getUniqueId().toString() + "\" will be removed !");
 		this.deletePlayerChatProfile(event.getPlayer().getUniqueId().toString());
 
 	}
