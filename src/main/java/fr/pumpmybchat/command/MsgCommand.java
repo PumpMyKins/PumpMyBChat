@@ -171,10 +171,18 @@ public class MsgCommand extends Command implements TabExecutor{
 			}
 			
 			if(args.length == 1) {
+				
+				if(args[0].trim().isEmpty()) {
+					l.add(player.getName());
+					continue;
+				}
+				
 				if(player.getName().startsWith(args[0])) {
 					l.add(player.getName());
+					continue;
+					
 				}
-				continue;
+				
 			}
 			
 		}
