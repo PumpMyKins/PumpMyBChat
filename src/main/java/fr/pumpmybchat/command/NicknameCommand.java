@@ -83,6 +83,17 @@ public class NicknameCommand extends Command {
 
 					}else {
 
+						if(ChatColorUtils.getWithoutChatColorCodesString(stringNickname).length() > 14) {
+							
+							TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
+							TextComponent txt1 = new TextComponent("Nick trop long !");
+							txt1.setColor(ChatColor.RED);
+							txt.addExtra(txt1);			
+							sender.sendMessage(txt);
+							
+							return;
+						}
+						
 						stringNickname = ChatColorUtils.getChatColorCodesTranslatedString(stringNickname);
 						
 						try {
