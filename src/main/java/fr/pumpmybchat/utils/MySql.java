@@ -10,6 +10,8 @@ public class MySql {
 
 	private Connection conn;
 	private MySQLCredentials credentials;
+	
+	public Connection getConn() {return this.conn;}
 
 	public MySql(MySQLCredentials credentials) {
 		this.credentials = credentials;

@@ -164,7 +164,27 @@ public class MsgCommand extends Command implements TabExecutor{
 		List<String> l = new ArrayList<>();
 		
 		for (ProxiedPlayer player : this.main.getProxy().getPlayers()) {
-			l.add(player.getName());
+			
+			if(args.length == 0) {
+				l.add(player.getName());
+				continue;
+			}
+			
+			if(args.length == 1) {
+				
+				if(args[0].trim().isEmpty()) {
+					l.add(player.getName());
+					continue;
+				}
+				
+				if(player.getName().startsWith(args[0])) {
+					l.add(player.getName());
+					continue;
+					
+				}
+				
+			}
+			
 		}
 		
 		return l;
