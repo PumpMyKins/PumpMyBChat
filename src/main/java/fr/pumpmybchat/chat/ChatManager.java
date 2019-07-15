@@ -1,6 +1,7 @@
 package fr.pumpmybchat.chat;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.util.AbstractMap.SimpleEntry;
@@ -241,13 +242,30 @@ public class ChatManager implements Listener {
 	
 	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
 
-		this.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + (prefix.isActive() ? 1 : 0) + "');");
+		PreparedStatement stmt = this.mySQL.getConn().prepareStatement("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ( ? , ? , ? );");
+		
+		stmt.setString(1, uuid);
+		stmt.setString(2, prefix.getPrefix());
+		stmt.setBoolean(3, prefix.isActive());
+
+		stmt.executeUpdate();
+		
+		//lthis.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + (prefix.isActive() ? 1 : 0) + "');");
 
 	}
 
 	private void updateMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
-		this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`blocked`='" + (prefix.isBlocked() ? 1 : 0) +"',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
+		PreparedStatement stmt = this.mySQL.getConn().prepareStatement("UPDATE `prefixplayer` SET `prefix`= ? ,`active`= ? ,`blocked`= ? ,`modification`= ? WHERE `uuid`='" + uuid + "';");
+		
+		stmt.setString(1, prefix.getPrefix());
+		stmt.setBoolean(2, prefix.isActive());
+		stmt.setBoolean(3, prefix.isBlocked());
+		stmt.setInt(4, prefix.getModification());
+		
+		stmt.executeUpdate();
+		
+		//this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`blocked`='" + (prefix.isBlocked() ? 1 : 0) +"',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
 
 	}
 	
