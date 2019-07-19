@@ -372,7 +372,7 @@ public class ChatManager implements Listener {
 			txt.addExtra(txt1);			
 			player.sendMessage(txt);
 			
-			TextComponent txt2 = new TextComponent("Fonctionnalité réservé aux tiers supérieurs");
+			TextComponent txt2 = new TextComponent("Fonctionnalité réservée aux tiers supérieurs");
 			txt2.setColor(ChatColor.RED);	
 			player.sendMessage(txt2);
 
@@ -421,12 +421,12 @@ public class ChatManager implements Listener {
 		if(nickname.hasOne()) {
 			
 			nicknameText = new TextComponent(nickname.getUnSafeNickname());
-			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bPseudo d'origine : §1" + player.getName() + "\n§bCliquez pour envoyer un message privée !").create()));
+			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bPseudo d'origine : §1" + player.getName() + "\n§bCliquez pour envoyer un message privé !").create()));
 			
 		}else {
 			
 			nicknameText = new TextComponent(player.getDisplayName());
-			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bCliquez pour envoyer un message privée !").create()));
+			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bCliquez pour envoyer un message privé !").create()));
 			
 		}
 		

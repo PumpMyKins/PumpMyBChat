@@ -56,7 +56,7 @@ public class SetPrefixSubCommand implements ISubCommand {
 			txt.addExtra(txt1);			
 			sender.sendMessage(txt);
 
-			TextComponent txt2 = new TextComponent("Fonctionnalité réservé aux tiers supérieurs");
+			TextComponent txt2 = new TextComponent("Fonctionnalité réservée aux tiers supérieurs");
 			txt2.setColor(ChatColor.RED);	
 			sender.sendMessage(txt2);
 
