@@ -4,8 +4,12 @@ import java.sql.SQLException;
 
 import fr.pumpmybchat.chat.ChatManager;
 import fr.pumpmybchat.command.MsgCommand;
-import fr.pumpmybchat.command.NicknameCommand;
 import fr.pumpmybchat.command.RCommand;
+import fr.pumpmybchat.command.nick.ActivateNickSubCommand;
+import fr.pumpmybchat.command.nick.ColorNickSubCommand;
+import fr.pumpmybchat.command.nick.HelpNickSubCommand;
+import fr.pumpmybchat.command.nick.NickCommandExecutor;
+import fr.pumpmybchat.command.nick.SetNickSubCommand;
 import fr.pumpmybchat.command.prefix.ActivatePrefixSubCommand;
 import fr.pumpmybchat.command.prefix.ColorPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.HelpPrefixSubCommand;
