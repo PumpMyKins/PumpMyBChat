@@ -96,32 +96,16 @@ public class ChatManager implements Listener {
 
 	}
 
-	private void addPlayerNickInMySqlHistory(String uuid,String nick) throws Exception {
+	private void addNickInMySqlHistory(String uuid, Nickname nick) throws Exception {
 
-		this.mySQL.sendUpdate("INSERT INTO `nickhistory`(`uuid`, `nick`) VALUES ('" + uuid + "','" + nick + "');");
+		PreparedStatement stmt = this.mySQL.getConn().prepareStatement("INSERT INTO `nickhistory`(`uuid`, `nick`, `active`) VALUES ( ? , ? , ? );");
+		
+		stmt.setString(1, uuid);
+		stmt.setString(2, nick.getNick());
+		stmt.setBoolean(3, nick.isActive());
 
-	}
-	
-	public void setPlayerNickname(ProxiedPlayer player, String string) throws Exception {
+		stmt.executeUpdate();
 
-		String uuid = player.getUniqueId().toString();
-		ChatProfile chatProfile = this.getPlayerChatProfile(player);
-		chatProfile.getNickname().setNickname(string);
-		this.addPlayerNickInMySqlHistory(uuid, string);
-		
-	}
-
-	public void unsetPlayerNickname(ProxiedPlayer player) {
-		
-		ChatProfile chatProfile = this.getPlayerChatProfile(player);
-		chatProfile.getNickname().unsetNickname();
-		
-	}
-
-	public boolean playerHasNickname(ProxiedPlayer player) {
-		
-		return this.getPlayerChatProfile(player).getNickname().hasOne();
-		
 	}
 
 	private List<SimpleEntry<String,SimpleEntry<String, Boolean>>> getMySqlPrefixHistory(String uuid) throws Exception {
