@@ -5,13 +5,13 @@ import java.util.List;
 
 public class ChatProfile {
 	
-	private Nickname nickname;
+	private Nickname nick;
 	private Prefix prefix;
 	private List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory;
-	private List<SimpleEntry<String, String>> nickHistory;
+	private List<SimpleEntry<String, SimpleEntry<String, Boolean>>> nickHistory;
 	
-	public ChatProfile(Prefix prefix, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory, List<SimpleEntry<String, String>> nickHistory) {
-		this.nickname = new Nickname();
+	public ChatProfile(Prefix prefix, Nickname nick, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> nickHistory) {
+		this.nick = nick;
 		this.prefix = prefix;
 		this.prefixHistory = prefixHistory;
 		this.nickHistory = nickHistory;
