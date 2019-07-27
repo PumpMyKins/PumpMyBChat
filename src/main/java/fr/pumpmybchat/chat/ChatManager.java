@@ -169,6 +169,37 @@ public class ChatManager implements Listener {
 
 	}
 	
+	private void initMySqlNick(String uuid, int modification) throws Exception {
+
+		this.mySQL.sendUpdate("INSERT INTO `nickplayer` (`uuid`, `modification`) VALUES ('" + uuid + "', '" + modification + "')");
+
+	}
+	
+	public Nickname getPlayerNick(ProxiedPlayer player) {
+		
+		try {
+			return this.getMySqlNick(player.getUniqueId().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	private Nickname getMySqlNick(String uuid) throws Exception {
+		
+		ResultSet rs = this.mySQL.sendQuery("SELECT `nick`, `active`, `blocked` , `modification` FROM `nickplayer` WHERE `uuid`='" + uuid + "';");
+		
+		if(!rs.first()) {
+			
+			return null;
+			
+		}
+		
+		return new Nickname(uuid, rs.getString("nick"), rs.getBoolean("active"),rs.getBoolean("blocked"), rs.getInt("modification"));
+		
+	}
+	
 	public Prefix getPlayerPrefix(ProxiedPlayer player) {
 		
 		try {
@@ -192,6 +223,73 @@ public class ChatManager implements Listener {
 		
 		return new Prefix(uuid, rs.getString("prefix"), rs.getBoolean("active"),rs.getBoolean("blocked"), rs.getInt("modification"));
 		
+	}
+	
+	public void updatePlayerNickModification(ProxiedPlayer player,int modification) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Nickname nick = chatProfile.getNickname();
+		
+		nick.setModification(modification);
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlNick(uuid, nick);
+		
+	}
+	
+	public void updatePlayerNickContent(ProxiedPlayer player, String content,boolean modificated) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Nickname nick = chatProfile.getNickname();
+			
+		nick.setNick(content,modificated);	
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlNick(uuid, nick);
+		this.addNickInMySqlHistory(uuid, nick);
+		
+	}
+	
+	public void updatePlayerNickActive(ProxiedPlayer player, boolean active) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Nickname nick = chatProfile.getNickname();
+		
+		nick.setActive(active);
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlNick(uuid, nick);
+		this.addNickInMySqlHistory(uuid, nick);
+		
+	}
+	
+	public void updatePlayerNickBlocked(ProxiedPlayer player, boolean blocked) throws Exception {
+		
+		ChatProfile chatProfile = this.getPlayerChatProfile(player);
+		Nickname nick = chatProfile.getNickname();
+		
+		nick.setBlocked(blocked);
+		
+		String uuid = player.getUniqueId().toString();
+		
+		this.updateMySqlNick(uuid, nick);
+		
+	}
+
+	private void updateMySqlNick(String uuid, Nickname nick) throws Exception {
+
+		PreparedStatement stmt = this.mySQL.getConn().prepareStatement("UPDATE `nickplayer` SET `nick`= ? ,`active`= ? ,`blocked`= ? ,`modification`= ? WHERE `uuid`='" + uuid + "';");
+		
+		stmt.setString(1, nick.getNick());
+		stmt.setBoolean(2, nick.isActive());
+		stmt.setBoolean(3, nick.isBlocked());
+		stmt.setInt(4, nick.getModification());
+		
+		stmt.executeUpdate();
+
 	}
 	
 	public void updatePlayerPrefixModification(ProxiedPlayer player,int modification) throws Exception {
@@ -247,20 +345,6 @@ public class ChatManager implements Listener {
 		this.updateMySqlPrefix(uuid, prefix);
 		
 	}
-	
-	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
-
-		PreparedStatement stmt = this.mySQL.getConn().prepareStatement("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ( ? , ? , ? );");
-		
-		stmt.setString(1, uuid);
-		stmt.setString(2, prefix.getPrefix());
-		stmt.setBoolean(3, prefix.isActive());
-
-		stmt.executeUpdate();
-		
-		//lthis.mySQL.sendUpdate("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ('" + uuid + "','" + prefix.getPrefix() + "','" + (prefix.isActive() ? 1 : 0) + "');");
-
-	}
 
 	private void updateMySqlPrefix(String uuid, Prefix prefix) throws Exception {
 
@@ -272,8 +356,21 @@ public class ChatManager implements Listener {
 		stmt.setInt(4, prefix.getModification());
 		
 		stmt.executeUpdate();
+
+	}
+	
+	public void deletePlayerNick(ProxiedPlayer player) throws Exception {
 		
-		//this.mySQL.sendUpdate("UPDATE `prefixplayer` SET `prefix`='" + prefix.getPrefix() + "',`active`='" + (prefix.isActive() ? 1 : 0) + "',`blocked`='" + (prefix.isBlocked() ? 1 : 0) +"',`modification`='" + prefix.getModification() + "' WHERE `uuid`='" + uuid + "';");
+		String uuid = player.getUniqueId().toString();
+		this.deleteMySqlNick(uuid);
+		
+		this.initPlayerChatProfile(player);				
+		
+	}
+
+	private void deleteMySqlNick(String uuid) throws Exception {
+
+		this.mySQL.sendUpdate("DELETE FROM `nickplayer` WHERE `uuid`='" + uuid + "';");
 
 	}
 	
