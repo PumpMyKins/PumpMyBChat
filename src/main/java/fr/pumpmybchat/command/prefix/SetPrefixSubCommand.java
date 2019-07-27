@@ -8,7 +8,7 @@ import fr.pumpmybchat.chat.ChatProfile;
 import fr.pumpmybchat.chat.Prefix;
 import fr.pumpmybchat.command.utils.ISubCommand;
 import fr.pumpmybchat.utils.ChatColorUtils;
-import fr.pumpmybchat.utils.InsufisantModificationPrefixException;
+import fr.pumpmybchat.utils.InsufisantModificationException;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -177,7 +177,7 @@ public class SetPrefixSubCommand implements ISubCommand {
 				}
 				
 				
-			} catch (InsufisantModificationPrefixException e) {
+			} catch (InsufisantModificationException e) {
 				
 				TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 				TextComponent txt1 = new TextComponent("Vous avez épuisé votre nombre de modification possible !");
