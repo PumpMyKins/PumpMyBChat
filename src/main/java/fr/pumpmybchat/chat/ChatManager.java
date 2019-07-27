@@ -123,10 +123,23 @@ public class ChatManager implements Listener {
 		return l;
 	}
 	
-	public void initPlayerPrefix(ProxiedPlayer player, int modification) throws Exception {
+	private void addPrefixInMySqlHistory(String uuid, Prefix prefix) throws Exception {
+
+		PreparedStatement stmt = this.mySQL.getConn().prepareStatement("INSERT INTO `prefixhistory`(`uuid`, `prefix`, `active`) VALUES ( ? , ? , ? );");
+		
+		stmt.setString(1, uuid);
+		stmt.setString(2, prefix.getPrefix());
+		stmt.setBoolean(3, prefix.isActive());
+
+		stmt.executeUpdate();
+
+	}
+	
+	public void initPlayer(ProxiedPlayer player, int modification) throws Exception {
 		
 		String uuid = player.getUniqueId().toString();
 		this.initMySqlPrefix(uuid, modification);
+		this.initMySqlNick(uuid, modification);
 		
 		this.initPlayerChatProfile(player);
 		ChatProfile chatProfile = this.getPlayerChatProfile(player);
@@ -137,7 +150,16 @@ public class ChatManager implements Listener {
 			throw new Exception("Prefix unfound after mysql initialise !");
 			
 		}		
-		chatProfile.setPrefix(this.getMySqlPrefix(uuid));		
+		chatProfile.setPrefix(this.getMySqlPrefix(uuid));
+		
+		Nickname nick = this.getPlayerNick(player);
+		if(nick == null) {
+			
+			throw new Exception("Nick unfound after mysql initialise !");
+			
+		}		
+		chatProfile.setNick(this.getMySqlNick(uuid));
+		
 		
 	}
 	
