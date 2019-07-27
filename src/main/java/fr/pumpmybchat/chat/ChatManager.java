@@ -397,7 +397,7 @@ public class ChatManager implements Listener {
 			this.deletePlayerChatProfile(uuid);
 		}
 		
-		this.addPlayerChatProfile(uuid, new ChatProfile(null, null, null));		
+		this.addPlayerChatProfile(uuid, new ChatProfile(null,null, null, null));		
 		
 		this.main.getProxy().getScheduler().runAsync(this.main, new Runnable() {
 			
@@ -408,21 +408,22 @@ public class ChatManager implements Listener {
 				try {
 					prefixHistory = getMySqlPrefixHistory(uuid);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					main.getLogger().severe("Can't get MySql Prefix history of " + uuid);
 					e.printStackTrace();
 				}
 
-				List<SimpleEntry<String, String>> nickHistory = new ArrayList<>();
+				List<SimpleEntry<String, SimpleEntry<String, Boolean>>> nickHistory = new ArrayList<>();
 				try {
 					nickHistory = getMySqlNickHistory(uuid);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					main.getLogger().severe("Can't get MySql Nick history of " + uuid);
 					e.printStackTrace();
 				}
 
 				Prefix prefix = getPlayerPrefix(player);	
+				Nickname nickname = getPlayerNick(player);
 
-				addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,prefixHistory,nickHistory));
+				addPlayerChatProfile(player.getUniqueId().toString(), new ChatProfile(prefix,nickname,prefixHistory,nickHistory));
 				
 			}
 		});
