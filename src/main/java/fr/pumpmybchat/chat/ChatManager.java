@@ -464,7 +464,7 @@ public class ChatManager implements Listener {
 			
 			this.main.getLogger().severe("Player ChatProfile not found ! " + player.getName() + "/" + player.getUniqueId().toString());		
 			this.initPlayerChatProfile(player);
-			chatProfile = new ChatProfile(null, null, null);
+			chatProfile = new ChatProfile(null, null, null, null);
 			
 		}
 
@@ -522,11 +522,12 @@ public class ChatManager implements Listener {
 
 		}
 		
-		Nickname nickname = chatProfile.getNickname();
+		Nickname nick = chatProfile.getNickname();
 		TextComponent nicknameText;
-		if(nickname.hasOne()) {
+		
+		if(nick!= null && nick.isActive() && !nick.isBlocked()) {
 			
-			nicknameText = new TextComponent(nickname.getUnSafeNickname());
+			nicknameText = new TextComponent(nick.getNick());
 			nicknameText.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bPseudo d'origine : §1" + player.getName() + "\n§bCliquez pour envoyer un message privé !").create()));
 			
 		}else {
