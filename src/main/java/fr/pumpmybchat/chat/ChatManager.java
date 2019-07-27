@@ -72,9 +72,11 @@ public class ChatManager implements Listener {
 	private void initMySql() throws Exception {
 		String createtable = "CREATE TABLE IF NOT EXISTS `prefixplayer` ( `uuid` VARCHAR(50) NOT NULL , `prefix` VARCHAR(50) NOT NULL DEFAULT '§dI-LOVE-PMK' , `active` BOOLEAN NOT NULL DEFAULT '1' , `blocked` BOOLEAN NOT NULL DEFAULT '0', `modification` INT NOT NULL , PRIMARY KEY (`uuid`), UNIQUE (`uuid`)) ENGINE = InnoDB;";
 		this.mySQL.sendUpdate(createtable);	
+		createtable = "CREATE TABLE IF NOT EXISTS `nickplayer` ( `uuid` VARCHAR(50) NOT NULL , `nick` VARCHAR(50) NOT NULL DEFAULT '§dI-LOVE-PMK' , `active` BOOLEAN NOT NULL DEFAULT '1' , `blocked` BOOLEAN NOT NULL DEFAULT '0', `modification` INT NOT NULL , PRIMARY KEY (`uuid`), UNIQUE (`uuid`)) ENGINE = InnoDB;";
+		this.mySQL.sendUpdate(createtable);
 		createtable = "CREATE TABLE IF NOT EXISTS `prefixhistory` ( `uuid` VARCHAR(50) NOT NULL , `prefix` VARCHAR(50) NOT NULL , `active` BOOLEAN NOT NULL , `date` DATETIME NOT NULL DEFAULT NOW() ) ENGINE = InnoDB;";
 		this.mySQL.sendUpdate(createtable);
-		createtable = "CREATE TABLE IF NOT EXISTS `nickhistory` ( `uuid` VARCHAR(50) NOT NULL , `nick` VARCHAR(50) NOT NULL , `date` DATETIME NOT NULL DEFAULT NOW() ) ENGINE = InnoDB;";
+		createtable = "CREATE TABLE IF NOT EXISTS `nickhistory` ( `uuid` VARCHAR(50) NOT NULL , `nick` VARCHAR(50) NOT NULL , `active` BOOLEAN NOT NULL , `date` DATETIME NOT NULL DEFAULT NOW() ) ENGINE = InnoDB;";
 		this.mySQL.sendUpdate(createtable);
 	}
 
