@@ -90,8 +90,6 @@ public class Main  extends Plugin implements Listener{
 		
 		// COMMANDS
 		
-		pm.registerCommand(this, new NicknameCommand("nick",this.chatManager));
-		
 		pm.registerCommand(this, new MsgCommand(this,"msg","w","tell"));
 		pm.registerCommand(this, new RCommand(this,"r"));
 		
@@ -101,8 +99,7 @@ public class Main  extends Plugin implements Listener{
 		prefixCommandExecutor.addSubCommand("set", new SetPrefixSubCommand(this.chatManager));
 		prefixCommandExecutor.addSubCommand("color", "pumpmybchat.command.prefix.color", new ColorPrefixSubCommand());
 		
-		pm.registerCommand(this, prefixCommandExecutor);
-		
+		pm.registerCommand(this, prefixCommandExecutor);		
 		
 		PrefixAdminCommandExecutor prefixAdminCommandExecutor = new PrefixAdminCommandExecutor(this);
 		prefixAdminCommandExecutor.addSubCommand("init", new InitPrefixAdminSubCommand(this));
@@ -111,6 +108,15 @@ public class Main  extends Plugin implements Listener{
 		prefixAdminCommandExecutor.addSubCommand("delete", new DeletePrefixAdminSubCommand(this));
 		
 		pm.registerCommand(this, prefixAdminCommandExecutor);
+		
+		
+		NickCommandExecutor nickCommandExecutor = new NickCommandExecutor(this);
+		nickCommandExecutor.addSubCommand("help", new HelpNickSubCommand());
+		nickCommandExecutor.addSubCommand("activate", new ActivateNickSubCommand(this.chatManager));
+		nickCommandExecutor.addSubCommand("set", new SetNickSubCommand(this.chatManager));
+		nickCommandExecutor.addSubCommand("color", "pumpmybchat.command.nick.color", new ColorNickSubCommand());
+		
+		pm.registerCommand(this, nickCommandExecutor);
 		
 		/*this.chatPlayer = new ChatPlayer();
 
