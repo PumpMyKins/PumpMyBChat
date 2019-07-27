@@ -9,31 +9,31 @@ import net.md_5.bungee.event.EventHandler;
 
 public class MsgManager implements Listener {
 
-	private HashMap<CommandSender,CommandSender> msg;
+	private HashMap<String,CommandSender> msg;
 	
 	public MsgManager() {
-		msg = new HashMap<CommandSender, CommandSender>();
+		this.msg = new HashMap<String, CommandSender>();
 	}
 	
 	public void addLastMessageSender(CommandSender target, CommandSender sender) {
 		
-		
-		if(msg.containsKey(target)) {
-			msg.replace(target, sender);
+		if(msg.containsKey(target.getName())) {
+			msg.replace(target.getName(), sender);
 		}else {
-			msg.put(target, sender);
+			msg.put(target.getName(), sender);
 		}	
+		
 	}
 	
 	public CommandSender getLastMessageSenderName(CommandSender target) throws Exception {
 		
-		if(!this.msg.containsKey(target)) {
+		if(!this.msg.containsKey(target.getName())) {
 			
 			throw new Exception("Unfound");
 			
 		}else {
 			
-			return this.msg.get(target);
+			return this.msg.get(target.getName());
 			
 		}
 		
@@ -41,7 +41,7 @@ public class MsgManager implements Listener {
 	
 	public void clearPlayerLastMessage(CommandSender player) {
 		
-		msg.remove(player);
+		msg.remove(player.getName());
 		
 	}
 	
