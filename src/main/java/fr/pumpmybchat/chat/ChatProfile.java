@@ -21,12 +21,12 @@ public class ChatProfile {
 		return prefixHistory;
 	}
 
-	public List<SimpleEntry<String, String>> getNickHistory() {
+	public List<SimpleEntry<String, SimpleEntry<String, Boolean>>> getNickHistory() {
 		return nickHistory;
 	}
 
 	public Nickname getNickname() {
-		return this.nickname;
+		return this.nick;
 	}
 
 	public Prefix getPrefix() {
@@ -40,6 +40,15 @@ public class ChatProfile {
 		}
 		
 		this.prefix = prefix;
+	}
+	
+	public void setNick(Nickname nick) throws Exception {
+		
+		if(this.nick != null && nick != null){			
+			throw new Exception("Prefix already set in ChatProlies");			
+		}
+		
+		this.nick = nick;
 	}
 
 }
