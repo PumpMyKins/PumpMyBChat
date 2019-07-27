@@ -80,19 +80,19 @@ public class ChatManager implements Listener {
 		this.mySQL.sendUpdate(createtable);
 	}
 
-	private List<SimpleEntry<String,String>> getMySqlNickHistory(String uuid) throws Exception {
+	private List<SimpleEntry<String,SimpleEntry<String, Boolean>>> getMySqlNickHistory(String uuid) throws Exception {
 
-		List<SimpleEntry<String,String>> l = new ArrayList<>();
+		List<SimpleEntry<String,SimpleEntry<String, Boolean>>> l = new ArrayList<>();
 
-		ResultSet rs = this.mySQL.sendQuery("SELECT `nick`, `date` FROM `nickhistory` WHERE `uuid`='" + uuid + "';");
+		ResultSet rs = this.mySQL.sendQuery("SELECT `nick`, `active`, `date` FROM `nickhistory` WHERE `uuid`='" + uuid + "';");
 		while (rs.next()) {
 
-			SimpleEntry<String, String> simpleEntry = new SimpleEntry<String, String>(rs.getString("nick"),rs.getString("date"));
+			SimpleEntry<String,SimpleEntry<String, Boolean>> simpleEntry = new SimpleEntry<String,SimpleEntry<String, Boolean>>(rs.getString("date"), new SimpleEntry<String, Boolean>(rs.getString("nick"),rs.getBoolean("active")));
 			l.add(simpleEntry);
 
 		}
 
-		return l;		
+		return l;	
 
 	}
 
