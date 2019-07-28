@@ -163,6 +163,13 @@ public class ChatManager implements Listener {
 		
 	}
 	
+	public void renewPlayer(ProxiedPlayer player, int modification) throws Exception {
+		
+		this.updatePlayerNickModification(player, modification);
+		this.updatePlayerPrefixModification(player, modification);
+		
+	}
+	
 	private void initMySqlPrefix(String uuid, int modification) throws Exception {
 
 		this.mySQL.sendUpdate("INSERT INTO `prefixplayer` (`uuid`, `modification`) VALUES ('" + uuid + "', '" + modification + "')");
