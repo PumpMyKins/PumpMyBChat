@@ -358,15 +358,6 @@ public class ChatManager implements Listener {
 		stmt.executeUpdate();
 
 	}
-	
-	public void deletePlayerNick(ProxiedPlayer player) throws Exception {
-		
-		String uuid = player.getUniqueId().toString();
-		this.deleteMySqlNick(uuid);
-		
-		this.initPlayerChatProfile(player);				
-		
-	}
 
 	private void deleteMySqlNick(String uuid) throws Exception {
 
@@ -374,10 +365,11 @@ public class ChatManager implements Listener {
 
 	}
 	
-	public void deletePlayerPrefix(ProxiedPlayer player) throws Exception {
+	public void deletePlayer(ProxiedPlayer player) throws Exception {
 		
 		String uuid = player.getUniqueId().toString();
 		this.deleteMySqlPrefix(uuid);
+		this.deleteMySqlNick(uuid);
 		
 		this.initPlayerChatProfile(player);				
 		
