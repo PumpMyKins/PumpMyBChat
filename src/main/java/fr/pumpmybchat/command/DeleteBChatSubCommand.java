@@ -38,8 +38,7 @@ public class DeleteBChatSubCommand implements ISubCommand,ISubTabCompleter {
 				ProxiedPlayer player = this.main.getProxy().getPlayer(args.get(0));
 
 				try {
-					this.main.getChatManager().deletePlayerPrefix(player);
-					this.main.getChatManager().deletePlayerNick(player);
+					this.main.getChatManager().deletePlayer(player);
 					TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 					TextComponent txt1 = new TextComponent("ChatProfile supprimé pour le joueur " + player.getName() + "/" + player.getUniqueId().toString());
 					txt1.setColor(ChatColor.RED);
