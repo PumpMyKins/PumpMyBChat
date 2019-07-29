@@ -1,4 +1,4 @@
-package fr.pumpmybchat.command.prefix.admin;
+package fr.pumpmybchat.command;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class DeletePrefixAdminSubCommand implements ISubCommand,ISubTabCompleter {
+public class DeleteBChatSubCommand implements ISubCommand,ISubTabCompleter {
 
 	private Main main;
 
-	public DeletePrefixAdminSubCommand(Main main) {
+	public DeleteBChatSubCommand(Main main) {
 		this.main = main;
 	}
 
@@ -38,9 +38,9 @@ public class DeletePrefixAdminSubCommand implements ISubCommand,ISubTabCompleter
 				ProxiedPlayer player = this.main.getProxy().getPlayer(args.get(0));
 
 				try {
-					this.main.getChatManager().deletePlayerPrefix(player);
+					this.main.getChatManager().deletePlayer(player);
 					TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-					TextComponent txt1 = new TextComponent("Prefix supprimé pour le joueur " + player.getName() + "/" + player.getUniqueId().toString());
+					TextComponent txt1 = new TextComponent("ChatProfile supprimé pour le joueur " + player.getName() + "/" + player.getUniqueId().toString());
 					txt1.setColor(ChatColor.RED);
 					txt.addExtra(txt1);			
 					sender.sendMessage(txt);				

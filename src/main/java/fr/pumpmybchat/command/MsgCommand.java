@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.pumpmybchat.Main;
 import fr.pumpmybchat.chat.ChatProfile;
+import fr.pumpmybchat.chat.Nickname;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
@@ -100,14 +101,16 @@ public class MsgCommand extends Command implements TabExecutor{
 			}
 
 			ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player);
-			if(chatProfile.getNickname().hasOne()) {
+			Nickname nick = chatProfile.getNickname();		
+			
+			if(nick!= null && nick.isActive() && !nick.isBlocked()) {
 
-				senderName = new TextComponent(chatProfile.getNickname().getUnSafeNickname());
+				senderName = new TextComponent(nick.getNick());
 				senderName.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bPseudo d'origine : §1" + sender.getName() + "\n§bCliquez pour répondre !").create()));
 
 			}else {
 
-				senderName = new TextComponent(player.getName());
+				senderName = new TextComponent(player.getDisplayName());
 				senderName.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bCliquez pour répondre !").create()));
 
 			}
@@ -145,9 +148,11 @@ public class MsgCommand extends Command implements TabExecutor{
 		player.sendMessage(messages);			
 
 		ChatProfile chatProfile = this.main.getChatManager().getPlayerChatProfile(player);
-		if(chatProfile.getNickname().hasOne()) {
+		Nickname nick = chatProfile.getNickname();		
+		
+		if(nick!= null && nick.isActive() && !nick.isBlocked()) {
 
-			senderName = new TextComponent(chatProfile.getNickname().getUnSafeNickname());
+			senderName = new TextComponent(nick.getNick());
 
 		}else {
 

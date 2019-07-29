@@ -1,4 +1,4 @@
-package fr.pumpmybchat.command.prefix.admin;
+package fr.pumpmybchat.command;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class RenewPrefixAdminSubCommand implements ISubCommand, ISubTabCompleter {
+public class RenewBChatSubCommand implements ISubCommand, ISubTabCompleter {
 
 	private Main main;
 
-	public RenewPrefixAdminSubCommand(Main main) {
+	public RenewBChatSubCommand(Main main) {
 		this.main = main;
 	}
 
@@ -41,7 +41,7 @@ public class RenewPrefixAdminSubCommand implements ISubCommand, ISubTabCompleter
 					ProxiedPlayer player = this.main.getProxy().getPlayer(args.get(0));
 					
 					try {
-						this.main.getChatManager().updatePlayerPrefixModification(player, modification);
+						this.main.getChatManager().renewPlayer(player, modification);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

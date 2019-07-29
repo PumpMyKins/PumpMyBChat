@@ -1,6 +1,6 @@
 package fr.pumpmybchat.chat;
 
-import fr.pumpmybchat.utils.InsufisantModificationPrefixException;
+import fr.pumpmybchat.utils.InsufisantModificationException;
 
 public class Prefix {
 
@@ -33,12 +33,12 @@ public class Prefix {
 	public String getPrefix() {
 		return prefix;
 	}
-	public void setPrefix(String prefix, boolean m) throws InsufisantModificationPrefixException {
+	public void setPrefix(String prefix, boolean m) throws InsufisantModificationException {
 		
 		if(m) {
 			
 			if(this.modification <= 0) {
-				throw new InsufisantModificationPrefixException(this);
+				throw new InsufisantModificationException(this);
 			}
 			this.modification-=1;
 			

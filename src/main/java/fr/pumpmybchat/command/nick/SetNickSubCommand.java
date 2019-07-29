@@ -1,11 +1,11 @@
-package fr.pumpmybchat.command.prefix;
+package fr.pumpmybchat.command.nick;
 
 import java.util.List;
 
 import fr.pumpmybchat.Main;
 import fr.pumpmybchat.chat.ChatManager;
 import fr.pumpmybchat.chat.ChatProfile;
-import fr.pumpmybchat.chat.Prefix;
+import fr.pumpmybchat.chat.Nickname;
 import fr.pumpmybchat.command.utils.ISubCommand;
 import fr.pumpmybchat.utils.ChatColorUtils;
 import fr.pumpmybchat.utils.InsufisantModificationException;
@@ -14,16 +14,16 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.HoverEvent.Action;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 
-public class SetPrefixSubCommand implements ISubCommand {
+public class SetNickSubCommand implements ISubCommand {
 
 	private ChatManager chatManager;
 
-	public SetPrefixSubCommand(ChatManager chatManager) {
+	public SetNickSubCommand(ChatManager chatManager) {
 		this.chatManager = chatManager;
 	}
 
@@ -32,26 +32,26 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 		if(args.size() != 1) {
 
-			new HelpPrefixSubCommand().onSubCommand(exec, sender);
+			new HelpNickSubCommand().onSubCommand(exec, sender);
 			return;
 
 		}
 
-		String stringPrefix = args.get(0).trim();
+		String stringNick = args.get(0).trim();
 
-		if(stringPrefix.isEmpty()) {
+		if(stringNick.isEmpty()) {
 
-			new HelpPrefixSubCommand().onSubCommand(exec, sender);
+			new HelpNickSubCommand().onSubCommand(exec, sender);
 			return;
 
 		}
 		
 		ProxiedPlayer player = (ProxiedPlayer) sender;
 
-		if(ChatColorUtils.containsChatColorCodes(stringPrefix) && !player.hasPermission("pumpmybchat.prefix.colored")) {
+		if(ChatColorUtils.containsChatColorCodes(stringNick) && !player.hasPermission("pumpmybchat.nick.colored")) {
 
 			TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-			TextComponent txt1 = new TextComponent("Impossible de colorer votre prefix");
+			TextComponent txt1 = new TextComponent("Impossible de colorer votre surnom");
 			txt1.setColor(ChatColor.RED);
 			txt.addExtra(txt1);			
 			sender.sendMessage(txt);
@@ -71,10 +71,10 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 		}else {
 
-			if(ChatColorUtils.getWithoutChatColorCodesString(stringPrefix).length() > 10) {
+			if(ChatColorUtils.getWithoutChatColorCodesString(stringNick).length() > 14) {
 				
 				TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-				TextComponent txt1 = new TextComponent("Prefix trop long !");
+				TextComponent txt1 = new TextComponent("Surnom trop long !");
 				txt1.setColor(ChatColor.RED);
 				txt.addExtra(txt1);			
 				sender.sendMessage(txt);
@@ -82,7 +82,7 @@ public class SetPrefixSubCommand implements ISubCommand {
 				return;
 			}
 			
-			stringPrefix = ChatColorUtils.getChatColorCodesTranslatedString(stringPrefix);
+			stringNick = ChatColorUtils.getChatColorCodesTranslatedString(stringNick);
 			ChatProfile chatProfile = this.chatManager.getPlayerChatProfile(player);
 			
 			if(chatProfile == null) {
@@ -101,12 +101,12 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 			}
 			
-			Prefix prefix = chatProfile.getPrefix();
+			Nickname nick = chatProfile.getNickname();
 			
-			if(prefix == null) {
+			if(nick == null) {
 
 				TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
-				TextComponent txt1 = new TextComponent("ERREUR : Paramètre de prefix introuvable");
+				TextComponent txt1 = new TextComponent("ERREUR : Paramètre de surnom introuvable");
 				txt1.setColor(ChatColor.RED);
 				txt.addExtra(txt1);			
 				player.sendMessage(txt);
@@ -123,7 +123,7 @@ public class SetPrefixSubCommand implements ISubCommand {
 
 			}
 			
-			if(prefix.isBlocked()) {
+			if(nick.isBlocked()) {
 				
 				TextComponent txt = new TextComponent(Main.PLUGIN_PREFIX);
 				TextComponent txt1 = new TextComponent("Cette fonctionnalité vous a été retiré suite à un abus !");
@@ -142,33 +142,33 @@ public class SetPrefixSubCommand implements ISubCommand {
 			try {
 				
 				boolean modificated = true;
-				if(player.hasPermission("pumpmybchat.prefix.infinite")) {
+				if(player.hasPermission("pumpmybchat.nick.infinite")) {
 					modificated = false;					
 				}
 				
-				this.chatManager.updatePlayerPrefixContent(player, stringPrefix,modificated);
+				this.chatManager.updatePlayerNickContent(player, stringNick,modificated);
 				
-				sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bPrefix appliqué !"));
+				sender.sendMessage(new TextComponent(Main.PLUGIN_PREFIX + "§bSurnom appliqué !"));
 				
 				if(modificated) {
 					
 					TextComponent txt = new TextComponent("Nombre de modifcation restante : ");
 					txt.setColor(ChatColor.AQUA);
-					TextComponent txt1 = new TextComponent("" + prefix.getModification());
+					TextComponent txt1 = new TextComponent("" + nick.getModification());
 					txt1.setColor(ChatColor.DARK_BLUE);
 					txt.addExtra(txt1);
 					sender.sendMessage(txt);
 					
 				}
 				
-				if(!prefix.isActive()) {
+				if(!nick.isActive()) {
 					
-					TextComponent activation = new TextComponent("/prefix activate");
+					TextComponent activation = new TextComponent("/nick activate");
 					activation.setColor(ChatColor.DARK_BLUE);
 					activation.setBold(true);
-					activation.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/prefix activate"));
+					activation.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/nick activate"));
 					activation.setHoverEvent(new HoverEvent(Action.SHOW_TEXT,new ComponentBuilder("§bExecuter la commande !").create()));
-					TextComponent txt2 = new TextComponent(" pour activer votre préfix");
+					TextComponent txt2 = new TextComponent(" pour activer votre surnom");
 					txt2.setColor(ChatColor.AQUA);
 					activation.addExtra(txt2);
 					

@@ -3,19 +3,29 @@ package fr.pumpmybchat;
 import java.sql.SQLException;
 
 import fr.pumpmybchat.chat.ChatManager;
+import fr.pumpmybchat.command.BChatCommandExecutor;
+import fr.pumpmybchat.command.DeleteBChatSubCommand;
+import fr.pumpmybchat.command.FakeMsgBChatSubCommand;
+import fr.pumpmybchat.command.InitBChatSubCommand;
 import fr.pumpmybchat.command.MsgCommand;
-import fr.pumpmybchat.command.NicknameCommand;
 import fr.pumpmybchat.command.RCommand;
+import fr.pumpmybchat.command.RenewBChatSubCommand;
+import fr.pumpmybchat.command.nick.ActivateNickSubCommand;
+import fr.pumpmybchat.command.nick.ColorNickSubCommand;
+import fr.pumpmybchat.command.nick.HelpNickSubCommand;
+import fr.pumpmybchat.command.nick.NickCommandExecutor;
+import fr.pumpmybchat.command.nick.SetNickSubCommand;
+import fr.pumpmybchat.command.nick.admin.BlockNickAdminSubCommand;
+import fr.pumpmybchat.command.nick.admin.HelpNickAdminSubCommand;
+import fr.pumpmybchat.command.nick.admin.NickAdminCommandExecutor;
 import fr.pumpmybchat.command.prefix.ActivatePrefixSubCommand;
 import fr.pumpmybchat.command.prefix.ColorPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.HelpPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.PrefixCommandExecutor;
 import fr.pumpmybchat.command.prefix.SetPrefixSubCommand;
 import fr.pumpmybchat.command.prefix.admin.BlockPrefixAdminSubCommand;
-import fr.pumpmybchat.command.prefix.admin.DeletePrefixAdminSubCommand;
-import fr.pumpmybchat.command.prefix.admin.InitPrefixAdminSubCommand;
+import fr.pumpmybchat.command.prefix.admin.HelpPrefixAdminSubCommand;
 import fr.pumpmybchat.command.prefix.admin.PrefixAdminCommandExecutor;
-import fr.pumpmybchat.command.prefix.admin.RenewPrefixAdminSubCommand;
 import fr.pumpmybchat.utils.MySql;
 import fr.pumpmybchat.utils.MySql.MySQLCredentials;
 import net.md_5.bungee.api.plugin.Listener;
@@ -86,10 +96,10 @@ public class Main  extends Plugin implements Listener{
 		
 		// COMMANDS
 		
-		pm.registerCommand(this, new NicknameCommand("nick",this.chatManager));
-		
 		pm.registerCommand(this, new MsgCommand(this,"msg","w","tell"));
 		pm.registerCommand(this, new RCommand(this,"r"));
+		
+		////////// PREFIX
 		
 		PrefixCommandExecutor prefixCommandExecutor = new PrefixCommandExecutor(this);
 		prefixCommandExecutor.addSubCommand("help", new HelpPrefixSubCommand());
@@ -99,14 +109,42 @@ public class Main  extends Plugin implements Listener{
 		
 		pm.registerCommand(this, prefixCommandExecutor);
 		
+		//////// PREFIX-ADMIN
 		
 		PrefixAdminCommandExecutor prefixAdminCommandExecutor = new PrefixAdminCommandExecutor(this);
-		prefixAdminCommandExecutor.addSubCommand("init", new InitPrefixAdminSubCommand(this));
+		prefixAdminCommandExecutor.addSubCommand("help", new HelpPrefixAdminSubCommand());
 		prefixAdminCommandExecutor.addSubCommand("block", new BlockPrefixAdminSubCommand(this));
-		prefixAdminCommandExecutor.addSubCommand("renew", new RenewPrefixAdminSubCommand(this));
-		prefixAdminCommandExecutor.addSubCommand("delete", new DeletePrefixAdminSubCommand(this));
 		
-		pm.registerCommand(this, prefixAdminCommandExecutor);
+		pm.registerCommand(this, prefixAdminCommandExecutor);	
+		
+		/////// NICK
+		
+		NickCommandExecutor nickCommandExecutor = new NickCommandExecutor(this);
+		nickCommandExecutor.addSubCommand("help", new HelpNickSubCommand());
+		nickCommandExecutor.addSubCommand("activate", new ActivateNickSubCommand(this.chatManager));
+		nickCommandExecutor.addSubCommand("set", new SetNickSubCommand(this.chatManager));
+		nickCommandExecutor.addSubCommand("color", "pumpmybchat.command.nick.color", new ColorNickSubCommand());
+		
+		pm.registerCommand(this, nickCommandExecutor);
+		
+		//////// NICK ADMIN
+		
+		NickAdminCommandExecutor nickAdminCommandExecutor = new NickAdminCommandExecutor(this);
+		nickAdminCommandExecutor.addSubCommand("help", new HelpNickAdminSubCommand());
+		nickAdminCommandExecutor.addSubCommand("block", new BlockNickAdminSubCommand(this));
+		
+		pm.registerCommand(this, nickAdminCommandExecutor);
+		
+		/////// PUMPmYBCHAT
+		
+		BChatCommandExecutor bChatCommandExecutor = new BChatCommandExecutor(this);
+		bChatCommandExecutor.addSubCommand("init", new InitBChatSubCommand(this));
+		bChatCommandExecutor.addSubCommand("renew", new RenewBChatSubCommand(this));
+		bChatCommandExecutor.addSubCommand("delete", new DeleteBChatSubCommand(this));
+		bChatCommandExecutor.addSubCommand("fakechat", new FakeMsgBChatSubCommand(this));
+		
+		
+		pm.registerCommand(this, bChatCommandExecutor);
 		
 		/*this.chatPlayer = new ChatPlayer();
 

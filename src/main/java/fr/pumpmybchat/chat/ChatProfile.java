@@ -5,13 +5,13 @@ import java.util.List;
 
 public class ChatProfile {
 	
-	private Nickname nickname;
+	private Nickname nick;
 	private Prefix prefix;
 	private List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory;
-	private List<SimpleEntry<String, String>> nickHistory;
+	private List<SimpleEntry<String, SimpleEntry<String, Boolean>>> nickHistory;
 	
-	public ChatProfile(Prefix prefix, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory, List<SimpleEntry<String, String>> nickHistory) {
-		this.nickname = new Nickname();
+	public ChatProfile(Prefix prefix, Nickname nick, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> prefixHistory, List<SimpleEntry<String, SimpleEntry<String, Boolean>>> nickHistory) {
+		this.nick = nick;
 		this.prefix = prefix;
 		this.prefixHistory = prefixHistory;
 		this.nickHistory = nickHistory;
@@ -21,12 +21,12 @@ public class ChatProfile {
 		return prefixHistory;
 	}
 
-	public List<SimpleEntry<String, String>> getNickHistory() {
+	public List<SimpleEntry<String, SimpleEntry<String, Boolean>>> getNickHistory() {
 		return nickHistory;
 	}
 
 	public Nickname getNickname() {
-		return this.nickname;
+		return this.nick;
 	}
 
 	public Prefix getPrefix() {
@@ -40,6 +40,15 @@ public class ChatProfile {
 		}
 		
 		this.prefix = prefix;
+	}
+	
+	public void setNick(Nickname nick) throws Exception {
+		
+		if(this.nick != null && nick != null){			
+			throw new Exception("Prefix already set in ChatProlies");			
+		}
+		
+		this.nick = nick;
 	}
 
 }
