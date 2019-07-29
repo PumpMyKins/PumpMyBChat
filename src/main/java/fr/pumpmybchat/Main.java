@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import fr.pumpmybchat.chat.ChatManager;
 import fr.pumpmybchat.command.BChatCommandExecutor;
 import fr.pumpmybchat.command.DeleteBChatSubCommand;
+import fr.pumpmybchat.command.FakeMsgBChatSubCommand;
 import fr.pumpmybchat.command.InitBChatSubCommand;
 import fr.pumpmybchat.command.MsgCommand;
 import fr.pumpmybchat.command.RCommand;
@@ -136,12 +137,14 @@ public class Main  extends Plugin implements Listener{
 		
 		/////// PUMPmYBCHAT
 		
-		BChatCommandExecutor BChatCommandExecutor = new BChatCommandExecutor(this);
-		BChatCommandExecutor.addSubCommand("init", new InitBChatSubCommand(this));
-		BChatCommandExecutor.addSubCommand("renew", new RenewBChatSubCommand(this));
-		BChatCommandExecutor.addSubCommand("delete", new DeleteBChatSubCommand(this));
+		BChatCommandExecutor bChatCommandExecutor = new BChatCommandExecutor(this);
+		bChatCommandExecutor.addSubCommand("init", new InitBChatSubCommand(this));
+		bChatCommandExecutor.addSubCommand("renew", new RenewBChatSubCommand(this));
+		bChatCommandExecutor.addSubCommand("delete", new DeleteBChatSubCommand(this));
+		bChatCommandExecutor.addSubCommand("fakechat", new FakeMsgBChatSubCommand(this));
 		
-		pm.registerCommand(this, BChatCommandExecutor);
+		
+		pm.registerCommand(this, bChatCommandExecutor);
 		
 		/*this.chatPlayer = new ChatPlayer();
 
