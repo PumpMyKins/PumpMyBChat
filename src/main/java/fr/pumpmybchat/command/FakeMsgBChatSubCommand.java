@@ -41,11 +41,11 @@ public class FakeMsgBChatSubCommand implements ISubCommand,ISubTabCompleter {
 
 		}else {
 
-			if(args.size() > 3 && this.onTabComplete(exec, sender, args).contains(args.get(0)) && !args.get(1).trim().isEmpty()) {
+			if(args.size() > 2 && this.onTabComplete(exec, sender, args).contains(args.get(0)) && !args.get(1).trim().isEmpty()) {
 
 				String message = "";
-				for (int i = 2; i < (args.size()-1); i++) {
-					message += args.get(i);
+				for (int i = 2; i < (args.size()); i++) {
+					message += args.get(i) + " ";
 				}
 
 				message = ChatColorUtils.getChatColorCodesTranslatedString(message);
